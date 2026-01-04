@@ -6,8 +6,8 @@
    <rect>
     <x>0</x>
     <y>0</y>
-    <width>1012</width>
-    <height>735</height>
+    <width>1580</width>
+    <height>638</height>
    </rect>
   </property>
   <property name="windowTitle">
@@ -34,6 +34,9 @@
         <property name="title">
          <string>Recherche</string>
         </property>
+        <property name="alignment">
+         <set>Qt::AlignmentFlag::AlignCenter</set>
+        </property>
         <layout class="QGridLayout" name="gridLayout_19">
          <item row="0" column="0">
           <layout class="QGridLayout" name="gridLayout_18">
@@ -59,21 +62,111 @@
        <layout class="QHBoxLayout" name="horizontalLayout">
         <item>
          <widget class="QGroupBox" name="classificationGroupBox">
+          <property name="minimumSize">
+           <size>
+            <width>1000</width>
+            <height>0</height>
+           </size>
+          </property>
+          <property name="maximumSize">
+           <size>
+            <width>1000</width>
+            <height>16777215</height>
+           </size>
+          </property>
           <property name="title">
            <string>Classification</string>
           </property>
+          <property name="alignment">
+           <set>Qt::AlignmentFlag::AlignCenter</set>
+          </property>
           <layout class="QGridLayout" name="gridLayout_17">
+           <item row="1" column="0">
+            <widget class="QPushButton" name="classificationAddSpeciesPushButton">
+             <property name="text">
+              <string>Ajouter une espèce</string>
+             </property>
+            </widget>
+           </item>
            <item row="0" column="0">
-            <widget class="QTreeView" name="classificationTreeView">
-             <property name="contextMenuPolicy">
-              <enum>Qt::ContextMenuPolicy::NoContextMenu</enum>
+            <widget class="QTreeWidget" name="classificationTreeWidget">
+             <property name="autoFillBackground">
+              <bool>false</bool>
              </property>
-             <property name="accessibleDescription">
-              <string/>
+             <property name="frameShape">
+              <enum>QFrame::Shape::StyledPanel</enum>
              </property>
-             <attribute name="headerVisible">
+             <property name="frameShadow">
+              <enum>QFrame::Shadow::Sunken</enum>
+             </property>
+             <property name="lineWidth">
+              <number>1</number>
+             </property>
+             <property name="textElideMode">
+              <enum>Qt::TextElideMode::ElideRight</enum>
+             </property>
+             <property name="indentation">
+              <number>0</number>
+             </property>
+             <property name="sortingEnabled">
+              <bool>false</bool>
+             </property>
+             <property name="wordWrap">
+              <bool>true</bool>
+             </property>
+             <property name="columnCount">
+              <number>7</number>
+             </property>
+             <property name="supportedDragActions">
+              <set>Qt::DropAction::IgnoreAction</set>
+             </property>
+             <attribute name="headerCascadingSectionResizes">
               <bool>false</bool>
              </attribute>
+             <attribute name="headerMinimumSectionSize">
+              <number>100</number>
+             </attribute>
+             <attribute name="headerShowSortIndicator" stdset="0">
+              <bool>false</bool>
+             </attribute>
+             <attribute name="headerStretchLastSection">
+              <bool>true</bool>
+             </attribute>
+             <column>
+              <property name="text">
+               <string notr="true">Règne</string>
+              </property>
+             </column>
+             <column>
+              <property name="text">
+               <string>Division</string>
+              </property>
+             </column>
+             <column>
+              <property name="text">
+               <string>Classe</string>
+              </property>
+             </column>
+             <column>
+              <property name="text">
+               <string>Ordre</string>
+              </property>
+             </column>
+             <column>
+              <property name="text">
+               <string>Famille</string>
+              </property>
+             </column>
+             <column>
+              <property name="text">
+               <string>Genre</string>
+              </property>
+             </column>
+             <column>
+              <property name="text">
+               <string>Espèce</string>
+              </property>
+             </column>
             </widget>
            </item>
           </layout>
@@ -83,6 +176,9 @@
          <widget class="QGroupBox" name="speciesGroupBox">
           <property name="title">
            <string>Espèce</string>
+          </property>
+          <property name="alignment">
+           <set>Qt::AlignmentFlag::AlignCenter</set>
           </property>
           <layout class="QGridLayout" name="gridLayout_16">
            <item row="0" column="0">
@@ -113,14 +209,14 @@
                    </widget>
                   </item>
                   <item row="1" column="0">
-                   <widget class="QLabel" name="speciesFrenchNameLabel">
+                   <widget class="QLabel" name="speciesCommonNameLabel">
                     <property name="text">
-                     <string>Nom Français</string>
+                     <string>Nom Commun</string>
                     </property>
                    </widget>
                   </item>
                   <item row="1" column="1">
-                   <widget class="QLabel" name="speciesFrenchNameContentLabel">
+                   <widget class="QLabel" name="speciesCommonNameContentLabel">
                     <property name="text">
                      <string>Content</string>
                     </property>
@@ -175,30 +271,6 @@
                <layout class="QGridLayout" name="gridLayout_12">
                 <item row="0" column="0">
                  <layout class="QGridLayout" name="gridLayout_9">
-                  <item row="0" column="0">
-                   <widget class="QLabel" name="speciesDelachauxFlowersLabel">
-                    <property name="text">
-                     <string>Guide Delachaux des Fleurs</string>
-                    </property>
-                   </widget>
-                  </item>
-                  <item row="0" column="1">
-                   <widget class="QLabel" name="speciesDelachauxFlowersContentLabel">
-                    <property name="text">
-                     <string>Content</string>
-                    </property>
-                    <property name="alignment">
-                     <set>Qt::AlignmentFlag::AlignRight|Qt::AlignmentFlag::AlignTrailing|Qt::AlignmentFlag::AlignVCenter</set>
-                    </property>
-                   </widget>
-                  </item>
-                  <item row="1" column="0">
-                   <widget class="QLabel" name="speciesGuide700PlantesLabel">
-                    <property name="text">
-                     <string>Guide 700 Plantes</string>
-                    </property>
-                   </widget>
-                  </item>
                   <item row="1" column="1">
                    <widget class="QLabel" name="speciesGuide700PlantesContentLabel">
                     <property name="text">
@@ -226,13 +298,6 @@
                     </property>
                    </widget>
                   </item>
-                  <item row="3" column="0">
-                   <widget class="QLabel" name="speciesDelachauxTreesLabel">
-                    <property name="text">
-                     <string>Guide Delachaux des Arbres</string>
-                    </property>
-                   </widget>
-                  </item>
                   <item row="3" column="1">
                    <widget class="QLabel" name="speciesDelachauxTreesContentLabel">
                     <property name="text">
@@ -243,10 +308,34 @@
                     </property>
                    </widget>
                   </item>
+                  <item row="0" column="0">
+                   <widget class="QLabel" name="speciesDelachauxFlowersLabel">
+                    <property name="text">
+                     <string>Guide Delachaux des Fleurs</string>
+                    </property>
+                   </widget>
+                  </item>
+                  <item row="3" column="0">
+                   <widget class="QLabel" name="speciesDelachauxTreesLabel">
+                    <property name="text">
+                     <string>Guide Delachaux des Arbres</string>
+                    </property>
+                   </widget>
+                  </item>
                   <item row="4" column="0">
                    <widget class="QLabel" name="speciesChampignonsLabel">
                     <property name="text">
                      <string>Guide des Champignons</string>
+                    </property>
+                   </widget>
+                  </item>
+                  <item row="0" column="1">
+                   <widget class="QLabel" name="speciesDelachauxFlowersContentLabel">
+                    <property name="text">
+                     <string>Content</string>
+                    </property>
+                    <property name="alignment">
+                     <set>Qt::AlignmentFlag::AlignRight|Qt::AlignmentFlag::AlignTrailing|Qt::AlignmentFlag::AlignVCenter</set>
                     </property>
                    </widget>
                   </item>
@@ -260,12 +349,26 @@
                     </property>
                    </widget>
                   </item>
+                  <item row="1" column="0">
+                   <widget class="QLabel" name="speciesGuide700PlantesLabel">
+                    <property name="text">
+                     <string>Guide 700 Plantes</string>
+                    </property>
+                   </widget>
+                  </item>
                  </layout>
                 </item>
                </layout>
               </widget>
              </item>
             </layout>
+           </item>
+           <item row="1" column="0">
+            <widget class="QPushButton" name="speciesEditPushButton">
+             <property name="text">
+              <string>Editer</string>
+             </property>
+            </widget>
            </item>
           </layout>
          </widget>
@@ -274,6 +377,9 @@
          <widget class="QGroupBox" name="observationsGroupBox">
           <property name="title">
            <string>Observations</string>
+          </property>
+          <property name="alignment">
+           <set>Qt::AlignmentFlag::AlignCenter</set>
           </property>
           <layout class="QGridLayout" name="gridLayout_8">
            <item row="0" column="0">
