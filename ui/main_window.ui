@@ -201,7 +201,7 @@
                   <item row="0" column="1">
                    <widget class="QLabel" name="speciesLatinNameContentLabel">
                     <property name="text">
-                     <string>Content</string>
+                     <string/>
                     </property>
                     <property name="alignment">
                      <set>Qt::AlignmentFlag::AlignRight|Qt::AlignmentFlag::AlignTrailing|Qt::AlignmentFlag::AlignVCenter</set>
@@ -218,7 +218,7 @@
                   <item row="1" column="1">
                    <widget class="QLabel" name="speciesCommonNameContentLabel">
                     <property name="text">
-                     <string>Content</string>
+                     <string/>
                     </property>
                     <property name="alignment">
                      <set>Qt::AlignmentFlag::AlignRight|Qt::AlignmentFlag::AlignTrailing|Qt::AlignmentFlag::AlignVCenter</set>
@@ -251,7 +251,7 @@
                   <item row="0" column="1">
                    <widget class="QLabel" name="speciesEdibilityContentLabel">
                     <property name="text">
-                     <string>Content</string>
+                     <string/>
                     </property>
                     <property name="alignment">
                      <set>Qt::AlignmentFlag::AlignRight|Qt::AlignmentFlag::AlignTrailing|Qt::AlignmentFlag::AlignVCenter</set>
@@ -272,9 +272,9 @@
                 <item row="0" column="0">
                  <layout class="QGridLayout" name="gridLayout_9">
                   <item row="1" column="1">
-                   <widget class="QLabel" name="speciesGuide700PlantesContentLabel">
+                   <widget class="QLabel" name="speciesRefGuide700PlantesContentLabel">
                     <property name="text">
-                     <string>Content</string>
+                     <string/>
                     </property>
                     <property name="alignment">
                      <set>Qt::AlignmentFlag::AlignRight|Qt::AlignmentFlag::AlignTrailing|Qt::AlignmentFlag::AlignVCenter</set>
@@ -282,16 +282,16 @@
                    </widget>
                   </item>
                   <item row="2" column="0">
-                   <widget class="QLabel" name="speciesFlorePyreneesLabel">
+                   <widget class="QLabel" name="speciesRefFlorePyreneesLabel">
                     <property name="text">
                      <string>Guide Flore des Pyrénées</string>
                     </property>
                    </widget>
                   </item>
                   <item row="2" column="1">
-                   <widget class="QLabel" name="speciesFlorePyreneesContentLabel">
+                   <widget class="QLabel" name="speciesRefFlorePyreneesContentLabel">
                     <property name="text">
-                     <string>Content</string>
+                     <string/>
                     </property>
                     <property name="alignment">
                      <set>Qt::AlignmentFlag::AlignRight|Qt::AlignmentFlag::AlignTrailing|Qt::AlignmentFlag::AlignVCenter</set>
@@ -299,9 +299,9 @@
                    </widget>
                   </item>
                   <item row="3" column="1">
-                   <widget class="QLabel" name="speciesDelachauxTreesContentLabel">
+                   <widget class="QLabel" name="speciesRefDelachauxArbresContentLabel">
                     <property name="text">
-                     <string>Content</string>
+                     <string/>
                     </property>
                     <property name="alignment">
                      <set>Qt::AlignmentFlag::AlignRight|Qt::AlignmentFlag::AlignTrailing|Qt::AlignmentFlag::AlignVCenter</set>
@@ -309,30 +309,30 @@
                    </widget>
                   </item>
                   <item row="0" column="0">
-                   <widget class="QLabel" name="speciesDelachauxFlowersLabel">
+                   <widget class="QLabel" name="speciesRefDelachauxFleursLabel">
                     <property name="text">
                      <string>Guide Delachaux des Fleurs</string>
                     </property>
                    </widget>
                   </item>
                   <item row="3" column="0">
-                   <widget class="QLabel" name="speciesDelachauxTreesLabel">
+                   <widget class="QLabel" name="speciesRefDelachauxArbresLabel">
                     <property name="text">
                      <string>Guide Delachaux des Arbres</string>
                     </property>
                    </widget>
                   </item>
                   <item row="4" column="0">
-                   <widget class="QLabel" name="speciesChampignonsLabel">
+                   <widget class="QLabel" name="speciesRefChampignonsLabel">
                     <property name="text">
                      <string>Guide des Champignons</string>
                     </property>
                    </widget>
                   </item>
                   <item row="0" column="1">
-                   <widget class="QLabel" name="speciesDelachauxFlowersContentLabel">
+                   <widget class="QLabel" name="speciesRefDelachauxFleursContentLabel">
                     <property name="text">
-                     <string>Content</string>
+                     <string/>
                     </property>
                     <property name="alignment">
                      <set>Qt::AlignmentFlag::AlignRight|Qt::AlignmentFlag::AlignTrailing|Qt::AlignmentFlag::AlignVCenter</set>
@@ -340,9 +340,9 @@
                    </widget>
                   </item>
                   <item row="4" column="1">
-                   <widget class="QLabel" name="speciesChampignonsContentLabel">
+                   <widget class="QLabel" name="speciesRefChampignonsContentLabel">
                     <property name="text">
-                     <string>Content</string>
+                     <string/>
                     </property>
                     <property name="alignment">
                      <set>Qt::AlignmentFlag::AlignRight|Qt::AlignmentFlag::AlignTrailing|Qt::AlignmentFlag::AlignVCenter</set>
@@ -350,7 +350,7 @@
                    </widget>
                   </item>
                   <item row="1" column="0">
-                   <widget class="QLabel" name="speciesGuide700PlantesLabel">
+                   <widget class="QLabel" name="speciesRefGuide700PlantesLabel">
                     <property name="text">
                      <string>Guide 700 Plantes</string>
                     </property>
@@ -421,7 +421,7 @@
                   <item row="0" column="1">
                    <widget class="QLabel" name="observationsDateLabel">
                     <property name="text">
-                     <string>Content</string>
+                     <string/>
                     </property>
                     <property name="alignment">
                      <set>Qt::AlignmentFlag::AlignCenter</set>
@@ -517,7 +517,7 @@
                   <item row="4" column="1">
                    <widget class="QLabel" name="observationsFieldContentLabel">
                     <property name="text">
-                     <string>Content</string>
+                     <string/>
                     </property>
                     <property name="alignment">
                      <set>Qt::AlignmentFlag::AlignRight|Qt::AlignmentFlag::AlignTrailing|Qt::AlignmentFlag::AlignVCenter</set>
@@ -534,7 +534,7 @@
                   <item row="1" column="1">
                    <widget class="QLabel" name="observationsDepartmentContentLabel">
                     <property name="text">
-                     <string>Content</string>
+                     <string/>
                     </property>
                     <property name="alignment">
                      <set>Qt::AlignmentFlag::AlignRight|Qt::AlignmentFlag::AlignTrailing|Qt::AlignmentFlag::AlignVCenter</set>
@@ -547,7 +547,7 @@
                      <enum>QFrame::Shape::NoFrame</enum>
                     </property>
                     <property name="text">
-                     <string>Content</string>
+                     <string/>
                     </property>
                     <property name="alignment">
                      <set>Qt::AlignmentFlag::AlignRight|Qt::AlignmentFlag::AlignTrailing|Qt::AlignmentFlag::AlignVCenter</set>
@@ -557,7 +557,7 @@
                   <item row="3" column="1">
                    <widget class="QLabel" name="observationsGpsContentLabel">
                     <property name="text">
-                     <string>Content</string>
+                     <string/>
                     </property>
                     <property name="alignment">
                      <set>Qt::AlignmentFlag::AlignRight|Qt::AlignmentFlag::AlignTrailing|Qt::AlignmentFlag::AlignVCenter</set>
@@ -567,7 +567,7 @@
                   <item row="2" column="1">
                    <widget class="QLabel" name="observationsCountryContentLabel">
                     <property name="text">
-                     <string>Content</string>
+                     <string/>
                     </property>
                     <property name="alignment">
                      <set>Qt::AlignmentFlag::AlignRight|Qt::AlignmentFlag::AlignTrailing|Qt::AlignmentFlag::AlignVCenter</set>
