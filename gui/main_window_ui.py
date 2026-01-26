@@ -62,8 +62,8 @@ class Ui_MainWindow(object):
         self.horizontalLayout.setObjectName(u"horizontalLayout")
         self.classificationGroupBox = QGroupBox(self.centralwidget)
         self.classificationGroupBox.setObjectName(u"classificationGroupBox")
-        self.classificationGroupBox.setMinimumSize(QSize(1000, 0))
-        self.classificationGroupBox.setMaximumSize(QSize(1000, 16777215))
+        self.classificationGroupBox.setMinimumSize(QSize(0, 0))
+        self.classificationGroupBox.setMaximumSize(QSize(16777215, 16777215))
         self.classificationGroupBox.setAlignment(Qt.AlignmentFlag.AlignCenter)
         self.gridLayout_17 = QGridLayout(self.classificationGroupBox)
         self.gridLayout_17.setObjectName(u"gridLayout_17")
@@ -99,6 +99,8 @@ class Ui_MainWindow(object):
 
         self.speciesGroupBox = QGroupBox(self.centralwidget)
         self.speciesGroupBox.setObjectName(u"speciesGroupBox")
+        self.speciesGroupBox.setMinimumSize(QSize(400, 0))
+        self.speciesGroupBox.setMaximumSize(QSize(400, 16777215))
         self.speciesGroupBox.setAlignment(Qt.AlignmentFlag.AlignCenter)
         self.gridLayout_16 = QGridLayout(self.speciesGroupBox)
         self.gridLayout_16.setObjectName(u"gridLayout_16")
@@ -138,10 +140,14 @@ class Ui_MainWindow(object):
 
         self.gridLayout_15.addWidget(self.speciesNameGroupBox, 0, 0, 1, 1)
 
-        self.speciesPhotoGraphicsViews = QGraphicsView(self.speciesGroupBox)
-        self.speciesPhotoGraphicsViews.setObjectName(u"speciesPhotoGraphicsViews")
+        self.speciesPhotoGraphicsView = QGraphicsView(self.speciesGroupBox)
+        self.speciesPhotoGraphicsView.setObjectName(u"speciesPhotoGraphicsView")
+        self.speciesPhotoGraphicsView.setFrameShape(QFrame.Shape.Panel)
+        self.speciesPhotoGraphicsView.setInteractive(False)
+        self.speciesPhotoGraphicsView.setRenderHints(QPainter.RenderHint.LosslessImageRendering|QPainter.RenderHint.SmoothPixmapTransform|QPainter.RenderHint.TextAntialiasing)
+        self.speciesPhotoGraphicsView.setResizeAnchor(QGraphicsView.ViewportAnchor.AnchorViewCenter)
 
-        self.gridLayout_15.addWidget(self.speciesPhotoGraphicsViews, 1, 0, 1, 1)
+        self.gridLayout_15.addWidget(self.speciesPhotoGraphicsView, 1, 0, 1, 1)
 
         self.speciesInfosGroupBox = QGroupBox(self.speciesGroupBox)
         self.speciesInfosGroupBox.setObjectName(u"speciesInfosGroupBox")
@@ -244,159 +250,161 @@ class Ui_MainWindow(object):
 
         self.horizontalLayout.addWidget(self.speciesGroupBox)
 
-        self.observationsGroupBox = QGroupBox(self.centralwidget)
-        self.observationsGroupBox.setObjectName(u"observationsGroupBox")
-        self.observationsGroupBox.setAlignment(Qt.AlignmentFlag.AlignCenter)
-        self.gridLayout_8 = QGridLayout(self.observationsGroupBox)
+        self.observationGroupBox = QGroupBox(self.centralwidget)
+        self.observationGroupBox.setObjectName(u"observationGroupBox")
+        self.observationGroupBox.setMinimumSize(QSize(400, 0))
+        self.observationGroupBox.setMaximumSize(QSize(400, 16777215))
+        self.observationGroupBox.setAlignment(Qt.AlignmentFlag.AlignCenter)
+        self.gridLayout_8 = QGridLayout(self.observationGroupBox)
         self.gridLayout_8.setObjectName(u"gridLayout_8")
         self.gridLayout_7 = QGridLayout()
         self.gridLayout_7.setObjectName(u"gridLayout_7")
-        self.observationsAddPushButton = QPushButton(self.observationsGroupBox)
-        self.observationsAddPushButton.setObjectName(u"observationsAddPushButton")
+        self.observationAddPushButton = QPushButton(self.observationGroupBox)
+        self.observationAddPushButton.setObjectName(u"observationAddPushButton")
 
-        self.gridLayout_7.addWidget(self.observationsAddPushButton, 0, 0, 1, 1)
+        self.gridLayout_7.addWidget(self.observationAddPushButton, 0, 0, 1, 1)
 
-        self.observationsListGroupeBox = QGroupBox(self.observationsGroupBox)
-        self.observationsListGroupeBox.setObjectName(u"observationsListGroupeBox")
-        self.gridLayout_6 = QGridLayout(self.observationsListGroupeBox)
+        self.observationListGroupeBox = QGroupBox(self.observationGroupBox)
+        self.observationListGroupeBox.setObjectName(u"observationListGroupeBox")
+        self.gridLayout_6 = QGridLayout(self.observationListGroupeBox)
         self.gridLayout_6.setObjectName(u"gridLayout_6")
         self.gridLayout_5 = QGridLayout()
         self.gridLayout_5.setObjectName(u"gridLayout_5")
-        self.observationsListPreviousPushButton = QPushButton(self.observationsListGroupeBox)
-        self.observationsListPreviousPushButton.setObjectName(u"observationsListPreviousPushButton")
-        self.observationsListPreviousPushButton.setMinimumSize(QSize(50, 0))
-        self.observationsListPreviousPushButton.setMaximumSize(QSize(50, 16777215))
+        self.observationListPreviousPushButton = QPushButton(self.observationListGroupeBox)
+        self.observationListPreviousPushButton.setObjectName(u"observationListPreviousPushButton")
+        self.observationListPreviousPushButton.setMinimumSize(QSize(50, 0))
+        self.observationListPreviousPushButton.setMaximumSize(QSize(50, 16777215))
 
-        self.gridLayout_5.addWidget(self.observationsListPreviousPushButton, 0, 0, 1, 1)
+        self.gridLayout_5.addWidget(self.observationListPreviousPushButton, 0, 0, 1, 1)
 
-        self.observationsDateLabel = QLabel(self.observationsListGroupeBox)
-        self.observationsDateLabel.setObjectName(u"observationsDateLabel")
-        self.observationsDateLabel.setAlignment(Qt.AlignmentFlag.AlignCenter)
+        self.observationDateLabel = QLabel(self.observationListGroupeBox)
+        self.observationDateLabel.setObjectName(u"observationDateLabel")
+        self.observationDateLabel.setAlignment(Qt.AlignmentFlag.AlignCenter)
 
-        self.gridLayout_5.addWidget(self.observationsDateLabel, 0, 1, 1, 1)
+        self.gridLayout_5.addWidget(self.observationDateLabel, 0, 1, 1, 1)
 
-        self.observationsListNextPushButton = QPushButton(self.observationsListGroupeBox)
-        self.observationsListNextPushButton.setObjectName(u"observationsListNextPushButton")
-        self.observationsListNextPushButton.setMinimumSize(QSize(50, 0))
-        self.observationsListNextPushButton.setMaximumSize(QSize(50, 16777215))
+        self.observationListNextPushButton = QPushButton(self.observationListGroupeBox)
+        self.observationListNextPushButton.setObjectName(u"observationListNextPushButton")
+        self.observationListNextPushButton.setMinimumSize(QSize(50, 0))
+        self.observationListNextPushButton.setMaximumSize(QSize(50, 16777215))
 
-        self.gridLayout_5.addWidget(self.observationsListNextPushButton, 0, 2, 1, 1)
+        self.gridLayout_5.addWidget(self.observationListNextPushButton, 0, 2, 1, 1)
 
 
         self.gridLayout_6.addLayout(self.gridLayout_5, 0, 0, 1, 1)
 
 
-        self.gridLayout_7.addWidget(self.observationsListGroupeBox, 1, 0, 1, 1)
+        self.gridLayout_7.addWidget(self.observationListGroupeBox, 1, 0, 1, 1)
 
-        self.observationsPhotosGroupBox = QGroupBox(self.observationsGroupBox)
-        self.observationsPhotosGroupBox.setObjectName(u"observationsPhotosGroupBox")
-        self.gridLayout_4 = QGridLayout(self.observationsPhotosGroupBox)
+        self.observationPhotosGroupBox = QGroupBox(self.observationGroupBox)
+        self.observationPhotosGroupBox.setObjectName(u"observationPhotosGroupBox")
+        self.gridLayout_4 = QGridLayout(self.observationPhotosGroupBox)
         self.gridLayout_4.setObjectName(u"gridLayout_4")
         self.gridLayout_3 = QGridLayout()
         self.gridLayout_3.setObjectName(u"gridLayout_3")
-        self.observationsPhotosPreviousPushButton = QPushButton(self.observationsPhotosGroupBox)
-        self.observationsPhotosPreviousPushButton.setObjectName(u"observationsPhotosPreviousPushButton")
-        self.observationsPhotosPreviousPushButton.setMinimumSize(QSize(50, 0))
-        self.observationsPhotosPreviousPushButton.setMaximumSize(QSize(50, 16777215))
+        self.observationPhotosPreviousPushButton = QPushButton(self.observationPhotosGroupBox)
+        self.observationPhotosPreviousPushButton.setObjectName(u"observationPhotosPreviousPushButton")
+        self.observationPhotosPreviousPushButton.setMinimumSize(QSize(50, 0))
+        self.observationPhotosPreviousPushButton.setMaximumSize(QSize(50, 16777215))
 
-        self.gridLayout_3.addWidget(self.observationsPhotosPreviousPushButton, 0, 0, 1, 1)
+        self.gridLayout_3.addWidget(self.observationPhotosPreviousPushButton, 0, 0, 1, 1)
 
-        self.observationsPhotosGraphicView = QGraphicsView(self.observationsPhotosGroupBox)
-        self.observationsPhotosGraphicView.setObjectName(u"observationsPhotosGraphicView")
+        self.observationPhotosGraphicView = QGraphicsView(self.observationPhotosGroupBox)
+        self.observationPhotosGraphicView.setObjectName(u"observationPhotosGraphicView")
 
-        self.gridLayout_3.addWidget(self.observationsPhotosGraphicView, 0, 1, 1, 1)
+        self.gridLayout_3.addWidget(self.observationPhotosGraphicView, 0, 1, 1, 1)
 
-        self.observationsPhotosNextPushButton = QPushButton(self.observationsPhotosGroupBox)
-        self.observationsPhotosNextPushButton.setObjectName(u"observationsPhotosNextPushButton")
-        self.observationsPhotosNextPushButton.setMinimumSize(QSize(50, 0))
-        self.observationsPhotosNextPushButton.setMaximumSize(QSize(50, 16777215))
+        self.observationPhotosNextPushButton = QPushButton(self.observationPhotosGroupBox)
+        self.observationPhotosNextPushButton.setObjectName(u"observationPhotosNextPushButton")
+        self.observationPhotosNextPushButton.setMinimumSize(QSize(50, 0))
+        self.observationPhotosNextPushButton.setMaximumSize(QSize(50, 16777215))
 
-        self.gridLayout_3.addWidget(self.observationsPhotosNextPushButton, 0, 2, 1, 1)
+        self.gridLayout_3.addWidget(self.observationPhotosNextPushButton, 0, 2, 1, 1)
 
 
         self.gridLayout_4.addLayout(self.gridLayout_3, 0, 0, 1, 1)
 
 
-        self.gridLayout_7.addWidget(self.observationsPhotosGroupBox, 2, 0, 1, 1)
+        self.gridLayout_7.addWidget(self.observationPhotosGroupBox, 2, 0, 1, 1)
 
-        self.observationsInfosGroupBox = QGroupBox(self.observationsGroupBox)
-        self.observationsInfosGroupBox.setObjectName(u"observationsInfosGroupBox")
-        self.gridLayout_2 = QGridLayout(self.observationsInfosGroupBox)
+        self.observationInfosGroupBox = QGroupBox(self.observationGroupBox)
+        self.observationInfosGroupBox.setObjectName(u"observationInfosGroupBox")
+        self.gridLayout_2 = QGridLayout(self.observationInfosGroupBox)
         self.gridLayout_2.setObjectName(u"gridLayout_2")
         self.gridLayout = QGridLayout()
         self.gridLayout.setObjectName(u"gridLayout")
-        self.observationsFieldContentLabel = QLabel(self.observationsInfosGroupBox)
-        self.observationsFieldContentLabel.setObjectName(u"observationsFieldContentLabel")
-        self.observationsFieldContentLabel.setAlignment(Qt.AlignmentFlag.AlignRight|Qt.AlignmentFlag.AlignTrailing|Qt.AlignmentFlag.AlignVCenter)
+        self.observationDescriptionContentLabel = QLabel(self.observationInfosGroupBox)
+        self.observationDescriptionContentLabel.setObjectName(u"observationDescriptionContentLabel")
+        self.observationDescriptionContentLabel.setAlignment(Qt.AlignmentFlag.AlignRight|Qt.AlignmentFlag.AlignTrailing|Qt.AlignmentFlag.AlignVCenter)
 
-        self.gridLayout.addWidget(self.observationsFieldContentLabel, 4, 1, 1, 1)
+        self.gridLayout.addWidget(self.observationDescriptionContentLabel, 4, 1, 1, 1)
 
-        self.observationsFieldLabel = QLabel(self.observationsInfosGroupBox)
-        self.observationsFieldLabel.setObjectName(u"observationsFieldLabel")
+        self.observationDescriptionLabel = QLabel(self.observationInfosGroupBox)
+        self.observationDescriptionLabel.setObjectName(u"observationDescriptionLabel")
 
-        self.gridLayout.addWidget(self.observationsFieldLabel, 4, 0, 1, 1)
+        self.gridLayout.addWidget(self.observationDescriptionLabel, 4, 0, 1, 1)
 
-        self.observationsDepartmentContentLabel = QLabel(self.observationsInfosGroupBox)
-        self.observationsDepartmentContentLabel.setObjectName(u"observationsDepartmentContentLabel")
-        self.observationsDepartmentContentLabel.setAlignment(Qt.AlignmentFlag.AlignRight|Qt.AlignmentFlag.AlignTrailing|Qt.AlignmentFlag.AlignVCenter)
+        self.observationDepartmentContentLabel = QLabel(self.observationInfosGroupBox)
+        self.observationDepartmentContentLabel.setObjectName(u"observationDepartmentContentLabel")
+        self.observationDepartmentContentLabel.setAlignment(Qt.AlignmentFlag.AlignRight|Qt.AlignmentFlag.AlignTrailing|Qt.AlignmentFlag.AlignVCenter)
 
-        self.gridLayout.addWidget(self.observationsDepartmentContentLabel, 1, 1, 1, 1)
+        self.gridLayout.addWidget(self.observationDepartmentContentLabel, 1, 1, 1, 1)
 
-        self.observationsCityContentLabel = QLabel(self.observationsInfosGroupBox)
-        self.observationsCityContentLabel.setObjectName(u"observationsCityContentLabel")
-        self.observationsCityContentLabel.setFrameShape(QFrame.Shape.NoFrame)
-        self.observationsCityContentLabel.setAlignment(Qt.AlignmentFlag.AlignRight|Qt.AlignmentFlag.AlignTrailing|Qt.AlignmentFlag.AlignVCenter)
+        self.observationCityContentLabel = QLabel(self.observationInfosGroupBox)
+        self.observationCityContentLabel.setObjectName(u"observationCityContentLabel")
+        self.observationCityContentLabel.setFrameShape(QFrame.Shape.NoFrame)
+        self.observationCityContentLabel.setAlignment(Qt.AlignmentFlag.AlignRight|Qt.AlignmentFlag.AlignTrailing|Qt.AlignmentFlag.AlignVCenter)
 
-        self.gridLayout.addWidget(self.observationsCityContentLabel, 0, 1, 1, 1)
+        self.gridLayout.addWidget(self.observationCityContentLabel, 0, 1, 1, 1)
 
-        self.observationsGpsContentLabel = QLabel(self.observationsInfosGroupBox)
-        self.observationsGpsContentLabel.setObjectName(u"observationsGpsContentLabel")
-        self.observationsGpsContentLabel.setAlignment(Qt.AlignmentFlag.AlignRight|Qt.AlignmentFlag.AlignTrailing|Qt.AlignmentFlag.AlignVCenter)
+        self.observationGpsContentLabel = QLabel(self.observationInfosGroupBox)
+        self.observationGpsContentLabel.setObjectName(u"observationGpsContentLabel")
+        self.observationGpsContentLabel.setAlignment(Qt.AlignmentFlag.AlignRight|Qt.AlignmentFlag.AlignTrailing|Qt.AlignmentFlag.AlignVCenter)
 
-        self.gridLayout.addWidget(self.observationsGpsContentLabel, 3, 1, 1, 1)
+        self.gridLayout.addWidget(self.observationGpsContentLabel, 3, 1, 1, 1)
 
-        self.observationsCountryContentLabel = QLabel(self.observationsInfosGroupBox)
-        self.observationsCountryContentLabel.setObjectName(u"observationsCountryContentLabel")
-        self.observationsCountryContentLabel.setAlignment(Qt.AlignmentFlag.AlignRight|Qt.AlignmentFlag.AlignTrailing|Qt.AlignmentFlag.AlignVCenter)
+        self.observationCountryContentLabel = QLabel(self.observationInfosGroupBox)
+        self.observationCountryContentLabel.setObjectName(u"observationCountryContentLabel")
+        self.observationCountryContentLabel.setAlignment(Qt.AlignmentFlag.AlignRight|Qt.AlignmentFlag.AlignTrailing|Qt.AlignmentFlag.AlignVCenter)
 
-        self.gridLayout.addWidget(self.observationsCountryContentLabel, 2, 1, 1, 1)
+        self.gridLayout.addWidget(self.observationCountryContentLabel, 2, 1, 1, 1)
 
-        self.observationsCountryLabel = QLabel(self.observationsInfosGroupBox)
-        self.observationsCountryLabel.setObjectName(u"observationsCountryLabel")
+        self.observationCountryLabel = QLabel(self.observationInfosGroupBox)
+        self.observationCountryLabel.setObjectName(u"observationCountryLabel")
 
-        self.gridLayout.addWidget(self.observationsCountryLabel, 2, 0, 1, 1)
+        self.gridLayout.addWidget(self.observationCountryLabel, 2, 0, 1, 1)
 
-        self.observationsDepartmentLabel = QLabel(self.observationsInfosGroupBox)
-        self.observationsDepartmentLabel.setObjectName(u"observationsDepartmentLabel")
+        self.observationDepartmentLabel = QLabel(self.observationInfosGroupBox)
+        self.observationDepartmentLabel.setObjectName(u"observationDepartmentLabel")
 
-        self.gridLayout.addWidget(self.observationsDepartmentLabel, 1, 0, 1, 1)
+        self.gridLayout.addWidget(self.observationDepartmentLabel, 1, 0, 1, 1)
 
-        self.observationsGpsLabel = QLabel(self.observationsInfosGroupBox)
-        self.observationsGpsLabel.setObjectName(u"observationsGpsLabel")
+        self.observationGpsLabel = QLabel(self.observationInfosGroupBox)
+        self.observationGpsLabel.setObjectName(u"observationGpsLabel")
 
-        self.gridLayout.addWidget(self.observationsGpsLabel, 3, 0, 1, 1)
+        self.gridLayout.addWidget(self.observationGpsLabel, 3, 0, 1, 1)
 
-        self.observationsCityLabel = QLabel(self.observationsInfosGroupBox)
-        self.observationsCityLabel.setObjectName(u"observationsCityLabel")
+        self.observationCityLabel = QLabel(self.observationInfosGroupBox)
+        self.observationCityLabel.setObjectName(u"observationCityLabel")
 
-        self.gridLayout.addWidget(self.observationsCityLabel, 0, 0, 1, 1)
+        self.gridLayout.addWidget(self.observationCityLabel, 0, 0, 1, 1)
 
 
         self.gridLayout_2.addLayout(self.gridLayout, 0, 0, 1, 1)
 
 
-        self.gridLayout_7.addWidget(self.observationsInfosGroupBox, 3, 0, 1, 1)
+        self.gridLayout_7.addWidget(self.observationInfosGroupBox, 3, 0, 1, 1)
 
-        self.observationsEditPushButton = QPushButton(self.observationsGroupBox)
-        self.observationsEditPushButton.setObjectName(u"observationsEditPushButton")
+        self.observationEditPushButton = QPushButton(self.observationGroupBox)
+        self.observationEditPushButton.setObjectName(u"observationEditPushButton")
 
-        self.gridLayout_7.addWidget(self.observationsEditPushButton, 4, 0, 1, 1)
+        self.gridLayout_7.addWidget(self.observationEditPushButton, 4, 0, 1, 1)
 
 
         self.gridLayout_8.addLayout(self.gridLayout_7, 0, 0, 1, 1)
 
 
-        self.horizontalLayout.addWidget(self.observationsGroupBox)
+        self.horizontalLayout.addWidget(self.observationGroupBox)
 
 
         self.verticalLayout.addLayout(self.horizontalLayout)
@@ -445,26 +453,26 @@ class Ui_MainWindow(object):
         self.speciesRefChampignonsContentLabel.setText("")
         self.speciesRefGuide700PlantesLabel.setText(QCoreApplication.translate("MainWindow", u"Guide 700 Plantes", None))
         self.speciesEditPushButton.setText(QCoreApplication.translate("MainWindow", u"Editer", None))
-        self.observationsGroupBox.setTitle(QCoreApplication.translate("MainWindow", u"Observations", None))
-        self.observationsAddPushButton.setText(QCoreApplication.translate("MainWindow", u"Ajouter", None))
-        self.observationsListGroupeBox.setTitle(QCoreApplication.translate("MainWindow", u"Liste", None))
-        self.observationsListPreviousPushButton.setText(QCoreApplication.translate("MainWindow", u"<", None))
-        self.observationsDateLabel.setText("")
-        self.observationsListNextPushButton.setText(QCoreApplication.translate("MainWindow", u">", None))
-        self.observationsPhotosGroupBox.setTitle(QCoreApplication.translate("MainWindow", u"Photos", None))
-        self.observationsPhotosPreviousPushButton.setText(QCoreApplication.translate("MainWindow", u"<", None))
-        self.observationsPhotosNextPushButton.setText(QCoreApplication.translate("MainWindow", u">", None))
-        self.observationsInfosGroupBox.setTitle(QCoreApplication.translate("MainWindow", u"Infos", None))
-        self.observationsFieldContentLabel.setText("")
-        self.observationsFieldLabel.setText(QCoreApplication.translate("MainWindow", u"Description terrain", None))
-        self.observationsDepartmentContentLabel.setText("")
-        self.observationsCityContentLabel.setText("")
-        self.observationsGpsContentLabel.setText("")
-        self.observationsCountryContentLabel.setText("")
-        self.observationsCountryLabel.setText(QCoreApplication.translate("MainWindow", u"Pays", None))
-        self.observationsDepartmentLabel.setText(QCoreApplication.translate("MainWindow", u"D\u00e9partement", None))
-        self.observationsGpsLabel.setText(QCoreApplication.translate("MainWindow", u"Coordonn\u00e9es GPS", None))
-        self.observationsCityLabel.setText(QCoreApplication.translate("MainWindow", u"Commune", None))
-        self.observationsEditPushButton.setText(QCoreApplication.translate("MainWindow", u"Editer", None))
+        self.observationGroupBox.setTitle(QCoreApplication.translate("MainWindow", u"Observations", None))
+        self.observationAddPushButton.setText(QCoreApplication.translate("MainWindow", u"Ajouter", None))
+        self.observationListGroupeBox.setTitle(QCoreApplication.translate("MainWindow", u"Liste", None))
+        self.observationListPreviousPushButton.setText(QCoreApplication.translate("MainWindow", u"<", None))
+        self.observationDateLabel.setText("")
+        self.observationListNextPushButton.setText(QCoreApplication.translate("MainWindow", u">", None))
+        self.observationPhotosGroupBox.setTitle(QCoreApplication.translate("MainWindow", u"Photos", None))
+        self.observationPhotosPreviousPushButton.setText(QCoreApplication.translate("MainWindow", u"<", None))
+        self.observationPhotosNextPushButton.setText(QCoreApplication.translate("MainWindow", u">", None))
+        self.observationInfosGroupBox.setTitle(QCoreApplication.translate("MainWindow", u"Infos", None))
+        self.observationDescriptionContentLabel.setText("")
+        self.observationDescriptionLabel.setText(QCoreApplication.translate("MainWindow", u"Description terrain", None))
+        self.observationDepartmentContentLabel.setText("")
+        self.observationCityContentLabel.setText("")
+        self.observationGpsContentLabel.setText("")
+        self.observationCountryContentLabel.setText("")
+        self.observationCountryLabel.setText(QCoreApplication.translate("MainWindow", u"Pays", None))
+        self.observationDepartmentLabel.setText(QCoreApplication.translate("MainWindow", u"D\u00e9partement", None))
+        self.observationGpsLabel.setText(QCoreApplication.translate("MainWindow", u"Coordonn\u00e9es GPS", None))
+        self.observationCityLabel.setText(QCoreApplication.translate("MainWindow", u"Commune", None))
+        self.observationEditPushButton.setText(QCoreApplication.translate("MainWindow", u"Editer", None))
     # retranslateUi
 
