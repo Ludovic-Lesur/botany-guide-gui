@@ -39,11 +39,14 @@ SPECIES_JSON_KEY_REQUIRED = [
 
 class Species:
     
-    def __init__(self, species_directory_path: str) -> None:
+    def __init__(self, gui: object, species_directory_path: str) -> None:
         # Local variables.
         json_decoded = False
         image_found = False
-        # Reset context.
+        # Init context.
+        self._gui = gui
+        self._identification_list = []
+        self._current_identification_index = 0
         self._latin_name = ""
         self._common_name = ""
         self._image_path = None
@@ -53,7 +56,6 @@ class Species:
         self._ref_flore_pyrenees = ""
         self._ref_delachaux_arbres = ""
         self._ref_champignons = ""
-        self._identification_list = []
         # Read directory.
         for f in os.listdir(species_directory_path):
             # Build complete path.
@@ -73,7 +75,7 @@ class Species:
             # Check identifications sub-directories.
             if (os.path.isdir(p)):
                 try:
-                    identification = Identification(p)
+                    identification = Identification(self._gui, p)
                     self._identification_list.append(identification)
                 except Exception as e:
                     logging.error("Invalid species sub-directory : %s", e)
@@ -123,28 +125,78 @@ class Species:
         self._ref_flore_pyrenees = self._to_text(species_mapping.get(SPECIES_JSON_KEY_REF_FLORE_PYRENEES), prefix_page=True)
         self._ref_delachaux_arbres = self._to_text(species_mapping.get(SPECIES_JSON_KEY_REF_DELACHAUX_ARBRES), prefix_page=True)
         self._ref_champignons = self._to_text(species_mapping.get(SPECIES_JSON_KEY_REF_CHAMPIGNONS), prefix_page=True)
-    
-    def _update_gui(self, gui: object, clear_flag: bool) -> None:
-        # Set GUI labels text.
-        gui.speciesLatinNameContentLabel.setText(self._latin_name if clear_flag == False else "")
-        gui.speciesCommonNameContentLabel.setText(self._common_name if clear_flag == False else "")
-        gui.speciesEdibilityContentLabel.setText(self._edibility if clear_flag == False else "")
-        gui.speciesRefDelachauxFleursContentLabel.setText(self._ref_delachaux_fleurs if clear_flag == False else "")
-        gui.speciesRefGuide700PlantesContentLabel.setText(self._ref_700_plantes if clear_flag == False else "")
-        gui.speciesRefFlorePyreneesContentLabel.setText(self._ref_flore_pyrenees if clear_flag == False else "")
-        gui.speciesRefDelachauxArbresContentLabel.setText(self._ref_delachaux_arbres if clear_flag == False else "")
-        gui.speciesRefChampignonsContentLabel.setText(self._ref_champignons if clear_flag == False else "")
-        # Print image.
-        Image.display(gui.speciesPhotoGraphicsView, self._image_path if clear_flag == False else None)
 
-    def display(self, gui: object) -> None:
-        # Print GUI labels text.
-        self._update_gui(gui, False)
+    def _display_identification(self):
+        # Local variables.
+        identification_count = len(self._identification_list)
+        # Check count.
+        if (identification_count == 0):
+            # Clear identification panel.
+            Identification.clear(self._gui)
+            self._gui.identificationListPreviousPushButton.setEnabled(False)
+            self._gui.identificationListNextPushButton.setEnabled(False)
+        else:
+            # Check index.
+            if (self._current_identification_index >= identification_count):
+                logging.warning("Identification index overflow, defaulting to last")
+                self._current_identification_index = (identification_count - 1)
+            # Print identification.
+            self._identification_list[self._current_identification_index].display()
+            # Update buttons state.
+            self._gui.identificationListPreviousPushButton.setEnabled(True if (self._current_identification_index > 0) else False)
+            self._gui.identificationListNextPushButton.setEnabled(True if (self._current_identification_index < (identification_count - 1)) else False)
+
+    def _previous_identification_callback(self):
+        # Check index.
+        if (self._current_identification_index > 0):
+            # Print previous item.
+            self._current_identification_index -= 1
+            self._display_identification()
+
+    def _next_identification_callback(self):
+        # Check index.
+        if (self._current_identification_index < (len(self._identification_list) - 1)):
+            # Print previous item.
+            self._current_identification_index += 1
+            self._display_identification()
+
+    def display(self) -> None:
+        # Print fields.
+        self._gui.speciesLatinNameContentLabel.setText(self._latin_name)
+        self._gui.speciesCommonNameContentLabel.setText(self._common_name)
+        self._gui.speciesEdibilityContentLabel.setText(self._edibility)
+        self._gui.speciesRefDelachauxFleursContentLabel.setText(self._ref_delachaux_fleurs)
+        self._gui.speciesRefGuide700PlantesContentLabel.setText(self._ref_700_plantes)
+        self._gui.speciesRefFlorePyreneesContentLabel.setText(self._ref_flore_pyrenees)
+        self._gui.speciesRefDelachauxArbresContentLabel.setText(self._ref_delachaux_arbres)
+        self._gui.speciesRefChampignonsContentLabel.setText(self._ref_champignons)
+        # Update image.
+        Image.display(self._gui.speciesPhotoGraphicsView, self._image_path)
+        # Update button callbacks.
+        self._gui.identificationListPreviousPushButton.clicked.connect(self._previous_identification_callback)
+        self._gui.identificationListNextPushButton.clicked.connect(self._next_identification_callback)
+        # Print first identification.
+        self._current_identification_index = 0
+        self._display_identification()
+
+    @staticmethod
+    def clear(gui: object) -> None:
+        # Clear all fields.
+        gui.speciesLatinNameContentLabel.setText("")
+        gui.speciesCommonNameContentLabel.setText("")
+        gui.speciesEdibilityContentLabel.setText("")
+        gui.speciesRefDelachauxFleursContentLabel.setText("")
+        gui.speciesRefGuide700PlantesContentLabel.setText("")
+        gui.speciesRefFlorePyreneesContentLabel.setText("")
+        gui.speciesRefDelachauxArbresContentLabel.setText("")
+        gui.speciesRefChampignonsContentLabel.setText("")
+        # Clear image.
+        Image.display(gui.speciesPhotoGraphicsView, None)
+        # Disable buttons.
+        gui.identificationListPreviousPushButton.clicked.connect(None)
+        gui.identificationListPreviousPushButton.setEnabled(False)
+        gui.identificationListNextPushButton.clicked.connect(None)
+        gui.identificationListNextPushButton.setEnabled(False)
         # Print first identification if it exists.
-        if (len(self._identification_list) > 0):
-            self._identification_list[0].display(gui)
-    
-    def clear(self, gui: object) -> None:
-        # Clear GUI labels text.
-        self._update_gui(gui, True)
+        Identification.clear(gui)
             

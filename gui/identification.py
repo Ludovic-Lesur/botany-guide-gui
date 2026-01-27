@@ -48,13 +48,15 @@ IDENTIFICATION_JSON_KEY_GPS_REQUIRED = [
 
 class Identification:
     
-    def __init__(self, identification_directory_path: str) -> None:
+    def __init__(self, gui: object, identification_directory_path: str) -> None:
         # Local variables.
         json_decoded = False
         image_found = False
-        # Reset context.
-        self._date = ""
+        # Init context.
+        self._gui = gui
         self._image_path_list = []
+        self._current_image_index = 0
+        self._date = ""
         self._city = ""
         self._department = ""
         self._country = ""
@@ -126,25 +128,64 @@ class Identification:
         self._gps_altitude = self._to_text(gps_mapping.get(IDENTIFICATION_JSON_KEY_ALTITUDE))
         self._description = self._to_text(identification_mapping.get(IDENTIFICATION_JSON_KEY_DESCRIPTION))
 
-    def _update_gui(self, gui: object, clear_flag: bool) -> None:
-        # Set GUI labels text.
-        gui.identificationDateLabel.setText(self._date if clear_flag == False else "")
-        gui.identificationCityContentLabel.setText(self._city if clear_flag == False else "")
-        gui.identificationDepartmentContentLabel.setText(self._department if clear_flag == False else "")
-        gui.identificationCountryContentLabel.setText(self._country if clear_flag == False else "")
-        gui.identificationGpsContentLabel.setText((self._gps_latitude + "° " + self._gps_longitude + "° (" + self._gps_altitude + "m)") if clear_flag == False else "")
-        gui.identificationDescriptionContentLabel.setText(self._description if clear_flag == False else "")
-        # Print image.
-        if (len(self._image_path_list) > 0):
-            Image.display(gui.identificationPhotosGraphicsView, self._image_path_list[0])
+    def _display_image(self):
+        # Local variables.
+        image_count = len(self._image_path_list)
+        # Check count.
+        if (image_count == 0):
+            # Clear identification panel.
+            Image.clear(self._gui.identificationPhotosGraphicsView)
+            self._gui.identificationPhotosPreviousPushButton.setEnabled(False)
+            self._gui.identificationPhotosNextPushButton.setEnabled(False)
         else:
-            Image.display(gui.identificationPhotosGraphicsView, None)
-    
-    def display(self, gui: object) -> None:
-        # Print GUI labels text.
-        self._update_gui(gui, False)
-    
-    def clear(self, gui: object) -> None:
-        # Clear GUI labels text.
-        self._update_gui(gui, True)
+            # Check index.
+            if (self._current_image_index >= image_count):
+                logging.warning("_current_image_index index overflow, defaulting to last")
+                self._current_identification_index = (image_count - 1)
+            # Print identification.
+            Image.display(self._gui.identificationPhotosGraphicsView, self._image_path_list[self._current_image_index])
+            # Update buttons state.
+            self._gui.identificationPhotosPreviousPushButton.setEnabled(True if (self._current_image_index > 0) else False)
+            self._gui.identificationPhotosNextPushButton.setEnabled(True if (self._current_image_index < (image_count - 1)) else False)
+
+    def _previous_image_callback(self):
+        # Check index.
+        if (self._current_image_index > 0):
+            # Print previous item.
+            self._current_image_index -= 1
+            self._display_image()
+
+    def _next_image_callback(self):
+        # Check index.
+        if (self._current_image_index < (len(self._image_path_list) - 1)):
+            # Print previous item.
+            self._current_image_index += 1
+            self._display_image()
+
+    def display(self) -> None:
+        # Print fields.
+        self._gui.identificationDateLabel.setText(self._date)
+        self._gui.identificationCityContentLabel.setText(self._city)
+        self._gui.identificationDepartmentContentLabel.setText(self._department)
+        self._gui.identificationCountryContentLabel.setText(self._country)
+        self._gui.identificationGpsContentLabel.setText(self._gps_latitude + "° " + self._gps_longitude + "° (" + self._gps_altitude + "m)")
+        self._gui.identificationDescriptionContentLabel.setText(self._description)
+        # Update button callbacks.
+        self._gui.identificationPhotosPreviousPushButton.clicked.connect(self._previous_image_callback)
+        self._gui.identificationPhotosNextPushButton.clicked.connect(self._next_image_callback)
+        # Print first image.
+        self._current_image_index = 0
+        self._display_image()
+
+    @staticmethod
+    def clear(gui: object) -> None:
+        # Clear all fields.
+        gui.identificationDateLabel.setText("")
+        gui.identificationCityContentLabel.setText("")
+        gui.identificationDepartmentContentLabel.setText("")
+        gui.identificationCountryContentLabel.setText("")
+        gui.identificationGpsContentLabel.setText("")
+        gui.identificationDescriptionContentLabel.setText("")
+        # Clear image.
+        Image.display(gui.identificationPhotosGraphicsView, None)
             

@@ -8,7 +8,7 @@
 import os
 
 from pathlib import Path
-from PySide6.QtWidgets import QMainWindow, QTreeWidgetItem, QHeaderView
+from PySide6.QtWidgets import QTreeWidgetItem, QHeaderView
 
 from .species import Species
 
@@ -20,11 +20,12 @@ GUI_CLASSIFICATION_SPECIES_COLUMN = 6
         
 class Classification:
     
-    def __init__(self, gui: QMainWindow, data_directory_path: str) -> None:
-        # Store GUI object.
+    def __init__(self, gui: object, data_directory_path: str) -> None:
+        # Init context.
         self._gui = gui
+        self._current_species = None
         # Setup tree view.
-        gui.classificationTreeWidget.header().setSectionResizeMode(QHeaderView.ResizeToContents)
+        self._gui.classificationTreeWidget.header().setSectionResizeMode(QHeaderView.ResizeToContents)
         # Read all data folder.
         for root, _, _ in os.walk(data_directory_path):
             # Compute directory depth.
@@ -37,17 +38,17 @@ class Classification:
                 item.setText((depth - 1), pretty_name)
                 item.setWhatsThis((depth - 1), os.path.join(root))
         # Signals and slot.
-        gui.classificationTreeWidget.itemClicked.connect(self._item_clicked)
+        self._gui.classificationTreeWidget.itemClicked.connect(self._item_clicked_callback)
         
-    def _item_clicked(self, item, column):
+    def _item_clicked_callback(self, item, column):
         # Unused variable.
         _ = column
         # Check if a species has been clicked.
         if (item.text(GUI_CLASSIFICATION_SPECIES_COLUMN)):
             # Try creating species object.
             try:
-                species = Species(item.whatsThis(GUI_CLASSIFICATION_SPECIES_COLUMN))
-                species.display(self._gui)
+                self._current_species = Species(self._gui, item.whatsThis(GUI_CLASSIFICATION_SPECIES_COLUMN))
+                self._current_species.display()
             except Exception as e:
                 raise ValueError(f"Species object creation failed: {e}")
             
