@@ -12,6 +12,7 @@ import os
 from pathlib import Path
 from typing import Any
 
+from gui.identification import Identification
 from gui.image import Image
 
 ### SPECIES macros ###
@@ -38,7 +39,7 @@ SPECIES_JSON_KEY_REQUIRED = [
 
 class Species:
     
-    def __init__(self, species_directory_path: str) -> bool:
+    def __init__(self, species_directory_path: str) -> None:
         # Local variables.
         json_decoded = False
         image_found = False
@@ -52,6 +53,7 @@ class Species:
         self._ref_flore_pyrenees = ""
         self._ref_delachaux_arbres = ""
         self._ref_champignons = ""
+        self._identification_list = []
         # Read directory.
         for f in os.listdir(species_directory_path):
             # Build complete path.
@@ -68,6 +70,13 @@ class Species:
             if ((Path(f).suffix.lower() == Image.IMAGE_FILE_EXTENSION) and (image_found == False)):
                 self._image_path = p
                 image_found = True
+            # Check identifications sub-directories.
+            if (os.path.isdir(p)):
+                try:
+                    identification = Identification(p)
+                    self._identification_list.append(identification)
+                except Exception as e:
+                    logging.error("Invalid species sub-directory : %s", e)
         # Warn if image has not been found.
         if (image_found == False):
             logging.warning("No species image found")
@@ -131,6 +140,9 @@ class Species:
     def display(self, gui: object) -> None:
         # Print GUI labels text.
         self._update_gui(gui, False)
+        # Print first identification if it exists.
+        if (len(self._identification_list) > 0):
+            self._identification_list[0].display(gui)
     
     def clear(self, gui: object) -> None:
         # Clear GUI labels text.

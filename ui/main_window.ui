@@ -399,7 +399,7 @@
          </widget>
         </item>
         <item>
-         <widget class="QGroupBox" name="observationGroupBox">
+         <widget class="QGroupBox" name="identificationGroupBox">
           <property name="minimumSize">
            <size>
             <width>400</width>
@@ -422,14 +422,14 @@
            <item row="0" column="0">
             <layout class="QGridLayout" name="gridLayout_7">
              <item row="0" column="0">
-              <widget class="QPushButton" name="observationAddPushButton">
+              <widget class="QPushButton" name="identificationAddPushButton">
                <property name="text">
                 <string>Ajouter</string>
                </property>
               </widget>
              </item>
              <item row="1" column="0">
-              <widget class="QGroupBox" name="observationListGroupeBox">
+              <widget class="QGroupBox" name="identificationListGroupeBox">
                <property name="title">
                 <string>Liste</string>
                </property>
@@ -437,7 +437,7 @@
                 <item row="0" column="0">
                  <layout class="QGridLayout" name="gridLayout_5">
                   <item row="0" column="0">
-                   <widget class="QPushButton" name="observationListPreviousPushButton">
+                   <widget class="QPushButton" name="identificationListPreviousPushButton">
                     <property name="minimumSize">
                      <size>
                       <width>50</width>
@@ -456,7 +456,7 @@
                    </widget>
                   </item>
                   <item row="0" column="1">
-                   <widget class="QLabel" name="observationDateLabel">
+                   <widget class="QLabel" name="identificationDateLabel">
                     <property name="text">
                      <string/>
                     </property>
@@ -466,7 +466,7 @@
                    </widget>
                   </item>
                   <item row="0" column="2">
-                   <widget class="QPushButton" name="observationListNextPushButton">
+                   <widget class="QPushButton" name="identificationListNextPushButton">
                     <property name="minimumSize">
                      <size>
                       <width>50</width>
@@ -490,7 +490,7 @@
               </widget>
              </item>
              <item row="2" column="0">
-              <widget class="QGroupBox" name="observationPhotosGroupBox">
+              <widget class="QGroupBox" name="identificationPhotosGroupBox">
                <property name="title">
                 <string>Photos</string>
                </property>
@@ -498,7 +498,7 @@
                 <item row="0" column="0">
                  <layout class="QGridLayout" name="gridLayout_3">
                   <item row="0" column="0">
-                   <widget class="QPushButton" name="observationPhotosPreviousPushButton">
+                   <widget class="QPushButton" name="identificationPhotosPreviousPushButton">
                     <property name="minimumSize">
                      <size>
                       <width>50</width>
@@ -517,10 +517,10 @@
                    </widget>
                   </item>
                   <item row="0" column="1">
-                   <widget class="QGraphicsView" name="observationPhotosGraphicView"/>
+                   <widget class="QGraphicsView" name="identificationPhotosGraphicsView"/>
                   </item>
                   <item row="0" column="2">
-                   <widget class="QPushButton" name="observationPhotosNextPushButton">
+                   <widget class="QPushButton" name="identificationPhotosNextPushButton">
                     <property name="minimumSize">
                      <size>
                       <width>50</width>
@@ -544,7 +544,7 @@
               </widget>
              </item>
              <item row="3" column="0">
-              <widget class="QGroupBox" name="observationInfosGroupBox">
+              <widget class="QGroupBox" name="identificationInfosGroupBox">
                <property name="title">
                 <string>Infos</string>
                </property>
@@ -552,7 +552,7 @@
                 <item row="0" column="0">
                  <layout class="QGridLayout" name="gridLayout">
                   <item row="4" column="1">
-                   <widget class="QLabel" name="observationDescriptionContentLabel">
+                   <widget class="QLabel" name="identificationDescriptionContentLabel">
                     <property name="text">
                      <string/>
                     </property>
@@ -562,14 +562,14 @@
                    </widget>
                   </item>
                   <item row="4" column="0">
-                   <widget class="QLabel" name="observationDescriptionLabel">
+                   <widget class="QLabel" name="identificationDescriptionLabel">
                     <property name="text">
                      <string>Description terrain</string>
                     </property>
                    </widget>
                   </item>
                   <item row="1" column="1">
-                   <widget class="QLabel" name="observationDepartmentContentLabel">
+                   <widget class="QLabel" name="identificationDepartmentContentLabel">
                     <property name="text">
                      <string/>
                     </property>
@@ -579,7 +579,7 @@
                    </widget>
                   </item>
                   <item row="0" column="1">
-                   <widget class="QLabel" name="observationCityContentLabel">
+                   <widget class="QLabel" name="identificationCityContentLabel">
                     <property name="frameShape">
                      <enum>QFrame::Shape::NoFrame</enum>
                     </property>
@@ -592,7 +592,7 @@
                    </widget>
                   </item>
                   <item row="3" column="1">
-                   <widget class="QLabel" name="observationGpsContentLabel">
+                   <widget class="QLabel" name="identificationGpsContentLabel">
                     <property name="text">
                      <string/>
                     </property>
@@ -602,7 +602,7 @@
                    </widget>
                   </item>
                   <item row="2" column="1">
-                   <widget class="QLabel" name="observationCountryContentLabel">
+                   <widget class="QLabel" name="identificationCountryContentLabel">
                     <property name="text">
                      <string/>
                     </property>
@@ -612,28 +612,28 @@
                    </widget>
                   </item>
                   <item row="2" column="0">
-                   <widget class="QLabel" name="observationCountryLabel">
+                   <widget class="QLabel" name="identificationCountryLabel">
                     <property name="text">
                      <string>Pays</string>
                     </property>
                    </widget>
                   </item>
                   <item row="1" column="0">
-                   <widget class="QLabel" name="observationDepartmentLabel">
+                   <widget class="QLabel" name="identificationDepartmentLabel">
                     <property name="text">
                      <string>Département</string>
                     </property>
                    </widget>
                   </item>
                   <item row="3" column="0">
-                   <widget class="QLabel" name="observationGpsLabel">
+                   <widget class="QLabel" name="identificationGpsLabel">
                     <property name="text">
                      <string>Coordonnées GPS</string>
                     </property>
                    </widget>
                   </item>
                   <item row="0" column="0">
-                   <widget class="QLabel" name="observationCityLabel">
+                   <widget class="QLabel" name="identificationCityLabel">
                     <property name="text">
                      <string>Commune</string>
                     </property>
@@ -645,7 +645,7 @@
               </widget>
              </item>
              <item row="4" column="0">
-              <widget class="QPushButton" name="observationEditPushButton">
+              <widget class="QPushButton" name="identificationEditPushButton">
                <property name="text">
                 <string>Editer</string>
                </property>
