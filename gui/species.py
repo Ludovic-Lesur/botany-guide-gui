@@ -135,6 +135,8 @@ class Species:
             Identification.clear(self._gui)
             self._gui.identificationListPreviousPushButton.setEnabled(False)
             self._gui.identificationListNextPushButton.setEnabled(False)
+            # Update title.
+            self._gui.identificationListGroupBox.setTitle("Liste (0)")
         else:
             # Check index.
             if (self._current_identification_index >= identification_count):
@@ -145,6 +147,8 @@ class Species:
             # Update buttons state.
             self._gui.identificationListPreviousPushButton.setEnabled(True if (self._current_identification_index > 0) else False)
             self._gui.identificationListNextPushButton.setEnabled(True if (self._current_identification_index < (identification_count - 1)) else False)
+            # Update title.
+            self._gui.identificationListGroupBox.setTitle("Liste (" + str(self._current_identification_index + 1) + "/" + str(identification_count) + ")")
 
     def _previous_identification_callback(self):
         # Check index.

@@ -25,7 +25,7 @@ class Ui_MainWindow(object):
     def setupUi(self, MainWindow):
         if not MainWindow.objectName():
             MainWindow.setObjectName(u"MainWindow")
-        MainWindow.resize(1580, 638)
+        MainWindow.resize(1580, 653)
         self.centralwidget = QWidget(MainWindow)
         self.centralwidget.setObjectName(u"centralwidget")
         self.gridLayout_20 = QGridLayout(self.centralwidget)
@@ -162,6 +162,7 @@ class Ui_MainWindow(object):
 
         self.speciesEdibilityContentLabel = QLabel(self.speciesInfosGroupBox)
         self.speciesEdibilityContentLabel.setObjectName(u"speciesEdibilityContentLabel")
+        self.speciesEdibilityContentLabel.setMinimumSize(QSize(0, 50))
         self.speciesEdibilityContentLabel.setAlignment(Qt.AlignmentFlag.AlignRight|Qt.AlignmentFlag.AlignTrailing|Qt.AlignmentFlag.AlignVCenter)
 
         self.gridLayout_10.addWidget(self.speciesEdibilityContentLabel, 0, 1, 1, 1)
@@ -264,26 +265,101 @@ class Ui_MainWindow(object):
 
         self.gridLayout_7.addWidget(self.identificationAddPushButton, 0, 0, 1, 1)
 
-        self.identificationListGroupeBox = QGroupBox(self.identificationGroupBox)
-        self.identificationListGroupeBox.setObjectName(u"identificationListGroupeBox")
-        self.gridLayout_6 = QGridLayout(self.identificationListGroupeBox)
+        self.identificationInfosGroupBox = QGroupBox(self.identificationGroupBox)
+        self.identificationInfosGroupBox.setObjectName(u"identificationInfosGroupBox")
+        self.gridLayout_2 = QGridLayout(self.identificationInfosGroupBox)
+        self.gridLayout_2.setObjectName(u"gridLayout_2")
+        self.gridLayout = QGridLayout()
+        self.gridLayout.setObjectName(u"gridLayout")
+        self.identificationGpsLabel = QLabel(self.identificationInfosGroupBox)
+        self.identificationGpsLabel.setObjectName(u"identificationGpsLabel")
+
+        self.gridLayout.addWidget(self.identificationGpsLabel, 3, 0, 1, 1)
+
+        self.identificationCityLabel = QLabel(self.identificationInfosGroupBox)
+        self.identificationCityLabel.setObjectName(u"identificationCityLabel")
+
+        self.gridLayout.addWidget(self.identificationCityLabel, 0, 0, 1, 1)
+
+        self.identificationDepartmentContentLabel = QLabel(self.identificationInfosGroupBox)
+        self.identificationDepartmentContentLabel.setObjectName(u"identificationDepartmentContentLabel")
+        self.identificationDepartmentContentLabel.setAlignment(Qt.AlignmentFlag.AlignRight|Qt.AlignmentFlag.AlignTrailing|Qt.AlignmentFlag.AlignVCenter)
+
+        self.gridLayout.addWidget(self.identificationDepartmentContentLabel, 1, 1, 1, 1)
+
+        self.identificationCountryLabel = QLabel(self.identificationInfosGroupBox)
+        self.identificationCountryLabel.setObjectName(u"identificationCountryLabel")
+
+        self.gridLayout.addWidget(self.identificationCountryLabel, 2, 0, 1, 1)
+
+        self.identificationCountryContentLabel = QLabel(self.identificationInfosGroupBox)
+        self.identificationCountryContentLabel.setObjectName(u"identificationCountryContentLabel")
+        self.identificationCountryContentLabel.setAlignment(Qt.AlignmentFlag.AlignRight|Qt.AlignmentFlag.AlignTrailing|Qt.AlignmentFlag.AlignVCenter)
+
+        self.gridLayout.addWidget(self.identificationCountryContentLabel, 2, 1, 1, 1)
+
+        self.identificationGpsContentLabel = QLabel(self.identificationInfosGroupBox)
+        self.identificationGpsContentLabel.setObjectName(u"identificationGpsContentLabel")
+        self.identificationGpsContentLabel.setAlignment(Qt.AlignmentFlag.AlignRight|Qt.AlignmentFlag.AlignTrailing|Qt.AlignmentFlag.AlignVCenter)
+
+        self.gridLayout.addWidget(self.identificationGpsContentLabel, 3, 1, 1, 1)
+
+        self.identificationDepartmentLabel = QLabel(self.identificationInfosGroupBox)
+        self.identificationDepartmentLabel.setObjectName(u"identificationDepartmentLabel")
+
+        self.gridLayout.addWidget(self.identificationDepartmentLabel, 1, 0, 1, 1)
+
+        self.identificationCityContentLabel = QLabel(self.identificationInfosGroupBox)
+        self.identificationCityContentLabel.setObjectName(u"identificationCityContentLabel")
+        self.identificationCityContentLabel.setFrameShape(QFrame.Shape.NoFrame)
+        self.identificationCityContentLabel.setAlignment(Qt.AlignmentFlag.AlignRight|Qt.AlignmentFlag.AlignTrailing|Qt.AlignmentFlag.AlignVCenter)
+
+        self.gridLayout.addWidget(self.identificationCityContentLabel, 0, 1, 1, 1)
+
+        self.identificationDescriptionLabel = QLabel(self.identificationInfosGroupBox)
+        self.identificationDescriptionLabel.setObjectName(u"identificationDescriptionLabel")
+
+        self.gridLayout.addWidget(self.identificationDescriptionLabel, 4, 0, 1, 1)
+
+        self.identificationDescriptionContentLabel = QLabel(self.identificationInfosGroupBox)
+        self.identificationDescriptionContentLabel.setObjectName(u"identificationDescriptionContentLabel")
+        self.identificationDescriptionContentLabel.setMinimumSize(QSize(0, 117))
+        self.identificationDescriptionContentLabel.setAlignment(Qt.AlignmentFlag.AlignRight|Qt.AlignmentFlag.AlignTrailing|Qt.AlignmentFlag.AlignVCenter)
+        self.identificationDescriptionContentLabel.setWordWrap(True)
+
+        self.gridLayout.addWidget(self.identificationDescriptionContentLabel, 4, 1, 1, 1)
+
+
+        self.gridLayout_2.addLayout(self.gridLayout, 0, 0, 1, 1)
+
+
+        self.gridLayout_7.addWidget(self.identificationInfosGroupBox, 3, 0, 1, 1)
+
+        self.identificationEditPushButton = QPushButton(self.identificationGroupBox)
+        self.identificationEditPushButton.setObjectName(u"identificationEditPushButton")
+
+        self.gridLayout_7.addWidget(self.identificationEditPushButton, 4, 0, 1, 1)
+
+        self.identificationListGroupBox = QGroupBox(self.identificationGroupBox)
+        self.identificationListGroupBox.setObjectName(u"identificationListGroupBox")
+        self.gridLayout_6 = QGridLayout(self.identificationListGroupBox)
         self.gridLayout_6.setObjectName(u"gridLayout_6")
         self.gridLayout_5 = QGridLayout()
         self.gridLayout_5.setObjectName(u"gridLayout_5")
-        self.identificationListPreviousPushButton = QPushButton(self.identificationListGroupeBox)
+        self.identificationListPreviousPushButton = QPushButton(self.identificationListGroupBox)
         self.identificationListPreviousPushButton.setObjectName(u"identificationListPreviousPushButton")
         self.identificationListPreviousPushButton.setMinimumSize(QSize(50, 0))
         self.identificationListPreviousPushButton.setMaximumSize(QSize(50, 16777215))
 
         self.gridLayout_5.addWidget(self.identificationListPreviousPushButton, 0, 0, 1, 1)
 
-        self.identificationDateLabel = QLabel(self.identificationListGroupeBox)
+        self.identificationDateLabel = QLabel(self.identificationListGroupBox)
         self.identificationDateLabel.setObjectName(u"identificationDateLabel")
         self.identificationDateLabel.setAlignment(Qt.AlignmentFlag.AlignCenter)
 
         self.gridLayout_5.addWidget(self.identificationDateLabel, 0, 1, 1, 1)
 
-        self.identificationListNextPushButton = QPushButton(self.identificationListGroupeBox)
+        self.identificationListNextPushButton = QPushButton(self.identificationListGroupBox)
         self.identificationListNextPushButton.setObjectName(u"identificationListNextPushButton")
         self.identificationListNextPushButton.setMinimumSize(QSize(50, 0))
         self.identificationListNextPushButton.setMaximumSize(QSize(50, 16777215))
@@ -294,7 +370,7 @@ class Ui_MainWindow(object):
         self.gridLayout_6.addLayout(self.gridLayout_5, 0, 0, 1, 1)
 
 
-        self.gridLayout_7.addWidget(self.identificationListGroupeBox, 1, 0, 1, 1)
+        self.gridLayout_7.addWidget(self.identificationListGroupBox, 1, 0, 1, 1)
 
         self.identificationPhotosGroupBox = QGroupBox(self.identificationGroupBox)
         self.identificationPhotosGroupBox.setObjectName(u"identificationPhotosGroupBox")
@@ -326,79 +402,6 @@ class Ui_MainWindow(object):
 
 
         self.gridLayout_7.addWidget(self.identificationPhotosGroupBox, 2, 0, 1, 1)
-
-        self.identificationInfosGroupBox = QGroupBox(self.identificationGroupBox)
-        self.identificationInfosGroupBox.setObjectName(u"identificationInfosGroupBox")
-        self.gridLayout_2 = QGridLayout(self.identificationInfosGroupBox)
-        self.gridLayout_2.setObjectName(u"gridLayout_2")
-        self.gridLayout = QGridLayout()
-        self.gridLayout.setObjectName(u"gridLayout")
-        self.identificationDescriptionContentLabel = QLabel(self.identificationInfosGroupBox)
-        self.identificationDescriptionContentLabel.setObjectName(u"identificationDescriptionContentLabel")
-        self.identificationDescriptionContentLabel.setAlignment(Qt.AlignmentFlag.AlignRight|Qt.AlignmentFlag.AlignTrailing|Qt.AlignmentFlag.AlignVCenter)
-
-        self.gridLayout.addWidget(self.identificationDescriptionContentLabel, 4, 1, 1, 1)
-
-        self.identificationDescriptionLabel = QLabel(self.identificationInfosGroupBox)
-        self.identificationDescriptionLabel.setObjectName(u"identificationDescriptionLabel")
-
-        self.gridLayout.addWidget(self.identificationDescriptionLabel, 4, 0, 1, 1)
-
-        self.identificationDepartmentContentLabel = QLabel(self.identificationInfosGroupBox)
-        self.identificationDepartmentContentLabel.setObjectName(u"identificationDepartmentContentLabel")
-        self.identificationDepartmentContentLabel.setAlignment(Qt.AlignmentFlag.AlignRight|Qt.AlignmentFlag.AlignTrailing|Qt.AlignmentFlag.AlignVCenter)
-
-        self.gridLayout.addWidget(self.identificationDepartmentContentLabel, 1, 1, 1, 1)
-
-        self.identificationCityContentLabel = QLabel(self.identificationInfosGroupBox)
-        self.identificationCityContentLabel.setObjectName(u"identificationCityContentLabel")
-        self.identificationCityContentLabel.setFrameShape(QFrame.Shape.NoFrame)
-        self.identificationCityContentLabel.setAlignment(Qt.AlignmentFlag.AlignRight|Qt.AlignmentFlag.AlignTrailing|Qt.AlignmentFlag.AlignVCenter)
-
-        self.gridLayout.addWidget(self.identificationCityContentLabel, 0, 1, 1, 1)
-
-        self.identificationGpsContentLabel = QLabel(self.identificationInfosGroupBox)
-        self.identificationGpsContentLabel.setObjectName(u"identificationGpsContentLabel")
-        self.identificationGpsContentLabel.setAlignment(Qt.AlignmentFlag.AlignRight|Qt.AlignmentFlag.AlignTrailing|Qt.AlignmentFlag.AlignVCenter)
-
-        self.gridLayout.addWidget(self.identificationGpsContentLabel, 3, 1, 1, 1)
-
-        self.identificationCountryContentLabel = QLabel(self.identificationInfosGroupBox)
-        self.identificationCountryContentLabel.setObjectName(u"identificationCountryContentLabel")
-        self.identificationCountryContentLabel.setAlignment(Qt.AlignmentFlag.AlignRight|Qt.AlignmentFlag.AlignTrailing|Qt.AlignmentFlag.AlignVCenter)
-
-        self.gridLayout.addWidget(self.identificationCountryContentLabel, 2, 1, 1, 1)
-
-        self.identificationCountryLabel = QLabel(self.identificationInfosGroupBox)
-        self.identificationCountryLabel.setObjectName(u"identificationCountryLabel")
-
-        self.gridLayout.addWidget(self.identificationCountryLabel, 2, 0, 1, 1)
-
-        self.identificationDepartmentLabel = QLabel(self.identificationInfosGroupBox)
-        self.identificationDepartmentLabel.setObjectName(u"identificationDepartmentLabel")
-
-        self.gridLayout.addWidget(self.identificationDepartmentLabel, 1, 0, 1, 1)
-
-        self.identificationGpsLabel = QLabel(self.identificationInfosGroupBox)
-        self.identificationGpsLabel.setObjectName(u"identificationGpsLabel")
-
-        self.gridLayout.addWidget(self.identificationGpsLabel, 3, 0, 1, 1)
-
-        self.identificationCityLabel = QLabel(self.identificationInfosGroupBox)
-        self.identificationCityLabel.setObjectName(u"identificationCityLabel")
-
-        self.gridLayout.addWidget(self.identificationCityLabel, 0, 0, 1, 1)
-
-
-        self.gridLayout_2.addLayout(self.gridLayout, 0, 0, 1, 1)
-
-
-        self.gridLayout_7.addWidget(self.identificationInfosGroupBox, 3, 0, 1, 1)
-
-        self.identificationEditPushButton = QPushButton(self.identificationGroupBox)
-        self.identificationEditPushButton.setObjectName(u"identificationEditPushButton")
-
-        self.gridLayout_7.addWidget(self.identificationEditPushButton, 4, 0, 1, 1)
 
 
         self.gridLayout_8.addLayout(self.gridLayout_7, 0, 0, 1, 1)
@@ -453,26 +456,26 @@ class Ui_MainWindow(object):
         self.speciesRefChampignonsContentLabel.setText("")
         self.speciesRefGuide700PlantesLabel.setText(QCoreApplication.translate("MainWindow", u"Guide 700 Plantes", None))
         self.speciesEditPushButton.setText(QCoreApplication.translate("MainWindow", u"Editer", None))
-        self.identificationGroupBox.setTitle(QCoreApplication.translate("MainWindow", u"Observations", None))
+        self.identificationGroupBox.setTitle(QCoreApplication.translate("MainWindow", u"Identifications", None))
         self.identificationAddPushButton.setText(QCoreApplication.translate("MainWindow", u"Ajouter", None))
-        self.identificationListGroupeBox.setTitle(QCoreApplication.translate("MainWindow", u"Liste", None))
+        self.identificationInfosGroupBox.setTitle(QCoreApplication.translate("MainWindow", u"Infos", None))
+        self.identificationGpsLabel.setText(QCoreApplication.translate("MainWindow", u"Coordonn\u00e9es GPS", None))
+        self.identificationCityLabel.setText(QCoreApplication.translate("MainWindow", u"Commune", None))
+        self.identificationDepartmentContentLabel.setText("")
+        self.identificationCountryLabel.setText(QCoreApplication.translate("MainWindow", u"Pays", None))
+        self.identificationCountryContentLabel.setText("")
+        self.identificationGpsContentLabel.setText("")
+        self.identificationDepartmentLabel.setText(QCoreApplication.translate("MainWindow", u"D\u00e9partement", None))
+        self.identificationCityContentLabel.setText("")
+        self.identificationDescriptionLabel.setText(QCoreApplication.translate("MainWindow", u"Description terrain", None))
+        self.identificationDescriptionContentLabel.setText("")
+        self.identificationEditPushButton.setText(QCoreApplication.translate("MainWindow", u"Editer", None))
+        self.identificationListGroupBox.setTitle(QCoreApplication.translate("MainWindow", u"Liste", None))
         self.identificationListPreviousPushButton.setText(QCoreApplication.translate("MainWindow", u"<", None))
         self.identificationDateLabel.setText("")
         self.identificationListNextPushButton.setText(QCoreApplication.translate("MainWindow", u">", None))
         self.identificationPhotosGroupBox.setTitle(QCoreApplication.translate("MainWindow", u"Photos", None))
         self.identificationPhotosPreviousPushButton.setText(QCoreApplication.translate("MainWindow", u"<", None))
         self.identificationPhotosNextPushButton.setText(QCoreApplication.translate("MainWindow", u">", None))
-        self.identificationInfosGroupBox.setTitle(QCoreApplication.translate("MainWindow", u"Infos", None))
-        self.identificationDescriptionContentLabel.setText("")
-        self.identificationDescriptionLabel.setText(QCoreApplication.translate("MainWindow", u"Description terrain", None))
-        self.identificationDepartmentContentLabel.setText("")
-        self.identificationCityContentLabel.setText("")
-        self.identificationGpsContentLabel.setText("")
-        self.identificationCountryContentLabel.setText("")
-        self.identificationCountryLabel.setText(QCoreApplication.translate("MainWindow", u"Pays", None))
-        self.identificationDepartmentLabel.setText(QCoreApplication.translate("MainWindow", u"D\u00e9partement", None))
-        self.identificationGpsLabel.setText(QCoreApplication.translate("MainWindow", u"Coordonn\u00e9es GPS", None))
-        self.identificationCityLabel.setText(QCoreApplication.translate("MainWindow", u"Commune", None))
-        self.identificationEditPushButton.setText(QCoreApplication.translate("MainWindow", u"Editer", None))
     # retranslateUi
 

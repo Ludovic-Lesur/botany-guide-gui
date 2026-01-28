@@ -137,6 +137,8 @@ class Identification:
             Image.clear(self._gui.identificationPhotosGraphicsView)
             self._gui.identificationPhotosPreviousPushButton.setEnabled(False)
             self._gui.identificationPhotosNextPushButton.setEnabled(False)
+            # Update title.
+            self._gui.identificationPhotosGroupBox.setTitle("Photos (0)")
         else:
             # Check index.
             if (self._current_image_index >= image_count):
@@ -147,6 +149,8 @@ class Identification:
             # Update buttons state.
             self._gui.identificationPhotosPreviousPushButton.setEnabled(True if (self._current_image_index > 0) else False)
             self._gui.identificationPhotosNextPushButton.setEnabled(True if (self._current_image_index < (image_count - 1)) else False)
+            # Update title.
+            self._gui.identificationPhotosGroupBox.setTitle("Photos (" + str(self._current_image_index + 1) + "/" + str(image_count) + ")")
 
     def _previous_image_callback(self):
         # Check index.
