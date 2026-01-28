@@ -10,7 +10,7 @@ import os
 from dataclasses import dataclass
 
 from PySide6.QtWidgets import QGraphicsScene, QGraphicsView
-from PySide6.QtGui import QPixmap
+from PySide6.QtGui import QPixmap, QImageReader
 from PySide6.QtCore import Qt
 
 ### IMAGE class ###
@@ -34,9 +34,18 @@ class Image:
             raise ValueError("Image file not found:")
         # Create pixel map object.
         try:
-            pixmap = QPixmap(image_path)
-            if pixmap.isNull():
-                raise ValueError("Failed to create pixel mapping")
+            # Manage orientation.
+            reader = QImageReader(image_path)
+            reader.setAutoTransform(True)
+            image = reader.read()
+            # Check image.
+            if image is None or image.isNull():
+                # Fallback to simple QPixmap load.
+                pixmap = QPixmap(image_path)
+                if pixmap.isNull():
+                    raise ValueError("Failed to load image")
+            else:
+                pixmap = QPixmap.fromImage(image)
             # Configure scene.
             scene = QGraphicsScene()
             scene.addPixmap(pixmap)
