@@ -16,8 +16,12 @@ from .main_window_ui import Ui_MainWindow
 
 GUI_DATA_PATH = './data'
 
-### GUI class definition ###   
-        
+### GUI class definition ###
+
+"""
+* BotanyGuideGui
+* Main GUI class.
+"""
 class BotanyGuideGui(QMainWindow, Ui_MainWindow):
     # Constructor.
     def __init__(self):
