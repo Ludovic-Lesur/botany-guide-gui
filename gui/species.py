@@ -14,7 +14,7 @@ from pathlib import Path
 from typing import Any
 from PySide6.QtWidgets import QDialog, QDialogButtonBox, QTextEdit
 
-from gui.species_edit_window_ui import Ui_SpeciesEditWindow
+from gui.species_edit_window_ui import Ui_SpeciesEditDialog
 from gui.identification import Identification
 from gui.image import Image
 
@@ -45,7 +45,7 @@ SPECIES_JSON_KEY_REQUIRED = [
 * SpeciesEditWindow
 * Graphic class to edit a species.
 """
-class SpeciesEditWindow(QDialog, Ui_SpeciesEditWindow):
+class SpeciesEditWindow(QDialog, Ui_SpeciesEditDialog):
 
     def __init__(self, species: object) -> None:
         # Init parent.
@@ -266,6 +266,7 @@ class Species:
             self._internal_call = True
             self.display()
             self._internal_call = False
+        edit_window.close()
 
     def _display_identification(self):
         # Local variables.
@@ -326,8 +327,11 @@ class Species:
             # Update image.
             Image.display(self._gui.speciesPhotoGraphicsView, self._image_path)
             # Update buttons callbacks.
+            self._gui.identificationListPreviousPushButton.clicked.disconnect()
             self._gui.identificationListPreviousPushButton.clicked.connect(self._previous_identification_callback)
+            self._gui.identificationListNextPushButton.clicked.disconnect()
             self._gui.identificationListNextPushButton.clicked.connect(self._next_identification_callback)
+            self._gui.speciesEditPushButton.clicked.disconnect()
             self._gui.speciesEditPushButton.clicked.connect(self._edit_callback)
             # Print first identification.
             self._current_identification_index = 0
@@ -344,6 +348,8 @@ class Species:
         gui.speciesRefFlorePyreneesContentLabel.setText("")
         gui.speciesRefDelachauxArbresContentLabel.setText("")
         gui.speciesRefChampignonsContentLabel.setText("")
+        # Update title.
+        gui.identificationListGroupBox.setTitle("Liste")
         # Clear image.
         Image.display(gui.speciesPhotoGraphicsView, None)
         # Disable buttons.

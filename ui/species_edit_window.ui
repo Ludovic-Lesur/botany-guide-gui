@@ -1,13 +1,13 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <ui version="4.0">
- <class>SpeciesEditWindow</class>
- <widget class="QDialog" name="SpeciesEditWindow">
+ <class>SpeciesEditDialog</class>
+ <widget class="QDialog" name="SpeciesEditDialog">
   <property name="geometry">
    <rect>
     <x>0</x>
     <y>0</y>
-    <width>518</width>
-    <height>472</height>
+    <width>550</width>
+    <height>500</height>
    </rect>
   </property>
   <property name="windowTitle">
@@ -30,7 +30,7 @@
          <property name="minimumSize">
           <size>
            <width>300</width>
-           <height>0</height>
+           <height>30</height>
           </size>
          </property>
          <property name="maximumSize">
@@ -53,7 +53,7 @@
          <property name="minimumSize">
           <size>
            <width>300</width>
-           <height>0</height>
+           <height>30</height>
           </size>
          </property>
          <property name="maximumSize">
@@ -76,7 +76,7 @@
          <property name="minimumSize">
           <size>
            <width>300</width>
-           <height>0</height>
+           <height>30</height>
           </size>
          </property>
          <property name="maximumSize">
@@ -99,7 +99,7 @@
          <property name="minimumSize">
           <size>
            <width>300</width>
-           <height>0</height>
+           <height>30</height>
           </size>
          </property>
          <property name="maximumSize">
@@ -125,7 +125,7 @@
          <property name="minimumSize">
           <size>
            <width>300</width>
-           <height>0</height>
+           <height>30</height>
           </size>
          </property>
          <property name="maximumSize">
@@ -151,7 +151,7 @@
          <property name="minimumSize">
           <size>
            <width>300</width>
-           <height>0</height>
+           <height>30</height>
           </size>
          </property>
          <property name="maximumSize">
@@ -177,7 +177,7 @@
          <property name="minimumSize">
           <size>
            <width>300</width>
-           <height>0</height>
+           <height>30</height>
           </size>
          </property>
          <property name="maximumSize">
@@ -203,7 +203,7 @@
          <property name="minimumSize">
           <size>
            <width>300</width>
-           <height>0</height>
+           <height>30</height>
           </size>
          </property>
          <property name="maximumSize">
@@ -241,7 +241,7 @@
   <connection>
    <sender>buttonBox</sender>
    <signal>accepted()</signal>
-   <receiver>SpeciesEditWindow</receiver>
+   <receiver>SpeciesEditDialog</receiver>
    <slot>accept()</slot>
    <hints>
     <hint type="sourcelabel">
@@ -257,7 +257,7 @@
   <connection>
    <sender>buttonBox</sender>
    <signal>rejected()</signal>
-   <receiver>SpeciesEditWindow</receiver>
+   <receiver>SpeciesEditDialog</receiver>
    <slot>reject()</slot>
    <hints>
     <hint type="sourcelabel">
