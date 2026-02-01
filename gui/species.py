@@ -14,6 +14,7 @@ from pathlib import Path
 from typing import Any
 from PySide6.QtWidgets import QDialog, QDialogButtonBox, QTextEdit
 
+from gui.single_slot_connector import SingleSlotConnector
 from gui.species_edit_window_ui import Ui_SpeciesEditDialog
 from gui.identification import Identification, IdentificationEditWindow, IdentificationView
 from gui.image import Image
@@ -165,6 +166,7 @@ class SpeciesView:
         self._image_path = None
         self._identification_view_list = []
         self._current_identification_index = 0
+        self._single_slot_connector = SingleSlotConnector()
         # Read directory.
         for f in os.listdir(species_directory_path):
             # Build complete path.
@@ -357,15 +359,12 @@ class SpeciesView:
         # Check call type.
         if (update_identification == True):
             # Update buttons callbacks.
-            self._gui.identificationAddPushButton.clicked.disconnect()
-            self._gui.identificationAddPushButton.clicked.connect(self._add_identification_callback)
+            self._single_slot_connector.connect(self._gui.speciesEditPushButton.clicked, self._edit_callback)
+            self._gui.speciesEditPushButton.setEnabled(True)
+            self._single_slot_connector.connect(self._gui.identificationAddPushButton.clicked, self._add_identification_callback)
             self._gui.identificationAddPushButton.setEnabled(True)
-            self._gui.identificationListPreviousPushButton.clicked.disconnect()
-            self._gui.identificationListPreviousPushButton.clicked.connect(self._previous_identification_callback)
-            self._gui.identificationListNextPushButton.clicked.disconnect()
-            self._gui.identificationListNextPushButton.clicked.connect(self._next_identification_callback)
-            self._gui.speciesEditPushButton.clicked.disconnect()
-            self._gui.speciesEditPushButton.clicked.connect(self._edit_callback)
+            self._single_slot_connector.connect(self._gui.identificationListPreviousPushButton.clicked, self._previous_identification_callback)
+            self._single_slot_connector.connect(self._gui.identificationListNextPushButton.clicked, self._next_identification_callback)
             # Print first identification in case of reset.
             if (reset_identification == True):
                 self._current_identification_index = 0
@@ -387,13 +386,10 @@ class SpeciesView:
         # Clear image.
         Image.display(gui.speciesPhotoGraphicsView, None)
         # Disable buttons.
-        gui.identificationAddPushButton.clicked.disconnect()
+        gui.speciesEditPushButton.setEnabled(False)
         gui.identificationAddPushButton.setEnabled(False)
-        gui.identificationListPreviousPushButton.clicked.disconnect()
         gui.identificationListPreviousPushButton.setEnabled(False)
-        gui.identificationListNextPushButton.clicked.disconnect()
         gui.identificationListNextPushButton.setEnabled(False)
-        gui.speciesEditPushButton.clicked.disconnect()
         gui.speciesEditPushButton.setEnabled(False)
         # Print first identification if it exists.
         IdentificationView.clear(gui)

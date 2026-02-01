@@ -18,6 +18,7 @@ from PySide6.QtCore import QDate
 
 from gui.identification_edit_window_ui import Ui_IdentificationEditDialog
 from gui.image import Image
+from gui.single_slot_connector import SingleSlotConnector
 
 ### IDENTIFICATION macros ###
 
@@ -218,6 +219,7 @@ class IdentificationView:
         self._gui = gui
         self._image_path_list = []
         self._current_image_index = 0
+        self._single_slot_connector = SingleSlotConnector()
         # Check initialization mode.
         if (identification is None):
             # Create empty object.
@@ -394,17 +396,15 @@ class IdentificationView:
         self._gui.identificationCountryContentLabel.setText(self._identification.location_country)
         self._gui.identificationGpsContentLabel.setText(str(self._identification.location_gps_latitude) + "° " + str(self._identification.location_gps_longitude) + "° (" + str(self._identification.location_gps_altitude) + "m)")
         self._gui.identificationDescriptionContentLabel.setText(self._identification.description)
-        # Enable edit button.
-        self._gui.identificationEditPushButton.setEnabled(True)
         # Check call type.
         if (reset == True):
             # Update button callbacks.
-            self._gui.identificationPhotosPreviousPushButton.clicked.disconnect()
-            self._gui.identificationPhotosPreviousPushButton.clicked.connect(self._previous_image_callback)
-            self._gui.identificationPhotosNextPushButton.clicked.disconnect()
-            self._gui.identificationPhotosNextPushButton.clicked.connect(self._next_image_callback)
-            self._gui.identificationEditPushButton.clicked.disconnect()
-            self._gui.identificationEditPushButton.clicked.connect(self._edit_callback)
+            self._single_slot_connector.connect(self._gui.identificationPhotosPreviousPushButton.clicked, self._previous_image_callback)
+            self._gui.identificationPhotosPreviousPushButton.setEnabled(True)
+            self._single_slot_connector.connect(self._gui.identificationPhotosNextPushButton.clicked, self._next_image_callback)
+            self._gui.identificationPhotosNextPushButton.setEnabled(True)
+            self._single_slot_connector.connect(self._gui.identificationEditPushButton.clicked, self._edit_callback)
+            self._gui.identificationEditPushButton.setEnabled(True)
             # Print first image.
             self._current_image_index = 0
             self._display_image()
@@ -422,6 +422,8 @@ class IdentificationView:
         gui.identificationPhotosGroupBox.setTitle("Photos")
         # Clear image.
         Image.display(gui.identificationPhotosGraphicsView, None)
-        # Disable edit button.
+        # Disable buttons.
+        gui.identificationPhotosPreviousPushButton.setEnabled(False)
+        gui.identificationPhotosNextPushButton.setEnabled(False)
         gui.identificationEditPushButton.setEnabled(False)
             

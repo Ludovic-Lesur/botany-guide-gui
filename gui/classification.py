@@ -18,7 +18,7 @@ from .species import SpeciesView
 CLASSIFICATION_SPECIES_COLUMN = 6
 CLASSIFICATION_DEPTH_MAX = 8
 
-### CLASSIFICATION class definition ###   
+### CLASSIFICATION class definition ###
         
 class ClassificationView:
     
