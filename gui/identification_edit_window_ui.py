@@ -23,97 +23,115 @@ class Ui_IdentificationEditDialog(object):
     def setupUi(self, IdentificationEditDialog):
         if not IdentificationEditDialog.objectName():
             IdentificationEditDialog.setObjectName(u"IdentificationEditDialog")
-        IdentificationEditDialog.resize(500, 500)
+        IdentificationEditDialog.resize(620, 500)
+        font = QFont()
+        font.setFamilies([u"LM Sans 12"])
+        IdentificationEditDialog.setFont(font)
         self.gridLayout = QGridLayout(IdentificationEditDialog)
         self.gridLayout.setObjectName(u"gridLayout")
         self.formLayout = QFormLayout()
         self.formLayout.setObjectName(u"formLayout")
         self.dateLabel = QLabel(IdentificationEditDialog)
         self.dateLabel.setObjectName(u"dateLabel")
+        self.dateLabel.setFont(font)
 
         self.formLayout.setWidget(0, QFormLayout.ItemRole.LabelRole, self.dateLabel)
 
         self.dateEdit = QDateEdit(IdentificationEditDialog)
         self.dateEdit.setObjectName(u"dateEdit")
-        self.dateEdit.setMinimumSize(QSize(300, 30))
-        self.dateEdit.setMaximumSize(QSize(16777215, 30))
+        self.dateEdit.setMinimumSize(QSize(300, 35))
+        self.dateEdit.setMaximumSize(QSize(16777215, 35))
 
         self.formLayout.setWidget(0, QFormLayout.ItemRole.FieldRole, self.dateEdit)
 
         self.cityLabel = QLabel(IdentificationEditDialog)
         self.cityLabel.setObjectName(u"cityLabel")
+        self.cityLabel.setFont(font)
 
         self.formLayout.setWidget(1, QFormLayout.ItemRole.LabelRole, self.cityLabel)
 
         self.cityTextEdit = QTextEdit(IdentificationEditDialog)
         self.cityTextEdit.setObjectName(u"cityTextEdit")
-        self.cityTextEdit.setMinimumSize(QSize(300, 30))
-        self.cityTextEdit.setMaximumSize(QSize(16777215, 30))
+        self.cityTextEdit.setMinimumSize(QSize(300, 35))
+        self.cityTextEdit.setMaximumSize(QSize(16777215, 35))
+        self.cityTextEdit.setFont(font)
+        self.cityTextEdit.viewport().setProperty(u"cursor", QCursor(Qt.CursorShape.IBeamCursor))
 
         self.formLayout.setWidget(1, QFormLayout.ItemRole.FieldRole, self.cityTextEdit)
 
         self.departmentLabel = QLabel(IdentificationEditDialog)
         self.departmentLabel.setObjectName(u"departmentLabel")
+        self.departmentLabel.setFont(font)
 
         self.formLayout.setWidget(2, QFormLayout.ItemRole.LabelRole, self.departmentLabel)
 
         self.departmentTextEdit = QTextEdit(IdentificationEditDialog)
         self.departmentTextEdit.setObjectName(u"departmentTextEdit")
-        self.departmentTextEdit.setMinimumSize(QSize(300, 30))
-        self.departmentTextEdit.setMaximumSize(QSize(16777215, 30))
+        self.departmentTextEdit.setMinimumSize(QSize(300, 35))
+        self.departmentTextEdit.setMaximumSize(QSize(16777215, 35))
+        self.departmentTextEdit.viewport().setProperty(u"cursor", QCursor(Qt.CursorShape.IBeamCursor))
 
         self.formLayout.setWidget(2, QFormLayout.ItemRole.FieldRole, self.departmentTextEdit)
 
         self.countryLabel = QLabel(IdentificationEditDialog)
         self.countryLabel.setObjectName(u"countryLabel")
+        self.countryLabel.setFont(font)
 
         self.formLayout.setWidget(3, QFormLayout.ItemRole.LabelRole, self.countryLabel)
 
         self.countryTextEdit = QTextEdit(IdentificationEditDialog)
         self.countryTextEdit.setObjectName(u"countryTextEdit")
-        self.countryTextEdit.setMinimumSize(QSize(300, 30))
-        self.countryTextEdit.setMaximumSize(QSize(16777215, 30))
+        self.countryTextEdit.setMinimumSize(QSize(300, 35))
+        self.countryTextEdit.setMaximumSize(QSize(16777215, 35))
+        self.countryTextEdit.viewport().setProperty(u"cursor", QCursor(Qt.CursorShape.IBeamCursor))
 
         self.formLayout.setWidget(3, QFormLayout.ItemRole.FieldRole, self.countryTextEdit)
 
         self.latitudeLabel = QLabel(IdentificationEditDialog)
         self.latitudeLabel.setObjectName(u"latitudeLabel")
+        self.latitudeLabel.setFont(font)
 
         self.formLayout.setWidget(4, QFormLayout.ItemRole.LabelRole, self.latitudeLabel)
 
         self.latitudeTextEdit = QTextEdit(IdentificationEditDialog)
         self.latitudeTextEdit.setObjectName(u"latitudeTextEdit")
-        self.latitudeTextEdit.setMinimumSize(QSize(300, 30))
-        self.latitudeTextEdit.setMaximumSize(QSize(16777215, 30))
+        self.latitudeTextEdit.setMinimumSize(QSize(300, 35))
+        self.latitudeTextEdit.setMaximumSize(QSize(16777215, 35))
+        self.latitudeTextEdit.viewport().setProperty(u"cursor", QCursor(Qt.CursorShape.IBeamCursor))
 
         self.formLayout.setWidget(4, QFormLayout.ItemRole.FieldRole, self.latitudeTextEdit)
 
         self.longitudeLabel = QLabel(IdentificationEditDialog)
         self.longitudeLabel.setObjectName(u"longitudeLabel")
+        self.longitudeLabel.setFont(font)
 
         self.formLayout.setWidget(5, QFormLayout.ItemRole.LabelRole, self.longitudeLabel)
 
         self.longitudeTextEdit = QTextEdit(IdentificationEditDialog)
         self.longitudeTextEdit.setObjectName(u"longitudeTextEdit")
-        self.longitudeTextEdit.setMinimumSize(QSize(300, 30))
-        self.longitudeTextEdit.setMaximumSize(QSize(16777215, 30))
+        self.longitudeTextEdit.setMinimumSize(QSize(300, 35))
+        self.longitudeTextEdit.setMaximumSize(QSize(16777215, 35))
+        self.longitudeTextEdit.viewport().setProperty(u"cursor", QCursor(Qt.CursorShape.IBeamCursor))
 
         self.formLayout.setWidget(5, QFormLayout.ItemRole.FieldRole, self.longitudeTextEdit)
 
         self.altitudeLabel = QLabel(IdentificationEditDialog)
         self.altitudeLabel.setObjectName(u"altitudeLabel")
+        self.altitudeLabel.setFont(font)
 
         self.formLayout.setWidget(6, QFormLayout.ItemRole.LabelRole, self.altitudeLabel)
 
         self.altitudeTextEdit = QTextEdit(IdentificationEditDialog)
         self.altitudeTextEdit.setObjectName(u"altitudeTextEdit")
-        self.altitudeTextEdit.setMinimumSize(QSize(300, 30))
-        self.altitudeTextEdit.setMaximumSize(QSize(16777215, 30))
+        self.altitudeTextEdit.setMinimumSize(QSize(300, 35))
+        self.altitudeTextEdit.setMaximumSize(QSize(16777215, 35))
+        self.altitudeTextEdit.viewport().setProperty(u"cursor", QCursor(Qt.CursorShape.IBeamCursor))
 
         self.formLayout.setWidget(6, QFormLayout.ItemRole.FieldRole, self.altitudeTextEdit)
 
         self.descriptionLabel = QLabel(IdentificationEditDialog)
         self.descriptionLabel.setObjectName(u"descriptionLabel")
+        self.descriptionLabel.setFont(font)
 
         self.formLayout.setWidget(7, QFormLayout.ItemRole.LabelRole, self.descriptionLabel)
 
@@ -121,11 +139,13 @@ class Ui_IdentificationEditDialog(object):
         self.descriptionTextEdit.setObjectName(u"descriptionTextEdit")
         self.descriptionTextEdit.setMinimumSize(QSize(300, 150))
         self.descriptionTextEdit.setMaximumSize(QSize(16777215, 150))
+        self.descriptionTextEdit.viewport().setProperty(u"cursor", QCursor(Qt.CursorShape.IBeamCursor))
 
         self.formLayout.setWidget(7, QFormLayout.ItemRole.FieldRole, self.descriptionTextEdit)
 
         self.buttonBox = QDialogButtonBox(IdentificationEditDialog)
         self.buttonBox.setObjectName(u"buttonBox")
+        self.buttonBox.setFont(font)
         self.buttonBox.setOrientation(Qt.Orientation.Horizontal)
         self.buttonBox.setStandardButtons(QDialogButtonBox.StandardButton.Cancel|QDialogButtonBox.StandardButton.Ok)
         self.buttonBox.setCenterButtons(True)
