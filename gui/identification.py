@@ -106,16 +106,17 @@ class IdentificationEditWindow(QDialog, Ui_IdentificationEditDialog):
         self._identification = identification
         # Setup window.
         self.setupUi(self)
-        self.setWindowTitle("Nouvelle identification" if (new_mode == True) else "Edition identification")
         # Init context.
         self._has_changed = False
         # Check mode.
         if (new_mode == True):
             # Set date to today by default.
+            self.setWindowTitle("Nouvelle identification")
             self.dateEdit.setDate(QDate.currentDate())
             self.buttonBox.button(QDialogButtonBox.Ok).setEnabled(False)
         else:
             # Print current fields.
+            self.setWindowTitle("Edition identification")
             self.dateEdit.setDate(QDate(self._identification.date_year, self._identification.date_month, self._identification.date_day))
             self.cityTextEdit.setPlainText(self._identification.location_city)
             self.departmentTextEdit.setPlainText(self._identification.location_department)

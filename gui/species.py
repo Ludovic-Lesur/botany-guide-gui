@@ -12,7 +12,7 @@ import re
 
 from pathlib import Path
 from typing import Any
-from PySide6.QtWidgets import QDialog, QDialogButtonBox, QTextEdit
+from PySide6.QtWidgets import QDialog, QDialogButtonBox, QTextEdit, QFileDialog
 
 from gui.single_slot_connector import SingleSlotConnector
 from gui.species_edit_window_ui import Ui_SpeciesEditDialog
@@ -57,6 +57,15 @@ class Species:
         self.references_decouvrir_flore_pyrenees = 0
         self.references_guide_delachaux_arbres = 0
         self.references_guide_champignons = 0
+        self.creation_directory_path = ""
+
+    def compute_json_file_name(self) -> str:
+        try:
+            json_file_name = self.latin_name.strip().lower()
+        except Exception:
+            return "invalid_latin_name.json"
+        result = re.sub(r"\s+", "_", json_file_name)
+        return (result + ".json")
 
 """
 * SpeciesEditWindow
@@ -64,7 +73,7 @@ class Species:
 """
 class SpeciesEditWindow(QDialog, Ui_SpeciesEditDialog):
 
-    def __init__(self, species: Species) -> None:
+    def __init__(self, species: Species, new_mode: bool) -> None:
         # Init parent.
         super().__init__()
         # Store species.
@@ -73,16 +82,28 @@ class SpeciesEditWindow(QDialog, Ui_SpeciesEditDialog):
         self.setupUi(self)
         # Init context.
         self._has_changed = False
+        self._creation_directory_path = ""
         # Print current fields.
-        self.latinNameTextEdit.setPlainText(self._species.latin_name)
-        self.commonNameTextEdit.setPlainText(self._species.common_name)
-        self.edibilityTextEdit.setPlainText(self._species.edibility)
-        SpeciesEditWindow._display_page(self.refDelachauxFleursTextEdit, self._species.references_guide_delachaux_fleurs)
-        SpeciesEditWindow._display_page(self.ref700PlantesTextEdit, self._species.references_reconnaitre_700_plantes)
-        SpeciesEditWindow._display_page(self.refFlorePyreneesTextEdit, self._species.references_decouvrir_flore_pyrenees)
-        SpeciesEditWindow._display_page(self.refDelachauxArbresTextEdit, self._species.references_guide_delachaux_arbres)
-        SpeciesEditWindow._display_page(self.refChampignonsTextEdit, self._species.references_guide_champignons)
+        if (new_mode == True):
+            # Enable explorer.
+            self.setWindowTitle("Nouvelle espèce")
+            self.explorerPushButton.setEnabled(True)
+            self.buttonBox.button(QDialogButtonBox.Ok).setEnabled(False)
+        else:
+            # Print current fields.
+            self.setWindowTitle("Edition espèce")
+            self.latinNameTextEdit.setPlainText(self._species.latin_name)
+            self.commonNameTextEdit.setPlainText(self._species.common_name)
+            self.edibilityTextEdit.setPlainText(self._species.edibility)
+            SpeciesEditWindow._display_page(self.refDelachauxFleursTextEdit, self._species.references_guide_delachaux_fleurs)
+            SpeciesEditWindow._display_page(self.ref700PlantesTextEdit, self._species.references_reconnaitre_700_plantes)
+            SpeciesEditWindow._display_page(self.refFlorePyreneesTextEdit, self._species.references_decouvrir_flore_pyrenees)
+            SpeciesEditWindow._display_page(self.refDelachauxArbresTextEdit, self._species.references_guide_delachaux_arbres)
+            SpeciesEditWindow._display_page(self.refChampignonsTextEdit, self._species.references_guide_champignons)
+            self.buttonBox.button(QDialogButtonBox.Ok).setEnabled(True)
+            self.explorerPushButton.setEnabled(False)
         # Update callbacks.
+        self.explorerPushButton.clicked.connect(self._open_explorer_callback)
         self.latinNameTextEdit.textChanged.connect(self._check_all_fields)
         self.commonNameTextEdit.textChanged.connect(self._check_all_fields)
         self.edibilityTextEdit.textChanged.connect(self._check_all_fields)
@@ -126,6 +147,13 @@ class SpeciesEditWindow(QDialog, Ui_SpeciesEditDialog):
             valid = False
         self.buttonBox.button(QDialogButtonBox.Ok).setEnabled(valid)
 
+    def _open_explorer_callback(self):
+        # Update flag.
+        self._has_changed = True
+        # Open explorer.
+        self._creation_directory_path = QFileDialog.getExistingDirectory(None, 'Select a folder', os.getcwd(), QFileDialog.ShowDirsOnly)
+        self.directoryContentLabel.setText(self._creation_directory_path)
+
     @staticmethod
     def _to_page(field: str) -> int:
         if ((field is None) or (field == "")):
@@ -142,6 +170,7 @@ class SpeciesEditWindow(QDialog, Ui_SpeciesEditDialog):
         self._species.references_decouvrir_flore_pyrenees = SpeciesEditWindow._to_page(self.refFlorePyreneesTextEdit.toPlainText())
         self._species.references_guide_delachaux_arbres = SpeciesEditWindow._to_page(self.refDelachauxArbresTextEdit.toPlainText())
         self._species.references_guide_champignons = SpeciesEditWindow._to_page(self.refChampignonsTextEdit.toPlainText())
+        self._species.creation_directory_path = self._creation_directory_path
         self.done(1)
 
     def reject(self) -> None:
@@ -154,19 +183,28 @@ class SpeciesEditWindow(QDialog, Ui_SpeciesEditDialog):
 """
 class SpeciesView:
 
-    def __init__(self, gui: object, species_directory_path: str) -> None:
+    def __init__(self, gui: object, species_directory_path: str, species: Species = None) -> None:
         # Local variables.
         json_decoded = False
         image_found = False
         # Init context.
-        self._species = Species()
         self._gui = gui
         self._directory_path = species_directory_path
-        self._json_path = None
         self._image_path = None
         self._identification_view_list = []
         self._current_identification_index = 0
         self._single_slot_connector = SingleSlotConnector()
+        # Check initialization mode.
+        if (species is None):
+            # Create empty object.
+            self._species = Species()
+            self._json_path = None
+        else:
+            # Create object from input.
+            self._species = species
+            self._json_path = os.path.join(species_directory_path, self._species.compute_json_file_name())
+            # Create JSON file.
+            self._write_json()
         # Read directory.
         for f in os.listdir(species_directory_path):
             # Build complete path.
@@ -234,17 +272,19 @@ class SpeciesView:
         self._species.references_guide_champignons = species_mapping.get(SPECIES_JSON_KEY_REFERENCES).get(SPECIES_JSON_KEY_REFERENCES_GUIDE_CHAMPIGNONS, 0)
 
     def _write_json(self) -> None:
+        # Local variables.
+        data = dict()
         # Check local path.
         if (self._json_path is None):
             return
         # Open JSON file.
-        with open(self._json_path, 'a+') as json_file:
-            # Load data.
-            data = json.load(json_file)
-            # Update data.
+        with open(self._json_path, 'r+' if (os.path.isfile(self._json_path)) else 'w+') as json_file:
+            # Compute data.
+            data[SPECIES_JSON_KEY_TOP_LEVEL] = dict()
             data[SPECIES_JSON_KEY_TOP_LEVEL][SPECIES_JSON_KEY_LATIN_NAME] = self._species.latin_name
             data[SPECIES_JSON_KEY_TOP_LEVEL][SPECIES_JSON_KEY_COMMON_NAME] = self._species.common_name
             data[SPECIES_JSON_KEY_TOP_LEVEL][SPECIES_JSON_KEY_EDIBILITY] = self._species.edibility
+            data[SPECIES_JSON_KEY_TOP_LEVEL][SPECIES_JSON_KEY_REFERENCES] = dict()
             data[SPECIES_JSON_KEY_TOP_LEVEL][SPECIES_JSON_KEY_REFERENCES][SPECIES_JSON_KEY_REFERENCES_GUIDE_DELACHAUX_FLEURS] = self._species.references_guide_delachaux_fleurs
             data[SPECIES_JSON_KEY_TOP_LEVEL][SPECIES_JSON_KEY_REFERENCES][SPECIES_JSON_KEY_REFERENCES_RECONNAITRE_700_PLANTES] = self._species.references_reconnaitre_700_plantes
             data[SPECIES_JSON_KEY_TOP_LEVEL][SPECIES_JSON_KEY_REFERENCES][SPECIES_JSON_KEY_REFERENCES_DECOUVRIR_FLORE_PYRENEES] = self._species.references_decouvrir_flore_pyrenees
@@ -258,7 +298,7 @@ class SpeciesView:
 
     def _edit_callback(self) -> None:
         # Open edition window.
-        edit_window = SpeciesEditWindow(self._species)
+        edit_window = SpeciesEditWindow(self._species, False)
         edit_window.exec()
         # Check if any property has been modified.
         if (edit_window._has_changed == True):
@@ -307,7 +347,6 @@ class SpeciesView:
             IdentificationView.clear(self._gui)
             self._gui.identificationListPreviousPushButton.setEnabled(False)
             self._gui.identificationListNextPushButton.setEnabled(False)
-            self._gui.speciesEditPushButton.setEnabled(False)
             # Update title.
             self._gui.identificationListGroupBox.setTitle("Liste (0)")
         else:
@@ -320,7 +359,6 @@ class SpeciesView:
             # Update buttons state.
             self._gui.identificationListPreviousPushButton.setEnabled(True if (self._current_identification_index > 0) else False)
             self._gui.identificationListNextPushButton.setEnabled(True if (self._current_identification_index < (identification_count - 1)) else False)
-            self._gui.speciesEditPushButton.setEnabled(True)
             # Update title.
             self._gui.identificationListGroupBox.setTitle("Liste (" + str(self._current_identification_index + 1) + "/" + str(identification_count) + ")")
 
@@ -390,7 +428,6 @@ class SpeciesView:
         gui.identificationAddPushButton.setEnabled(False)
         gui.identificationListPreviousPushButton.setEnabled(False)
         gui.identificationListNextPushButton.setEnabled(False)
-        gui.speciesEditPushButton.setEnabled(False)
         # Print first identification if it exists.
         IdentificationView.clear(gui)
             

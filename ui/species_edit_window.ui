@@ -6,8 +6,8 @@
    <rect>
     <x>0</x>
     <y>0</y>
-    <width>550</width>
-    <height>500</height>
+    <width>650</width>
+    <height>450</height>
    </rect>
   </property>
   <property name="windowTitle">
@@ -17,9 +17,61 @@
    <item row="0" column="0">
     <layout class="QVBoxLayout" name="verticalLayout">
      <item>
-      <layout class="QFormLayout" name="speciesFormLayout">
+      <layout class="QHBoxLayout" name="horizontalLayout">
+       <item>
+        <widget class="QLabel" name="directoryLabel">
+         <property name="minimumSize">
+          <size>
+           <width>200</width>
+           <height>0</height>
+          </size>
+         </property>
+         <property name="text">
+          <string>Dossier</string>
+         </property>
+        </widget>
+       </item>
+       <item>
+        <widget class="QLabel" name="directoryContentLabel">
+         <property name="minimumSize">
+          <size>
+           <width>300</width>
+           <height>90</height>
+          </size>
+         </property>
+         <property name="maximumSize">
+          <size>
+           <width>16777215</width>
+           <height>90</height>
+          </size>
+         </property>
+         <property name="text">
+          <string/>
+         </property>
+         <property name="wordWrap">
+          <bool>true</bool>
+         </property>
+        </widget>
+       </item>
+       <item>
+        <widget class="QPushButton" name="explorerPushButton">
+         <property name="text">
+          <string>Parcourir</string>
+         </property>
+        </widget>
+       </item>
+      </layout>
+     </item>
+     <item>
+      <layout class="QFormLayout" name="formLayout">
        <item row="0" column="0">
         <widget class="QLabel" name="latinNameLabel">
+         <property name="minimumSize">
+          <size>
+           <width>200</width>
+           <height>0</height>
+          </size>
+         </property>
          <property name="text">
           <string>Nom latin</string>
          </property>
@@ -43,6 +95,12 @@
        </item>
        <item row="1" column="0">
         <widget class="QLabel" name="commonNameLabel">
+         <property name="minimumSize">
+          <size>
+           <width>200</width>
+           <height>0</height>
+          </size>
+         </property>
          <property name="text">
           <string>Nom commun</string>
          </property>
@@ -66,6 +124,12 @@
        </item>
        <item row="2" column="0">
         <widget class="QLabel" name="edibilityLabel">
+         <property name="minimumSize">
+          <size>
+           <width>200</width>
+           <height>0</height>
+          </size>
+         </property>
          <property name="text">
           <string>Comestibilité</string>
          </property>
@@ -89,6 +153,12 @@
        </item>
        <item row="3" column="0">
         <widget class="QLabel" name="refDelachauxFleursLabel">
+         <property name="minimumSize">
+          <size>
+           <width>200</width>
+           <height>0</height>
+          </size>
+         </property>
          <property name="text">
           <string>Guide Delachaux des Fleurs</string>
          </property>
@@ -115,6 +185,12 @@
        </item>
        <item row="4" column="0">
         <widget class="QLabel" name="ref700PlantesLabel">
+         <property name="minimumSize">
+          <size>
+           <width>200</width>
+           <height>0</height>
+          </size>
+         </property>
          <property name="text">
           <string>Guide 700 Plantes</string>
          </property>
@@ -141,6 +217,12 @@
        </item>
        <item row="5" column="0">
         <widget class="QLabel" name="refFlorePyreneesLabel">
+         <property name="minimumSize">
+          <size>
+           <width>200</width>
+           <height>0</height>
+          </size>
+         </property>
          <property name="text">
           <string>Guide Flore des Pyrénées</string>
          </property>
@@ -167,6 +249,12 @@
        </item>
        <item row="6" column="0">
         <widget class="QLabel" name="refDelachauxArbresLabel">
+         <property name="minimumSize">
+          <size>
+           <width>200</width>
+           <height>0</height>
+          </size>
+         </property>
          <property name="text">
           <string>Guide Delachaux des Arbres</string>
          </property>
@@ -193,6 +281,12 @@
        </item>
        <item row="7" column="0">
         <widget class="QLabel" name="refChampignonsLabel">
+         <property name="minimumSize">
+          <size>
+           <width>200</width>
+           <height>0</height>
+          </size>
+         </property>
          <property name="text">
           <string>Guide des Champignons</string>
          </property>

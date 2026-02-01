@@ -11,7 +11,7 @@ import array
 from pathlib import Path
 from PySide6.QtWidgets import QTreeWidgetItem, QHeaderView
 
-from .species import SpeciesView
+from .species import Species, SpeciesEditWindow, SpeciesView
 
 ### CLASSIFICATION macros ###   
 
@@ -23,23 +23,33 @@ CLASSIFICATION_DEPTH_MAX = 8
 class ClassificationView:
     
     def __init__(self, gui: object, data_directory_path: str) -> None:
-        # Local variables.
-        item_count = array.array('I', (0 for i in range(0, CLASSIFICATION_DEPTH_MAX)))
-        header = []
         # Init context.
         self._gui = gui
         self._current_species = None
+        self._data_directory_path = data_directory_path
         # Setup tree view.
         self._gui.classificationTreeWidget.header().setSectionResizeMode(QHeaderView.ResizeToContents)
+        self._gui.classificationTreeWidget.itemClicked.connect(self._item_clicked_callback)
+        self._gui.classificationAddSpeciesPushButton.clicked.connect(self._add_species_callback)
+        # Init GUI.
+        SpeciesView.clear(self._gui)
+        self._refresh()
+
+    def _refresh(self):
+        # Local variables.
+        header = []
+        item_count = array.array('I', (0 for i in range(0, CLASSIFICATION_DEPTH_MAX)))
+        # Reset tree.
+        self._gui.classificationTreeWidget.clear()
         # Read all data folder.
-        for root, _, _ in os.walk(data_directory_path):
+        for root, _, _ in os.walk(self._data_directory_path):
             # Compute directory depth.
             depth = (len(Path(os.path.join(root)).parents) - 1)
             if ((depth > 0) and (depth < CLASSIFICATION_DEPTH_MAX)):
                 # Convert folder name in pretty format.
                 pretty_name = str(os.path.basename(root).title()).replace("_", " ")
                 # Add item.
-                item = QTreeWidgetItem(gui.classificationTreeWidget)
+                item = QTreeWidgetItem(self._gui.classificationTreeWidget)
                 item.setText((depth - 1), pretty_name)
                 item.setWhatsThis((depth - 1), os.path.join(root))
                 # Update item count.
@@ -53,12 +63,8 @@ class ClassificationView:
         header.append("Genre ("    + str(item_count[6]) + ")")
         header.append("Espèce ("   + str(item_count[7]) + ")")
         self._gui.classificationTreeWidget.setHeaderLabels(header)
-        # Signals and slot.
-        self._gui.classificationTreeWidget.itemClicked.connect(self._item_clicked_callback)
-        # Clear GUI.
-        SpeciesView.clear(self._gui)
         
-    def _item_clicked_callback(self, item, column):
+    def _item_clicked_callback(self, item, column) -> None:
         # Unused variable.
         _ = column
         # Check if a species has been clicked.
@@ -69,4 +75,19 @@ class ClassificationView:
                 self._current_species.display()
             except Exception as e:
                 raise ValueError(f"Species object creation failed: {e}")
+
+    def _add_species_callback(self) -> None:
+        # Create static object.
+        new_species = Species()
+        # Open new window.
+        new_window = SpeciesEditWindow(new_species, True)
+        new_window.exec()
+        # Check if any property has been modified.
+        if (new_window._has_changed == True):
+            # Create species object.
+            new_species_view = SpeciesView(self._gui, new_species.creation_directory_path, new_species)
+            _ = new_species_view
+            # Refresh GUI.
+            self._refresh()
+        new_window.close()
             
