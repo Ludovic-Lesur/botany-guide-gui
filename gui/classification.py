@@ -42,7 +42,7 @@ class ClassificationView:
         # Reset tree.
         self._gui.classificationTreeWidget.clear()
         # Read all data folder.
-        for root, _, _ in os.walk(self._data_directory_path):
+        for root, _, _ in sorted(os.walk(self._data_directory_path)):
             # Compute directory depth.
             depth = (len(Path(os.path.join(root)).parents) - 1)
             if ((depth > 0) and (depth < CLASSIFICATION_DEPTH_MAX)):
