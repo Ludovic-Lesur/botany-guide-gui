@@ -460,9 +460,9 @@ class Ui_MainWindow(object):
         ___qtreewidgetitem.setText(1, QCoreApplication.translate("MainWindow", u"Division", None));
         self.speciesGroupBox.setTitle(QCoreApplication.translate("MainWindow", u"ESP\u00c8CE", None))
         self.speciesNameGroupBox.setTitle(QCoreApplication.translate("MainWindow", u"Nomenclature", None))
-        self.speciesLatinNameLabel.setText(QCoreApplication.translate("MainWindow", u"<html><head/><body><p><span style=\" font-weight:700; color:#26a269;\">Nom Latin</span></p></body></html>", None))
+        self.speciesLatinNameLabel.setText(QCoreApplication.translate("MainWindow", u"<html><head/><body><p><span style=\" font-weight:700; color:#26a269;\">Nom latin</span></p></body></html>", None))
         self.speciesLatinNameContentLabel.setText("")
-        self.speciesCommonNameLabel.setText(QCoreApplication.translate("MainWindow", u"<html><head/><body><p><span style=\" font-weight:700; color:#26a269;\">Nom Commun</span></p></body></html>", None))
+        self.speciesCommonNameLabel.setText(QCoreApplication.translate("MainWindow", u"<html><head/><body><p><span style=\" font-weight:700; color:#26a269;\">Nom commun</span></p></body></html>", None))
         self.speciesCommonNameContentLabel.setText("")
         self.speciesInfosGroupBox.setTitle(QCoreApplication.translate("MainWindow", u"Infos", None))
         self.speciedEdibilityLabel.setText(QCoreApplication.translate("MainWindow", u"<html><head/><body><p><span style=\" font-weight:700; color:#e5a50a;\">Comestibilit\u00e9</span></p></body></html>", None))

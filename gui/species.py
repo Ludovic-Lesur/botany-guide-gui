@@ -25,8 +25,9 @@ SPECIES_DATA_FILE_EXTENSION = '.json'
 
 SPECIES_JSON_KEY_TOP_LEVEL = 'species'
 
-SPECIES_JSON_KEY_LATIN_NAME = 'latinName'
-SPECIES_JSON_KEY_COMMON_NAME = 'commonName'
+SPECIES_JSON_KEY_NAME = 'name'
+SPECIES_JSON_KEY_NAME_LATIN = 'latin'
+SPECIES_JSON_KEY_NAME_COMMON = 'common'
 SPECIES_JSON_KEY_EDIBILITY = 'edibility'
 SPECIES_JSON_KEY_REFERENCES = 'references'
 SPECIES_JSON_KEY_REFERENCES_GUIDE_DELACHAUX_FLEURS = 'guideDelachauxFleurs'
@@ -36,8 +37,12 @@ SPECIES_JSON_KEY_REFERENCES_GUIDE_DELACHAUX_ARBRES = 'guideDelachauxArbres'
 SPECIES_JSON_KEY_REFERENCES_GUIDE_CHAMPIGNONS = 'guideChampignons'
 
 SPECIES_JSON_KEY_REQUIRED = [
-    SPECIES_JSON_KEY_LATIN_NAME,
-    SPECIES_JSON_KEY_COMMON_NAME
+    SPECIES_JSON_KEY_NAME,
+]
+
+SPECIES_JSON_KEY_NAME_REQUIRED = [
+    SPECIES_JSON_KEY_NAME_LATIN,
+    SPECIES_JSON_KEY_NAME_COMMON
 ]
 
 ### SPECIES classes ###
@@ -261,9 +266,13 @@ class SpeciesView:
         missing_keys = [k for k in SPECIES_JSON_KEY_REQUIRED if k not in species_mapping]
         if missing_keys:
             raise ValueError(f"Missing required species keys: {', '.join(missing_keys)}")
+        name_mapping = species_mapping.get(SPECIES_JSON_KEY_NAME)
+        missing_keys = [k for k in SPECIES_JSON_KEY_NAME_REQUIRED if k not in name_mapping]
+        if missing_keys:
+            raise ValueError(f"Missing required identification keys: {', '.join(missing_keys)}")
         # Update context.
-        self._species.latin_name = self._to_text(species_mapping.get(SPECIES_JSON_KEY_LATIN_NAME, ""))
-        self._species.common_name = self._to_text(species_mapping.get(SPECIES_JSON_KEY_COMMON_NAME, ""))
+        self._species.latin_name = self._to_text(name_mapping.get(SPECIES_JSON_KEY_NAME_LATIN, ""))
+        self._species.common_name = self._to_text(name_mapping.get(SPECIES_JSON_KEY_NAME_COMMON, ""))
         self._species.edibility = self._to_text(species_mapping.get(SPECIES_JSON_KEY_EDIBILITY, ""))
         self._species.references_guide_delachaux_fleurs = species_mapping.get(SPECIES_JSON_KEY_REFERENCES).get(SPECIES_JSON_KEY_REFERENCES_GUIDE_DELACHAUX_FLEURS, 0)
         self._species.references_reconnaitre_700_plantes = species_mapping.get(SPECIES_JSON_KEY_REFERENCES).get(SPECIES_JSON_KEY_REFERENCES_RECONNAITRE_700_PLANTES, 0)
@@ -281,8 +290,9 @@ class SpeciesView:
         with open(self._json_path, 'r+' if (os.path.isfile(self._json_path)) else 'w+') as json_file:
             # Compute data.
             data[SPECIES_JSON_KEY_TOP_LEVEL] = dict()
-            data[SPECIES_JSON_KEY_TOP_LEVEL][SPECIES_JSON_KEY_LATIN_NAME] = self._species.latin_name
-            data[SPECIES_JSON_KEY_TOP_LEVEL][SPECIES_JSON_KEY_COMMON_NAME] = self._species.common_name
+            data[SPECIES_JSON_KEY_TOP_LEVEL][SPECIES_JSON_KEY_NAME]= dict()
+            data[SPECIES_JSON_KEY_TOP_LEVEL][SPECIES_JSON_KEY_NAME][SPECIES_JSON_KEY_NAME_LATIN] = self._species.latin_name
+            data[SPECIES_JSON_KEY_TOP_LEVEL][SPECIES_JSON_KEY_NAME][SPECIES_JSON_KEY_NAME_COMMON] = self._species.common_name
             data[SPECIES_JSON_KEY_TOP_LEVEL][SPECIES_JSON_KEY_EDIBILITY] = self._species.edibility
             data[SPECIES_JSON_KEY_TOP_LEVEL][SPECIES_JSON_KEY_REFERENCES] = dict()
             data[SPECIES_JSON_KEY_TOP_LEVEL][SPECIES_JSON_KEY_REFERENCES][SPECIES_JSON_KEY_REFERENCES_GUIDE_DELACHAUX_FLEURS] = self._species.references_guide_delachaux_fleurs
