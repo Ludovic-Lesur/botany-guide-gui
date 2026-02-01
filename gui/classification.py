@@ -11,7 +11,7 @@ import array
 from pathlib import Path
 from PySide6.QtWidgets import QTreeWidgetItem, QHeaderView
 
-from .species import Species
+from .species import SpeciesView
 
 ### CLASSIFICATION macros ###   
 
@@ -20,7 +20,7 @@ CLASSIFICATION_DEPTH_MAX = 8
 
 ### CLASSIFICATION class definition ###   
         
-class Classification:
+class ClassificationView:
     
     def __init__(self, gui: object, data_directory_path: str) -> None:
         # Local variables.
@@ -55,6 +55,8 @@ class Classification:
         self._gui.classificationTreeWidget.setHeaderLabels(header)
         # Signals and slot.
         self._gui.classificationTreeWidget.itemClicked.connect(self._item_clicked_callback)
+        # Clear GUI.
+        SpeciesView.clear(self._gui)
         
     def _item_clicked_callback(self, item, column):
         # Unused variable.
@@ -63,7 +65,7 @@ class Classification:
         if (item.text(CLASSIFICATION_SPECIES_COLUMN)):
             # Try creating species object.
             try:
-                self._current_species = Species(self._gui, item.whatsThis(CLASSIFICATION_SPECIES_COLUMN))
+                self._current_species = SpeciesView(self._gui, item.whatsThis(CLASSIFICATION_SPECIES_COLUMN))
                 self._current_species.display()
             except Exception as e:
                 raise ValueError(f"Species object creation failed: {e}")

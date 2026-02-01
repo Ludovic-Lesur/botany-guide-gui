@@ -9,7 +9,7 @@ import sys
 
 from PySide6.QtWidgets import QApplication, QMainWindow
 
-from .classification import Classification
+from .classification import ClassificationView
 from .main_window_ui import Ui_MainWindow
 
 ### GUI macros ###
@@ -27,11 +27,11 @@ class BotanyGuideGui(QMainWindow, Ui_MainWindow):
     def __init__(self):
         # Init parent.
         super().__init__()
-        # Window properties.
+        # Setup window.
         self.setupUi(self)
         self.setWindowTitle("Botany Guide GUI")
         # Setup tree view.
-        self._classification = Classification(self, GUI_DATA_PATH)
+        self._classification = ClassificationView(self, GUI_DATA_PATH)
             
 ### GUI main function ###
 

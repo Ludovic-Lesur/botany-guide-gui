@@ -10,6 +10,7 @@ import logging
 import os
 import re
 
+from datetime import date
 from pathlib import Path
 from typing import Any
 from PySide6.QtWidgets import QDialog, QDialogButtonBox, QTextEdit
@@ -67,38 +68,71 @@ IDENTIFICATION_MONTH = [ "Error", "Janvier", "Février", "Mars", "Avril", "Mai",
 ### IDENTIFICATION classes ###
 
 """
+* Identification
+* Data class containing the identification data.
+"""
+class Identification:
+
+    def __init__(self) -> None :
+        self.date_day = 0
+        self.date_month = 0
+        self.date_year = 0
+        self.location_city = ""
+        self.location_department = ""
+        self.location_country = ""
+        self.location_gps_latitude = 0
+        self.location_gps_longitude = 0
+        self.location_gps_altitude = 0
+        self.description = ""
+
+    def compute_directory_name(self) -> str:
+        try:
+            date(self.date_year, self.date_month, self.date_day)
+        except Exception:
+            return "invalid_date"
+        return f"{self.date_year:04d}_{self.date_month:02d}_{self.date_day:02d}"
+
+"""
 * IdentificationEditWindow
 * Graphic class to edit an identification.
 """
 class IdentificationEditWindow(QDialog, Ui_IdentificationEditDialog):
 
-    def __init__(self, identification: object) -> None:
+    def __init__(self, identification: Identification, new_mode: bool) -> None:
         # Init parent.
         super().__init__()
         # Store species.
         self._identification = identification
         # Setup window.
         self.setupUi(self)
+        self.setWindowTitle("Nouvelle identification" if (new_mode == True) else "Edition identification")
         # Init context.
         self._has_changed = False
-        # Print current fields.
-        self.dateEdit.setDate(QDate(self._identification._date_year, self._identification._date_month, self._identification._date_day))
-        self.cityTextEdit.setPlainText(self._identification._location_city)
-        self.departmentTextEdit.setPlainText(self._identification._location_department)
-        self.countryTextEdit.setPlainText(self._identification._location_country)
-        IdentificationEditWindow._display_coordinate(self.latitudeTextEdit, self._identification._location_gps_latitude)
-        IdentificationEditWindow._display_coordinate(self.longitudeTextEdit, self._identification._location_gps_longitude)
-        IdentificationEditWindow._display_altitude(self.altitudeTextEdit, self._identification._location_gps_altitude)
-        self.descriptionTextEdit.setPlainText(self._identification._description)
+        # Check mode.
+        if (new_mode == True):
+            # Set date to today by default.
+            self.dateEdit.setDate(QDate.currentDate())
+            self.buttonBox.button(QDialogButtonBox.Ok).setEnabled(False)
+        else:
+            # Print current fields.
+            self.dateEdit.setDate(QDate(self._identification.date_year, self._identification.date_month, self._identification.date_day))
+            self.cityTextEdit.setPlainText(self._identification.location_city)
+            self.departmentTextEdit.setPlainText(self._identification.location_department)
+            self.countryTextEdit.setPlainText(self._identification.location_country)
+            IdentificationEditWindow._display_coordinate(self.latitudeTextEdit, self._identification.location_gps_latitude)
+            IdentificationEditWindow._display_coordinate(self.longitudeTextEdit, self._identification.location_gps_longitude)
+            IdentificationEditWindow._display_altitude(self.altitudeTextEdit, self._identification.location_gps_altitude)
+            self.descriptionTextEdit.setPlainText(self._identification.description)
+            self.buttonBox.button(QDialogButtonBox.Ok).setEnabled(True)
         # Update callbacks.
-        self.dateEdit.userDateChanged.connect(self._date_changed_callback)
-        self.cityTextEdit.textChanged.connect(self._city_changed_callback)
-        self.departmentTextEdit.textChanged.connect(self._department_changed_callback)
-        self.countryTextEdit.textChanged.connect(self._country_changed_callback)
-        self.latitudeTextEdit.textChanged.connect(self._latitude_changed_callback)
-        self.longitudeTextEdit.textChanged.connect(self._longitude_changed_callback)
-        self.altitudeTextEdit.textChanged.connect(self._altitude_changed_callback)
-        self.descriptionTextEdit.textChanged.connect(self._description_changed_callback)
+        self.dateEdit.userDateChanged.connect(self._check_all_fields)
+        self.cityTextEdit.textChanged.connect(self._check_all_fields)
+        self.departmentTextEdit.textChanged.connect(self._check_all_fields)
+        self.countryTextEdit.textChanged.connect(self._check_all_fields)
+        self.latitudeTextEdit.textChanged.connect(self._check_all_fields)
+        self.longitudeTextEdit.textChanged.connect(self._check_all_fields)
+        self.altitudeTextEdit.textChanged.connect(self._check_all_fields)
+        self.descriptionTextEdit.textChanged.connect(self._check_all_fields)
 
     @staticmethod
     def _display_coordinate(text_edit: QTextEdit, coordinate: float) -> None:
@@ -119,38 +153,26 @@ class IdentificationEditWindow(QDialog, Ui_IdentificationEditDialog):
         float_regex = re.compile(r'^[0-9]+[.,][0-9]+$')
         return bool(float_regex.fullmatch(s))
 
-    def _check_coordinate(self, text_edit: QTextEdit) -> None:
-        self.buttonBox.button(QDialogButtonBox.Ok).setEnabled(IdentificationEditWindow._is_float(text_edit.toPlainText()))
-
-    def _check_altitude(self, text_edit: QTextEdit) -> None:
-        self.buttonBox.button(QDialogButtonBox.Ok).setEnabled(IdentificationEditWindow._is_positive_decimal(text_edit.toPlainText()))
-
-    def _date_changed_callback(self) -> None:
+    def _check_all_fields(self) -> None:
+        # Update flag.
         self._has_changed = True
-
-    def _city_changed_callback(self) -> None:
-        self._has_changed = True
-
-    def _department_changed_callback(self) -> None:
-        self._has_changed = True
-
-    def _country_changed_callback(self) -> None:
-        self._has_changed = True
-
-    def _latitude_changed_callback(self) -> None:
-        self._has_changed = True
-        self._check_coordinate(self.latitudeTextEdit)
-
-    def _longitude_changed_callback(self) -> None:
-        self._has_changed = True
-        self._check_coordinate(self.longitudeTextEdit)
-
-    def _altitude_changed_callback(self) -> None:
-        self._has_changed = True
-        self._check_altitude(self.altitudeTextEdit)
-
-    def _description_changed_callback(self) -> None:
-        self._has_changed = True
+        valid = True
+        # Check strings.
+        if (self.cityTextEdit.toPlainText() == ""):
+            valid = False
+        if (self.departmentTextEdit.toPlainText() == ""):
+            valid = False
+        if (self.countryTextEdit.toPlainText() == ""):
+            valid = False
+        # Check coordinates.
+        if (IdentificationEditWindow._is_float(self.latitudeTextEdit.toPlainText()) == False):
+            valid = False
+        if (IdentificationEditWindow._is_float(self.longitudeTextEdit.toPlainText()) == False):
+            valid = False
+        # Check altitude.
+        if (IdentificationEditWindow._is_positive_decimal(self.altitudeTextEdit.toPlainText()) == False):
+            valid = False
+        self.buttonBox.button(QDialogButtonBox.Ok).setEnabled(valid)
 
     @staticmethod
     def _to_altitude(field: str) -> int:
@@ -166,47 +188,47 @@ class IdentificationEditWindow(QDialog, Ui_IdentificationEditDialog):
 
     def accept(self) -> None:
         # Update parent species fields.
-        self._identification._date_day = self.dateEdit.date().day()
-        self._identification._date_month = self.dateEdit.date().month()
-        self._identification._date_year = self.dateEdit.date().year()
-        self._identification._location_city = self.cityTextEdit.toPlainText()
-        self._identification._location_department = self.departmentTextEdit.toPlainText()
-        self._identification._location_country = self.countryTextEdit.toPlainText()
-        self._identification._location_gps_latitude = IdentificationEditWindow._to_coordinate(self.latitudeTextEdit.toPlainText())
-        self._identification._location_gps_longitude = IdentificationEditWindow._to_coordinate(self.longitudeTextEdit.toPlainText())
-        self._identification._location_gps_altitude = IdentificationEditWindow._to_altitude(self.altitudeTextEdit.toPlainText())
-        self._identification._description = self.descriptionTextEdit.toPlainText()
+        self._identification.date_day = self.dateEdit.date().day()
+        self._identification.date_month = self.dateEdit.date().month()
+        self._identification.date_year = self.dateEdit.date().year()
+        self._identification.location_city = self.cityTextEdit.toPlainText()
+        self._identification.location_department = self.departmentTextEdit.toPlainText()
+        self._identification.location_country = self.countryTextEdit.toPlainText()
+        self._identification.location_gps_latitude = IdentificationEditWindow._to_coordinate(self.latitudeTextEdit.toPlainText())
+        self._identification.location_gps_longitude = IdentificationEditWindow._to_coordinate(self.longitudeTextEdit.toPlainText())
+        self._identification.location_gps_altitude = IdentificationEditWindow._to_altitude(self.altitudeTextEdit.toPlainText())
+        self._identification.description = self.descriptionTextEdit.toPlainText()
         self.done(1)
 
     def reject(self) -> None:
+        self._has_changed = False
         self.done(0)
 
 """
-* Identification
-* Main identification class.
+* IdentificationView
+* Graphic class of the identification panel.
 """
-class Identification:
+class IdentificationView:
     
-    def __init__(self, gui: object, identification_directory_path: str) -> None:
+    def __init__(self, gui: object, identification_directory_path: str, identification: Identification = None) -> None:
         # Local variables.
         json_decoded = False
         image_found = False
         # Init context.
         self._gui = gui
-        self._json_path = None
         self._image_path_list = []
-        self._internal_call = False
         self._current_image_index = 0
-        self._date_day = 0
-        self._date_month = 0
-        self._date_year = 0
-        self._location_city = ""
-        self._location_department = ""
-        self._location_country = ""
-        self._location_gps_latitude = 0
-        self._location_gps_longitude = 0
-        self._location_gps_altitude = 0
-        self._description = ""
+        # Check initialization mode.
+        if (identification is None):
+            # Create empty object.
+            self._identification = Identification()
+            self._json_path = None
+        else:
+            # Create object from input.
+            self._identification = identification
+            self._json_path = os.path.join(identification_directory_path, "identification.json")
+            # Create JSON file.
+            self._write_json()
         # Read directory.
         for f in os.listdir(identification_directory_path):
             # Build complete path.
@@ -271,36 +293,40 @@ class Identification:
         if missing_keys:
             raise ValueError(f"Missing required identification keys: {', '.join(missing_keys)}")
         # Update context.
-        self._date_day = date_mapping.get(IDENTIFICATION_JSON_KEY_DATE_DAY, 0)
-        self._date_month = date_mapping.get(IDENTIFICATION_JSON_KEY_DATE_MONTH, 0)
-        self._date_year = date_mapping.get(IDENTIFICATION_JSON_KEY_DATE_YEAR, 0)
-        self._location_city = self._to_text(location_mapping.get(IDENTIFICATION_JSON_KEY_LOCATION_CITY, ""))
-        self._location_department = self._to_text(location_mapping.get(IDENTIFICATION_JSON_KEY_LOCATION_DEPARTMENT, ""))
-        self._location_country = self._to_text(location_mapping.get(IDENTIFICATION_JSON_KEY_LOCATION_COUNTRY, ""))
-        self._location_gps_latitude = gps_mapping.get(IDENTIFICATION_JSON_KEY_LOCATION_GPS_LATITUDE, 0)
-        self._location_gps_longitude = gps_mapping.get(IDENTIFICATION_JSON_KEY_LOCATION_GPS_LONGITUDE, 0)
-        self._location_gps_altitude = gps_mapping.get(IDENTIFICATION_JSON_KEY_LOCATION_GPS_ALTITUDE, 0)
-        self._description = self._to_text(identification_mapping.get(IDENTIFICATION_JSON_KEY_DESCRIPTION, ""))
+        self._identification.date_day = date_mapping.get(IDENTIFICATION_JSON_KEY_DATE_DAY, 0)
+        self._identification.date_month = date_mapping.get(IDENTIFICATION_JSON_KEY_DATE_MONTH, 0)
+        self._identification.date_year = date_mapping.get(IDENTIFICATION_JSON_KEY_DATE_YEAR, 0)
+        self._identification.location_city = IdentificationView._to_text(location_mapping.get(IDENTIFICATION_JSON_KEY_LOCATION_CITY, ""))
+        self._identification.location_department = IdentificationView._to_text(location_mapping.get(IDENTIFICATION_JSON_KEY_LOCATION_DEPARTMENT, ""))
+        self._identification.location_country = IdentificationView._to_text(location_mapping.get(IDENTIFICATION_JSON_KEY_LOCATION_COUNTRY, ""))
+        self._identification.location_gps_latitude = gps_mapping.get(IDENTIFICATION_JSON_KEY_LOCATION_GPS_LATITUDE, 0)
+        self._identification.location_gps_longitude = gps_mapping.get(IDENTIFICATION_JSON_KEY_LOCATION_GPS_LONGITUDE, 0)
+        self._identification.location_gps_altitude = gps_mapping.get(IDENTIFICATION_JSON_KEY_LOCATION_GPS_ALTITUDE, 0)
+        self._identification.description = IdentificationView._to_text(identification_mapping.get(IDENTIFICATION_JSON_KEY_DESCRIPTION, ""))
 
     def _write_json(self) -> None:
+        # Local variables.
+        data = dict()
         # Check local path.
         if (self._json_path is None):
             return
-        # Open JSON file.
-        with open(self._json_path, 'r+') as json_file:
-            # Load data.
-            data = json.load(json_file)
-            # Update data.
-            data[IDENTIFICATION_JSON_KEY_TOP_LEVEL][IDENTIFICATION_JSON_KEY_DATE][IDENTIFICATION_JSON_KEY_DATE_DAY] = self._date_day
-            data[IDENTIFICATION_JSON_KEY_TOP_LEVEL][IDENTIFICATION_JSON_KEY_DATE][IDENTIFICATION_JSON_KEY_DATE_MONTH] = self._date_month
-            data[IDENTIFICATION_JSON_KEY_TOP_LEVEL][IDENTIFICATION_JSON_KEY_DATE][IDENTIFICATION_JSON_KEY_DATE_YEAR] = self._date_year
-            data[IDENTIFICATION_JSON_KEY_TOP_LEVEL][IDENTIFICATION_JSON_KEY_LOCATION][IDENTIFICATION_JSON_KEY_LOCATION_CITY] = self._location_city
-            data[IDENTIFICATION_JSON_KEY_TOP_LEVEL][IDENTIFICATION_JSON_KEY_LOCATION][IDENTIFICATION_JSON_KEY_LOCATION_DEPARTMENT] = self._location_department
-            data[IDENTIFICATION_JSON_KEY_TOP_LEVEL][IDENTIFICATION_JSON_KEY_LOCATION][IDENTIFICATION_JSON_KEY_LOCATION_COUNTRY] = self._location_country
-            data[IDENTIFICATION_JSON_KEY_TOP_LEVEL][IDENTIFICATION_JSON_KEY_LOCATION][IDENTIFICATION_JSON_KEY_LOCATION_GPS][IDENTIFICATION_JSON_KEY_LOCATION_GPS_LATITUDE] = self._location_gps_latitude
-            data[IDENTIFICATION_JSON_KEY_TOP_LEVEL][IDENTIFICATION_JSON_KEY_LOCATION][IDENTIFICATION_JSON_KEY_LOCATION_GPS][IDENTIFICATION_JSON_KEY_LOCATION_GPS_LONGITUDE] = self._location_gps_longitude
-            data[IDENTIFICATION_JSON_KEY_TOP_LEVEL][IDENTIFICATION_JSON_KEY_LOCATION][IDENTIFICATION_JSON_KEY_LOCATION_GPS][IDENTIFICATION_JSON_KEY_LOCATION_GPS_ALTITUDE] = self._location_gps_altitude
-            data[IDENTIFICATION_JSON_KEY_TOP_LEVEL][IDENTIFICATION_JSON_KEY_DESCRIPTION] = self._description
+        # Open JSON file in reading mode.
+        with open(self._json_path, 'r+' if (os.path.isfile(self._json_path)) else 'w+') as json_file:
+            # Compute data.
+            data[IDENTIFICATION_JSON_KEY_TOP_LEVEL] = dict()
+            data[IDENTIFICATION_JSON_KEY_TOP_LEVEL][IDENTIFICATION_JSON_KEY_DATE] = dict()
+            data[IDENTIFICATION_JSON_KEY_TOP_LEVEL][IDENTIFICATION_JSON_KEY_DATE][IDENTIFICATION_JSON_KEY_DATE_DAY] = self._identification.date_day
+            data[IDENTIFICATION_JSON_KEY_TOP_LEVEL][IDENTIFICATION_JSON_KEY_DATE][IDENTIFICATION_JSON_KEY_DATE_MONTH] = self._identification.date_month
+            data[IDENTIFICATION_JSON_KEY_TOP_LEVEL][IDENTIFICATION_JSON_KEY_DATE][IDENTIFICATION_JSON_KEY_DATE_YEAR] = self._identification.date_year
+            data[IDENTIFICATION_JSON_KEY_TOP_LEVEL][IDENTIFICATION_JSON_KEY_LOCATION] = dict()
+            data[IDENTIFICATION_JSON_KEY_TOP_LEVEL][IDENTIFICATION_JSON_KEY_LOCATION][IDENTIFICATION_JSON_KEY_LOCATION_CITY] = self._identification.location_city
+            data[IDENTIFICATION_JSON_KEY_TOP_LEVEL][IDENTIFICATION_JSON_KEY_LOCATION][IDENTIFICATION_JSON_KEY_LOCATION_DEPARTMENT] = self._identification.location_department
+            data[IDENTIFICATION_JSON_KEY_TOP_LEVEL][IDENTIFICATION_JSON_KEY_LOCATION][IDENTIFICATION_JSON_KEY_LOCATION_COUNTRY] = self._identification.location_country
+            data[IDENTIFICATION_JSON_KEY_TOP_LEVEL][IDENTIFICATION_JSON_KEY_LOCATION][IDENTIFICATION_JSON_KEY_LOCATION_GPS] = dict()
+            data[IDENTIFICATION_JSON_KEY_TOP_LEVEL][IDENTIFICATION_JSON_KEY_LOCATION][IDENTIFICATION_JSON_KEY_LOCATION_GPS][IDENTIFICATION_JSON_KEY_LOCATION_GPS_LATITUDE] = self._identification.location_gps_latitude
+            data[IDENTIFICATION_JSON_KEY_TOP_LEVEL][IDENTIFICATION_JSON_KEY_LOCATION][IDENTIFICATION_JSON_KEY_LOCATION_GPS][IDENTIFICATION_JSON_KEY_LOCATION_GPS_LONGITUDE] = self._identification.location_gps_longitude
+            data[IDENTIFICATION_JSON_KEY_TOP_LEVEL][IDENTIFICATION_JSON_KEY_LOCATION][IDENTIFICATION_JSON_KEY_LOCATION_GPS][IDENTIFICATION_JSON_KEY_LOCATION_GPS_ALTITUDE] = self._identification.location_gps_altitude
+            data[IDENTIFICATION_JSON_KEY_TOP_LEVEL][IDENTIFICATION_JSON_KEY_DESCRIPTION] = self._identification.description
             # Write file.
             json_file.seek(0)
             json.dump(data, json_file, indent=4)
@@ -309,16 +335,14 @@ class Identification:
 
     def _edit_callback(self) -> None:
         # Open edition window.
-        edit_window = IdentificationEditWindow(self)
+        edit_window = IdentificationEditWindow(self._identification, False)
         edit_window.exec()
         # Check if any property has been modified.
         if (edit_window._has_changed == True):
             # Update JSON file.
             self._write_json()
             # Refresh GUI.
-            self._internal_call = True
-            self.display()
-            self._internal_call = False
+            self.display(reset = False)
         edit_window.close()
 
     def _display_image(self):
@@ -359,18 +383,21 @@ class Identification:
             self._current_image_index += 1
             self._display_image()
 
-    def display(self) -> None:
+    def get_identification(self) -> Identification:
+        return (self._identification)
+
+    def display(self, reset: bool = True) -> None:
         # Print fields.
-        self._gui.identificationDateLabel.setText(str(self._date_day) + " " + IDENTIFICATION_MONTH[self._date_month] + " " + str(self._date_year))
-        self._gui.identificationCityContentLabel.setText(self._location_city)
-        self._gui.identificationDepartmentContentLabel.setText(self._location_department)
-        self._gui.identificationCountryContentLabel.setText(self._location_country)
-        self._gui.identificationGpsContentLabel.setText(str(self._location_gps_latitude) + "° " + str(self._location_gps_longitude) + "° (" + str(self._location_gps_altitude) + "m)")
-        self._gui.identificationDescriptionContentLabel.setText(self._description)
+        self._gui.identificationDateLabel.setText(str(self._identification.date_day) + " " + IDENTIFICATION_MONTH[self._identification.date_month] + " " + str(self._identification.date_year))
+        self._gui.identificationCityContentLabel.setText(self._identification.location_city)
+        self._gui.identificationDepartmentContentLabel.setText(self._identification.location_department)
+        self._gui.identificationCountryContentLabel.setText(self._identification.location_country)
+        self._gui.identificationGpsContentLabel.setText(str(self._identification.location_gps_latitude) + "° " + str(self._identification.location_gps_longitude) + "° (" + str(self._identification.location_gps_altitude) + "m)")
+        self._gui.identificationDescriptionContentLabel.setText(self._identification.description)
         # Enable edit button.
         self._gui.identificationEditPushButton.setEnabled(True)
         # Check call type.
-        if (self._internal_call == False):
+        if (reset == True):
             # Update button callbacks.
             self._gui.identificationPhotosPreviousPushButton.clicked.disconnect()
             self._gui.identificationPhotosPreviousPushButton.clicked.connect(self._previous_image_callback)
