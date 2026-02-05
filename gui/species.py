@@ -12,7 +12,9 @@ import re
 
 from pathlib import Path
 from typing import Any
+from PySide6.QtCore import QUrl
 from PySide6.QtWidgets import QDialog, QDialogButtonBox, QTextEdit, QFileDialog
+from PySide6.QtGui import QDesktopServices
 
 from gui.single_slot_connector import SingleSlotConnector
 from gui.species_edit_window_ui import Ui_SpeciesEditDialog
@@ -318,6 +320,9 @@ class SpeciesView:
             self.display(update_identification = False, reset_identification = False)
         edit_window.close()
 
+    def _open_directory_callback(self) -> None:
+        QDesktopServices.openUrl(QUrl.fromLocalFile(str(Path(self._directory_path).resolve())))
+
     def _add_identification_callback(self) -> None:
         # Create static object.
         new_identification = Identification()
@@ -409,6 +414,8 @@ class SpeciesView:
             # Update buttons callbacks.
             self._single_slot_connector.connect(self._gui.speciesEditPushButton.clicked, self._edit_callback)
             self._gui.speciesEditPushButton.setEnabled(True)
+            self._single_slot_connector.connect(self._gui.speciesOpenDirectoryPushButton.clicked, self._open_directory_callback)
+            self._gui.speciesOpenDirectoryPushButton.setEnabled(True)
             self._single_slot_connector.connect(self._gui.identificationAddPushButton.clicked, self._add_identification_callback)
             self._gui.identificationAddPushButton.setEnabled(True)
             self._single_slot_connector.connect(self._gui.identificationListPreviousPushButton.clicked, self._previous_identification_callback)
@@ -435,6 +442,7 @@ class SpeciesView:
         Image.display(gui.speciesPhotoGraphicsView, None)
         # Disable buttons.
         gui.speciesEditPushButton.setEnabled(False)
+        gui.speciesOpenDirectoryPushButton.setEnabled(False)
         gui.identificationAddPushButton.setEnabled(False)
         gui.identificationListPreviousPushButton.setEnabled(False)
         gui.identificationListNextPushButton.setEnabled(False)

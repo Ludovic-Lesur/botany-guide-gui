@@ -31,11 +31,12 @@ class ClassificationView:
         self._gui.classificationTreeWidget.header().setSectionResizeMode(QHeaderView.ResizeToContents)
         self._gui.classificationTreeWidget.itemClicked.connect(self._item_clicked_callback)
         self._gui.classificationAddSpeciesPushButton.clicked.connect(self._add_species_callback)
+        self._gui.classificationRefreshPushButton.clicked.connect(self._refresh_callback)
         # Init GUI.
         SpeciesView.clear(self._gui)
-        self._refresh()
+        self._refresh_callback()
 
-    def _refresh(self):
+    def _refresh_callback(self) -> None:
         # Local variables.
         header = []
         item_count = array.array('I', (0 for i in range(0, CLASSIFICATION_DEPTH_MAX)))
@@ -88,6 +89,6 @@ class ClassificationView:
             new_species_view = SpeciesView(self._gui, new_species.creation_directory_path, new_species)
             _ = new_species_view
             # Refresh GUI.
-            self._refresh()
+            self._refresh_callback()
         new_window.close()
             

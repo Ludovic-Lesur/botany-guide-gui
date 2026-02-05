@@ -98,13 +98,6 @@
            <set>Qt::AlignmentFlag::AlignCenter</set>
           </property>
           <layout class="QGridLayout" name="gridLayout_17">
-           <item row="1" column="0">
-            <widget class="QPushButton" name="classificationAddSpeciesPushButton">
-             <property name="text">
-              <string>Ajouter une espèce</string>
-             </property>
-            </widget>
-           </item>
            <item row="0" column="0">
             <widget class="QTreeWidget" name="classificationTreeWidget">
              <property name="autoFillBackground">
@@ -185,6 +178,24 @@
               </property>
              </column>
             </widget>
+           </item>
+           <item row="1" column="0">
+            <layout class="QHBoxLayout" name="horizontalLayout_3">
+             <item>
+              <widget class="QPushButton" name="classificationAddSpeciesPushButton">
+               <property name="text">
+                <string>Ajouter une espèce</string>
+               </property>
+              </widget>
+             </item>
+             <item>
+              <widget class="QPushButton" name="classificationRefreshPushButton">
+               <property name="text">
+                <string>Actualiser</string>
+               </property>
+              </widget>
+             </item>
+            </layout>
            </item>
           </layout>
          </widget>
@@ -425,11 +436,22 @@
             </layout>
            </item>
            <item row="1" column="0">
-            <widget class="QPushButton" name="speciesEditPushButton">
-             <property name="text">
-              <string>Editer</string>
-             </property>
-            </widget>
+            <layout class="QHBoxLayout" name="horizontalLayout_2">
+             <item>
+              <widget class="QPushButton" name="speciesOpenDirectoryPushButton">
+               <property name="text">
+                <string>Ouvrir dossier</string>
+               </property>
+              </widget>
+             </item>
+             <item>
+              <widget class="QPushButton" name="speciesEditPushButton">
+               <property name="text">
+                <string>Editer</string>
+               </property>
+              </widget>
+             </item>
+            </layout>
            </item>
           </layout>
          </widget>

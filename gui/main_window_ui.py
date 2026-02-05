@@ -78,11 +78,6 @@ class Ui_MainWindow(object):
         self.classificationGroupBox.setAlignment(Qt.AlignmentFlag.AlignCenter)
         self.gridLayout_17 = QGridLayout(self.classificationGroupBox)
         self.gridLayout_17.setObjectName(u"gridLayout_17")
-        self.classificationAddSpeciesPushButton = QPushButton(self.classificationGroupBox)
-        self.classificationAddSpeciesPushButton.setObjectName(u"classificationAddSpeciesPushButton")
-
-        self.gridLayout_17.addWidget(self.classificationAddSpeciesPushButton, 1, 0, 1, 1)
-
         self.classificationTreeWidget = QTreeWidget(self.classificationGroupBox)
         __qtreewidgetitem = QTreeWidgetItem()
         __qtreewidgetitem.setText(0, u"R\u00e8gne");
@@ -104,6 +99,21 @@ class Ui_MainWindow(object):
         self.classificationTreeWidget.header().setStretchLastSection(True)
 
         self.gridLayout_17.addWidget(self.classificationTreeWidget, 0, 0, 1, 1)
+
+        self.horizontalLayout_3 = QHBoxLayout()
+        self.horizontalLayout_3.setObjectName(u"horizontalLayout_3")
+        self.classificationAddSpeciesPushButton = QPushButton(self.classificationGroupBox)
+        self.classificationAddSpeciesPushButton.setObjectName(u"classificationAddSpeciesPushButton")
+
+        self.horizontalLayout_3.addWidget(self.classificationAddSpeciesPushButton)
+
+        self.classificationRefreshPushButton = QPushButton(self.classificationGroupBox)
+        self.classificationRefreshPushButton.setObjectName(u"classificationRefreshPushButton")
+
+        self.horizontalLayout_3.addWidget(self.classificationRefreshPushButton)
+
+
+        self.gridLayout_17.addLayout(self.horizontalLayout_3, 1, 0, 1, 1)
 
 
         self.horizontalLayout.addWidget(self.classificationGroupBox)
@@ -263,10 +273,20 @@ class Ui_MainWindow(object):
 
         self.gridLayout_16.addLayout(self.gridLayout_15, 0, 0, 1, 1)
 
+        self.horizontalLayout_2 = QHBoxLayout()
+        self.horizontalLayout_2.setObjectName(u"horizontalLayout_2")
+        self.speciesOpenDirectoryPushButton = QPushButton(self.speciesGroupBox)
+        self.speciesOpenDirectoryPushButton.setObjectName(u"speciesOpenDirectoryPushButton")
+
+        self.horizontalLayout_2.addWidget(self.speciesOpenDirectoryPushButton)
+
         self.speciesEditPushButton = QPushButton(self.speciesGroupBox)
         self.speciesEditPushButton.setObjectName(u"speciesEditPushButton")
 
-        self.gridLayout_16.addWidget(self.speciesEditPushButton, 1, 0, 1, 1)
+        self.horizontalLayout_2.addWidget(self.speciesEditPushButton)
+
+
+        self.gridLayout_16.addLayout(self.horizontalLayout_2, 1, 0, 1, 1)
 
 
         self.horizontalLayout.addWidget(self.speciesGroupBox)
@@ -450,7 +470,6 @@ class Ui_MainWindow(object):
         self.searchGroupBox.setTitle(QCoreApplication.translate("MainWindow", u"RECHERCHE", None))
         self.searchTitlelabel.setText(QCoreApplication.translate("MainWindow", u"<html><head/><body><p><span style=\" color:#c01c28;\">Nom d'esp\u00e8ce</span></p></body></html>", None))
         self.classificationGroupBox.setTitle(QCoreApplication.translate("MainWindow", u"CLASSIFICATION", None))
-        self.classificationAddSpeciesPushButton.setText(QCoreApplication.translate("MainWindow", u"Ajouter une esp\u00e8ce", None))
         ___qtreewidgetitem = self.classificationTreeWidget.headerItem()
         ___qtreewidgetitem.setText(6, QCoreApplication.translate("MainWindow", u"Esp\u00e8ce", None));
         ___qtreewidgetitem.setText(5, QCoreApplication.translate("MainWindow", u"Genre", None));
@@ -458,6 +477,8 @@ class Ui_MainWindow(object):
         ___qtreewidgetitem.setText(3, QCoreApplication.translate("MainWindow", u"Ordre", None));
         ___qtreewidgetitem.setText(2, QCoreApplication.translate("MainWindow", u"Classe", None));
         ___qtreewidgetitem.setText(1, QCoreApplication.translate("MainWindow", u"Division", None));
+        self.classificationAddSpeciesPushButton.setText(QCoreApplication.translate("MainWindow", u"Ajouter une esp\u00e8ce", None))
+        self.classificationRefreshPushButton.setText(QCoreApplication.translate("MainWindow", u"Actualiser", None))
         self.speciesGroupBox.setTitle(QCoreApplication.translate("MainWindow", u"ESP\u00c8CE", None))
         self.speciesNameGroupBox.setTitle(QCoreApplication.translate("MainWindow", u"Nomenclature", None))
         self.speciesLatinNameLabel.setText(QCoreApplication.translate("MainWindow", u"<html><head/><body><p><span style=\" font-weight:700; color:#26a269;\">Nom latin</span></p></body></html>", None))
@@ -478,6 +499,7 @@ class Ui_MainWindow(object):
         self.speciesRefDelachauxFleursContentLabel.setText("")
         self.speciesRefChampignonsContentLabel.setText("")
         self.speciesRefGuide700PlantesLabel.setText(QCoreApplication.translate("MainWindow", u"<html><head/><body><p><span style=\" font-weight:700; color:#3584e4;\">Guide 700 Plantes</span></p></body></html>", None))
+        self.speciesOpenDirectoryPushButton.setText(QCoreApplication.translate("MainWindow", u"Ouvrir dossier", None))
         self.speciesEditPushButton.setText(QCoreApplication.translate("MainWindow", u"Editer", None))
         self.identificationGroupBox.setTitle(QCoreApplication.translate("MainWindow", u"IDENTIFICATIONS", None))
         self.identificationAddPushButton.setText(QCoreApplication.translate("MainWindow", u"Ajouter", None))

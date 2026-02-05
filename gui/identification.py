@@ -233,7 +233,7 @@ class IdentificationView:
             # Create JSON file.
             self._write_json()
         # Read directory.
-        for f in os.listdir(identification_directory_path):
+        for f in sorted(os.listdir(identification_directory_path)):
             # Build complete path.
             p = os.path.join(identification_directory_path, f)
             # Check if there is JSON file.
