@@ -155,10 +155,14 @@ class SpeciesEditWindow(QDialog, Ui_SpeciesEditDialog):
         self.buttonBox.button(QDialogButtonBox.Ok).setEnabled(valid)
 
     def _open_explorer_callback(self):
-        # Update flag.
-        self._has_changed = True
         # Open explorer.
-        self._creation_directory_path = QFileDialog.getExistingDirectory(None, 'Select a folder', os.getcwd(), QFileDialog.ShowDirsOnly)
+        new_directory_path = QFileDialog.getExistingDirectory(None, 'Select a folder', os.getcwd(), QFileDialog.ShowDirsOnly)
+        # Check returned value.
+        if ((new_directory_path is None) or (new_directory_path == "")):
+            return
+        # Update context.
+        self._has_changed = True
+        self._creation_directory_path = new_directory_path
         self.directoryContentLabel.setText(self._creation_directory_path)
 
     @staticmethod

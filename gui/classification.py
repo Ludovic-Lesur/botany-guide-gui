@@ -40,12 +40,13 @@ class ClassificationView:
         # Local variables.
         header = []
         item_count = array.array('I', (0 for i in range(0, CLASSIFICATION_DEPTH_MAX)))
+        data_directory_depth = len(Path(os.path.join(self._data_directory_path)).parents)
         # Reset tree.
         self._gui.classificationTreeWidget.clear()
         # Read all data folder.
         for root, _, _ in sorted(os.walk(self._data_directory_path)):
             # Compute directory depth.
-            depth = (len(Path(os.path.join(root)).parents) - 1)
+            depth = (len(Path(os.path.join(root)).parents) - data_directory_depth)
             if ((depth > 0) and (depth < CLASSIFICATION_DEPTH_MAX)):
                 # Convert folder name in pretty format.
                 pretty_name = str(os.path.basename(root).title()).replace("_", " ")

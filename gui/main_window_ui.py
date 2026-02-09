@@ -17,9 +17,8 @@ from PySide6.QtGui import (QBrush, QColor, QConicalGradient, QCursor,
     QPalette, QPixmap, QRadialGradient, QTransform)
 from PySide6.QtWidgets import (QApplication, QFrame, QGraphicsView, QGridLayout,
     QGroupBox, QHBoxLayout, QHeaderView, QLabel,
-    QLayout, QMainWindow, QPushButton, QSizePolicy,
-    QTextBrowser, QTreeWidget, QTreeWidgetItem, QVBoxLayout,
-    QWidget)
+    QMainWindow, QPushButton, QSizePolicy, QTreeWidget,
+    QTreeWidgetItem, QVBoxLayout, QWidget)
 
 class Ui_MainWindow(object):
     def setupUi(self, MainWindow):
@@ -35,46 +34,16 @@ class Ui_MainWindow(object):
         self.gridLayout_20.setObjectName(u"gridLayout_20")
         self.verticalLayout = QVBoxLayout()
         self.verticalLayout.setObjectName(u"verticalLayout")
-        self.searchGroupBox = QGroupBox(self.centralwidget)
-        self.searchGroupBox.setObjectName(u"searchGroupBox")
-        self.searchGroupBox.setMinimumSize(QSize(80, 0))
-        self.searchGroupBox.setMaximumSize(QSize(16777215, 80))
-        self.searchGroupBox.setAlignment(Qt.AlignmentFlag.AlignCenter)
-        self.gridLayout_19 = QGridLayout(self.searchGroupBox)
-        self.gridLayout_19.setObjectName(u"gridLayout_19")
-        self.gridLayout_18 = QGridLayout()
-        self.gridLayout_18.setObjectName(u"gridLayout_18")
-        self.gridLayout_18.setSizeConstraint(QLayout.SizeConstraint.SetMaximumSize)
-        self.searchTitlelabel = QLabel(self.searchGroupBox)
-        self.searchTitlelabel.setObjectName(u"searchTitlelabel")
-        font1 = QFont()
-        font1.setFamilies([u"LM Sans 12"])
-        font1.setBold(True)
-        self.searchTitlelabel.setFont(font1)
-
-        self.gridLayout_18.addWidget(self.searchTitlelabel, 0, 0, 1, 1)
-
-        self.searchTextBrowser = QTextBrowser(self.searchGroupBox)
-        self.searchTextBrowser.setObjectName(u"searchTextBrowser")
-
-        self.gridLayout_18.addWidget(self.searchTextBrowser, 0, 1, 1, 1)
-
-
-        self.gridLayout_19.addLayout(self.gridLayout_18, 0, 0, 1, 1)
-
-
-        self.verticalLayout.addWidget(self.searchGroupBox)
-
         self.horizontalLayout = QHBoxLayout()
         self.horizontalLayout.setObjectName(u"horizontalLayout")
         self.classificationGroupBox = QGroupBox(self.centralwidget)
         self.classificationGroupBox.setObjectName(u"classificationGroupBox")
         self.classificationGroupBox.setMinimumSize(QSize(0, 0))
         self.classificationGroupBox.setMaximumSize(QSize(16777215, 16777215))
-        font2 = QFont()
-        font2.setFamilies([u"LM Sans 12"])
-        font2.setBold(False)
-        self.classificationGroupBox.setFont(font2)
+        font1 = QFont()
+        font1.setFamilies([u"LM Sans 12"])
+        font1.setBold(False)
+        self.classificationGroupBox.setFont(font1)
         self.classificationGroupBox.setAlignment(Qt.AlignmentFlag.AlignCenter)
         self.gridLayout_17 = QGridLayout(self.classificationGroupBox)
         self.gridLayout_17.setObjectName(u"gridLayout_17")
@@ -102,13 +71,33 @@ class Ui_MainWindow(object):
 
         self.horizontalLayout_3 = QHBoxLayout()
         self.horizontalLayout_3.setObjectName(u"horizontalLayout_3")
+        self.workspaceEditPushButton = QPushButton(self.classificationGroupBox)
+        self.workspaceEditPushButton.setObjectName(u"workspaceEditPushButton")
+        self.workspaceEditPushButton.setMinimumSize(QSize(150, 0))
+        self.workspaceEditPushButton.setMaximumSize(QSize(150, 16777215))
+
+        self.horizontalLayout_3.addWidget(self.workspaceEditPushButton)
+
+        self.workspaceContentLabel = QLabel(self.classificationGroupBox)
+        self.workspaceContentLabel.setObjectName(u"workspaceContentLabel")
+        font2 = QFont()
+        font2.setFamilies([u"LM Sans 12"])
+        font2.setBold(True)
+        self.workspaceContentLabel.setFont(font2)
+
+        self.horizontalLayout_3.addWidget(self.workspaceContentLabel)
+
         self.classificationAddSpeciesPushButton = QPushButton(self.classificationGroupBox)
         self.classificationAddSpeciesPushButton.setObjectName(u"classificationAddSpeciesPushButton")
+        self.classificationAddSpeciesPushButton.setMinimumSize(QSize(150, 0))
+        self.classificationAddSpeciesPushButton.setMaximumSize(QSize(150, 16777215))
 
         self.horizontalLayout_3.addWidget(self.classificationAddSpeciesPushButton)
 
         self.classificationRefreshPushButton = QPushButton(self.classificationGroupBox)
         self.classificationRefreshPushButton.setObjectName(u"classificationRefreshPushButton")
+        self.classificationRefreshPushButton.setMinimumSize(QSize(150, 0))
+        self.classificationRefreshPushButton.setMaximumSize(QSize(150, 16777215))
 
         self.horizontalLayout_3.addWidget(self.classificationRefreshPushButton)
 
@@ -300,10 +289,80 @@ class Ui_MainWindow(object):
         self.gridLayout_8.setObjectName(u"gridLayout_8")
         self.gridLayout_7 = QGridLayout()
         self.gridLayout_7.setObjectName(u"gridLayout_7")
+        self.identificationPhotosGroupBox = QGroupBox(self.identificationGroupBox)
+        self.identificationPhotosGroupBox.setObjectName(u"identificationPhotosGroupBox")
+        self.identificationPhotosGroupBox.setFont(font)
+        self.gridLayout_4 = QGridLayout(self.identificationPhotosGroupBox)
+        self.gridLayout_4.setObjectName(u"gridLayout_4")
+        self.gridLayout_3 = QGridLayout()
+        self.gridLayout_3.setObjectName(u"gridLayout_3")
+        self.identificationPhotosPreviousPushButton = QPushButton(self.identificationPhotosGroupBox)
+        self.identificationPhotosPreviousPushButton.setObjectName(u"identificationPhotosPreviousPushButton")
+        self.identificationPhotosPreviousPushButton.setMinimumSize(QSize(50, 0))
+        self.identificationPhotosPreviousPushButton.setMaximumSize(QSize(50, 16777215))
+
+        self.gridLayout_3.addWidget(self.identificationPhotosPreviousPushButton, 0, 0, 1, 1)
+
+        self.identificationPhotosGraphicsView = QGraphicsView(self.identificationPhotosGroupBox)
+        self.identificationPhotosGraphicsView.setObjectName(u"identificationPhotosGraphicsView")
+
+        self.gridLayout_3.addWidget(self.identificationPhotosGraphicsView, 0, 1, 1, 1)
+
+        self.identificationPhotosNextPushButton = QPushButton(self.identificationPhotosGroupBox)
+        self.identificationPhotosNextPushButton.setObjectName(u"identificationPhotosNextPushButton")
+        self.identificationPhotosNextPushButton.setMinimumSize(QSize(50, 0))
+        self.identificationPhotosNextPushButton.setMaximumSize(QSize(50, 16777215))
+
+        self.gridLayout_3.addWidget(self.identificationPhotosNextPushButton, 0, 2, 1, 1)
+
+
+        self.gridLayout_4.addLayout(self.gridLayout_3, 0, 0, 1, 1)
+
+
+        self.gridLayout_7.addWidget(self.identificationPhotosGroupBox, 2, 0, 1, 1)
+
+        self.identificationEditPushButton = QPushButton(self.identificationGroupBox)
+        self.identificationEditPushButton.setObjectName(u"identificationEditPushButton")
+
+        self.gridLayout_7.addWidget(self.identificationEditPushButton, 4, 0, 1, 1)
+
         self.identificationAddPushButton = QPushButton(self.identificationGroupBox)
         self.identificationAddPushButton.setObjectName(u"identificationAddPushButton")
 
         self.gridLayout_7.addWidget(self.identificationAddPushButton, 0, 0, 1, 1)
+
+        self.identificationListGroupBox = QGroupBox(self.identificationGroupBox)
+        self.identificationListGroupBox.setObjectName(u"identificationListGroupBox")
+        self.identificationListGroupBox.setFont(font)
+        self.gridLayout_6 = QGridLayout(self.identificationListGroupBox)
+        self.gridLayout_6.setObjectName(u"gridLayout_6")
+        self.gridLayout_5 = QGridLayout()
+        self.gridLayout_5.setObjectName(u"gridLayout_5")
+        self.identificationListPreviousPushButton = QPushButton(self.identificationListGroupBox)
+        self.identificationListPreviousPushButton.setObjectName(u"identificationListPreviousPushButton")
+        self.identificationListPreviousPushButton.setMinimumSize(QSize(50, 0))
+        self.identificationListPreviousPushButton.setMaximumSize(QSize(50, 16777215))
+
+        self.gridLayout_5.addWidget(self.identificationListPreviousPushButton, 0, 0, 1, 1)
+
+        self.identificationDateLabel = QLabel(self.identificationListGroupBox)
+        self.identificationDateLabel.setObjectName(u"identificationDateLabel")
+        self.identificationDateLabel.setAlignment(Qt.AlignmentFlag.AlignCenter)
+
+        self.gridLayout_5.addWidget(self.identificationDateLabel, 0, 1, 1, 1)
+
+        self.identificationListNextPushButton = QPushButton(self.identificationListGroupBox)
+        self.identificationListNextPushButton.setObjectName(u"identificationListNextPushButton")
+        self.identificationListNextPushButton.setMinimumSize(QSize(50, 0))
+        self.identificationListNextPushButton.setMaximumSize(QSize(50, 16777215))
+
+        self.gridLayout_5.addWidget(self.identificationListNextPushButton, 0, 2, 1, 1)
+
+
+        self.gridLayout_6.addLayout(self.gridLayout_5, 0, 0, 1, 1)
+
+
+        self.gridLayout_7.addWidget(self.identificationListGroupBox, 1, 0, 1, 1)
 
         self.identificationInfosGroupBox = QGroupBox(self.identificationGroupBox)
         self.identificationInfosGroupBox.setObjectName(u"identificationInfosGroupBox")
@@ -376,76 +435,6 @@ class Ui_MainWindow(object):
 
         self.gridLayout_7.addWidget(self.identificationInfosGroupBox, 3, 0, 1, 1)
 
-        self.identificationEditPushButton = QPushButton(self.identificationGroupBox)
-        self.identificationEditPushButton.setObjectName(u"identificationEditPushButton")
-
-        self.gridLayout_7.addWidget(self.identificationEditPushButton, 4, 0, 1, 1)
-
-        self.identificationListGroupBox = QGroupBox(self.identificationGroupBox)
-        self.identificationListGroupBox.setObjectName(u"identificationListGroupBox")
-        self.identificationListGroupBox.setFont(font)
-        self.gridLayout_6 = QGridLayout(self.identificationListGroupBox)
-        self.gridLayout_6.setObjectName(u"gridLayout_6")
-        self.gridLayout_5 = QGridLayout()
-        self.gridLayout_5.setObjectName(u"gridLayout_5")
-        self.identificationListPreviousPushButton = QPushButton(self.identificationListGroupBox)
-        self.identificationListPreviousPushButton.setObjectName(u"identificationListPreviousPushButton")
-        self.identificationListPreviousPushButton.setMinimumSize(QSize(50, 0))
-        self.identificationListPreviousPushButton.setMaximumSize(QSize(50, 16777215))
-
-        self.gridLayout_5.addWidget(self.identificationListPreviousPushButton, 0, 0, 1, 1)
-
-        self.identificationDateLabel = QLabel(self.identificationListGroupBox)
-        self.identificationDateLabel.setObjectName(u"identificationDateLabel")
-        self.identificationDateLabel.setAlignment(Qt.AlignmentFlag.AlignCenter)
-
-        self.gridLayout_5.addWidget(self.identificationDateLabel, 0, 1, 1, 1)
-
-        self.identificationListNextPushButton = QPushButton(self.identificationListGroupBox)
-        self.identificationListNextPushButton.setObjectName(u"identificationListNextPushButton")
-        self.identificationListNextPushButton.setMinimumSize(QSize(50, 0))
-        self.identificationListNextPushButton.setMaximumSize(QSize(50, 16777215))
-
-        self.gridLayout_5.addWidget(self.identificationListNextPushButton, 0, 2, 1, 1)
-
-
-        self.gridLayout_6.addLayout(self.gridLayout_5, 0, 0, 1, 1)
-
-
-        self.gridLayout_7.addWidget(self.identificationListGroupBox, 1, 0, 1, 1)
-
-        self.identificationPhotosGroupBox = QGroupBox(self.identificationGroupBox)
-        self.identificationPhotosGroupBox.setObjectName(u"identificationPhotosGroupBox")
-        self.identificationPhotosGroupBox.setFont(font)
-        self.gridLayout_4 = QGridLayout(self.identificationPhotosGroupBox)
-        self.gridLayout_4.setObjectName(u"gridLayout_4")
-        self.gridLayout_3 = QGridLayout()
-        self.gridLayout_3.setObjectName(u"gridLayout_3")
-        self.identificationPhotosPreviousPushButton = QPushButton(self.identificationPhotosGroupBox)
-        self.identificationPhotosPreviousPushButton.setObjectName(u"identificationPhotosPreviousPushButton")
-        self.identificationPhotosPreviousPushButton.setMinimumSize(QSize(50, 0))
-        self.identificationPhotosPreviousPushButton.setMaximumSize(QSize(50, 16777215))
-
-        self.gridLayout_3.addWidget(self.identificationPhotosPreviousPushButton, 0, 0, 1, 1)
-
-        self.identificationPhotosGraphicsView = QGraphicsView(self.identificationPhotosGroupBox)
-        self.identificationPhotosGraphicsView.setObjectName(u"identificationPhotosGraphicsView")
-
-        self.gridLayout_3.addWidget(self.identificationPhotosGraphicsView, 0, 1, 1, 1)
-
-        self.identificationPhotosNextPushButton = QPushButton(self.identificationPhotosGroupBox)
-        self.identificationPhotosNextPushButton.setObjectName(u"identificationPhotosNextPushButton")
-        self.identificationPhotosNextPushButton.setMinimumSize(QSize(50, 0))
-        self.identificationPhotosNextPushButton.setMaximumSize(QSize(50, 16777215))
-
-        self.gridLayout_3.addWidget(self.identificationPhotosNextPushButton, 0, 2, 1, 1)
-
-
-        self.gridLayout_4.addLayout(self.gridLayout_3, 0, 0, 1, 1)
-
-
-        self.gridLayout_7.addWidget(self.identificationPhotosGroupBox, 2, 0, 1, 1)
-
 
         self.gridLayout_8.addLayout(self.gridLayout_7, 0, 0, 1, 1)
 
@@ -467,8 +456,6 @@ class Ui_MainWindow(object):
 
     def retranslateUi(self, MainWindow):
         MainWindow.setWindowTitle(QCoreApplication.translate("MainWindow", u"MainWindow", None))
-        self.searchGroupBox.setTitle(QCoreApplication.translate("MainWindow", u"RECHERCHE", None))
-        self.searchTitlelabel.setText(QCoreApplication.translate("MainWindow", u"<html><head/><body><p><span style=\" color:#c01c28;\">Nom d'esp\u00e8ce</span></p></body></html>", None))
         self.classificationGroupBox.setTitle(QCoreApplication.translate("MainWindow", u"CLASSIFICATION", None))
         ___qtreewidgetitem = self.classificationTreeWidget.headerItem()
         ___qtreewidgetitem.setText(6, QCoreApplication.translate("MainWindow", u"Esp\u00e8ce", None));
@@ -477,6 +464,8 @@ class Ui_MainWindow(object):
         ___qtreewidgetitem.setText(3, QCoreApplication.translate("MainWindow", u"Ordre", None));
         ___qtreewidgetitem.setText(2, QCoreApplication.translate("MainWindow", u"Classe", None));
         ___qtreewidgetitem.setText(1, QCoreApplication.translate("MainWindow", u"Division", None));
+        self.workspaceEditPushButton.setText(QCoreApplication.translate("MainWindow", u"Dossier de travail", None))
+        self.workspaceContentLabel.setText(QCoreApplication.translate("MainWindow", u"<html><head/><body><p><br/></p></body></html>", None))
         self.classificationAddSpeciesPushButton.setText(QCoreApplication.translate("MainWindow", u"Ajouter une esp\u00e8ce", None))
         self.classificationRefreshPushButton.setText(QCoreApplication.translate("MainWindow", u"Actualiser", None))
         self.speciesGroupBox.setTitle(QCoreApplication.translate("MainWindow", u"ESP\u00c8CE", None))
@@ -502,7 +491,15 @@ class Ui_MainWindow(object):
         self.speciesOpenDirectoryPushButton.setText(QCoreApplication.translate("MainWindow", u"Ouvrir dossier", None))
         self.speciesEditPushButton.setText(QCoreApplication.translate("MainWindow", u"Editer", None))
         self.identificationGroupBox.setTitle(QCoreApplication.translate("MainWindow", u"IDENTIFICATIONS", None))
+        self.identificationPhotosGroupBox.setTitle(QCoreApplication.translate("MainWindow", u"Photos", None))
+        self.identificationPhotosPreviousPushButton.setText(QCoreApplication.translate("MainWindow", u"<", None))
+        self.identificationPhotosNextPushButton.setText(QCoreApplication.translate("MainWindow", u">", None))
+        self.identificationEditPushButton.setText(QCoreApplication.translate("MainWindow", u"Editer", None))
         self.identificationAddPushButton.setText(QCoreApplication.translate("MainWindow", u"Ajouter", None))
+        self.identificationListGroupBox.setTitle(QCoreApplication.translate("MainWindow", u"Liste", None))
+        self.identificationListPreviousPushButton.setText(QCoreApplication.translate("MainWindow", u"<", None))
+        self.identificationDateLabel.setText("")
+        self.identificationListNextPushButton.setText(QCoreApplication.translate("MainWindow", u">", None))
         self.identificationInfosGroupBox.setTitle(QCoreApplication.translate("MainWindow", u"Infos", None))
         self.identificationGpsLabel.setText(QCoreApplication.translate("MainWindow", u"<html><head/><body><p><span style=\" font-weight:700; color:#9141ac;\">Coordonn\u00e9es GPS</span></p></body></html>", None))
         self.identificationCityLabel.setText(QCoreApplication.translate("MainWindow", u"<html><head/><body><p><span style=\" font-weight:700; color:#9141ac;\">Commune</span></p></body></html>", None))
@@ -514,13 +511,5 @@ class Ui_MainWindow(object):
         self.identificationCityContentLabel.setText("")
         self.identificationDescriptionLabel.setText(QCoreApplication.translate("MainWindow", u"<html><head/><body><p><span style=\" font-weight:700; color:#9141ac;\">Description terrain</span></p></body></html>", None))
         self.identificationDescriptionContentLabel.setText("")
-        self.identificationEditPushButton.setText(QCoreApplication.translate("MainWindow", u"Editer", None))
-        self.identificationListGroupBox.setTitle(QCoreApplication.translate("MainWindow", u"Liste", None))
-        self.identificationListPreviousPushButton.setText(QCoreApplication.translate("MainWindow", u"<", None))
-        self.identificationDateLabel.setText("")
-        self.identificationListNextPushButton.setText(QCoreApplication.translate("MainWindow", u">", None))
-        self.identificationPhotosGroupBox.setTitle(QCoreApplication.translate("MainWindow", u"Photos", None))
-        self.identificationPhotosPreviousPushButton.setText(QCoreApplication.translate("MainWindow", u"<", None))
-        self.identificationPhotosNextPushButton.setText(QCoreApplication.translate("MainWindow", u">", None))
     # retranslateUi
 
