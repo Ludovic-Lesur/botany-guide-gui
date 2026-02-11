@@ -26,6 +26,7 @@ class ClassificationView:
         # Init context.
         self._gui = gui
         self._current_species = None
+        self._current_species_directory = os.getcwd()
         self._data_directory_path = data_directory_path
         # Setup tree view.
         self._gui.classificationTreeWidget.header().setSectionResizeMode(QHeaderView.ResizeToContents)
@@ -73,7 +74,8 @@ class ClassificationView:
         if (item.text(CLASSIFICATION_SPECIES_COLUMN)):
             # Try creating species object.
             try:
-                self._current_species = SpeciesView(self._gui, item.whatsThis(CLASSIFICATION_SPECIES_COLUMN))
+                self._current_species_directory = item.whatsThis(CLASSIFICATION_SPECIES_COLUMN)
+                self._current_species = SpeciesView(self._gui, self._current_species_directory)
                 self._current_species.display()
             except Exception as e:
                 raise ValueError(f"Species object creation failed: {e}")
@@ -82,7 +84,7 @@ class ClassificationView:
         # Create static object.
         new_species = Species()
         # Open new window.
-        new_window = SpeciesEditWindow(new_species, True)
+        new_window = SpeciesEditWindow(new_species, True, self._current_species_directory)
         new_window.exec()
         # Check if any property has been modified.
         if (new_window._has_changed == True):
