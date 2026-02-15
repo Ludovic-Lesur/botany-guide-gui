@@ -89,14 +89,13 @@ class SpeciesEditWindow(QDialog, Ui_SpeciesEditDialog):
         self.setupUi(self)
         # Init context.
         self._has_changed = False
-        self._creation_directory_path = ""
-        self._creation_directory_path_default = creation_directory_path_default
+        self._creation_directory_path = creation_directory_path_default
         # Print current fields.
         if (new_mode == True):
             # Enable explorer.
             self.setWindowTitle("Nouvelle espèce")
             self.explorerPushButton.setEnabled(True)
-            self.directoryContentLabel.setText(self._creation_directory_path_default)
+            self.directoryContentLabel.setText(self._creation_directory_path)
             self.buttonBox.button(QDialogButtonBox.Ok).setEnabled(False)
         else:
             # Print current fields.
@@ -158,7 +157,7 @@ class SpeciesEditWindow(QDialog, Ui_SpeciesEditDialog):
 
     def _open_explorer_callback(self):
         # Open explorer.
-        new_directory_path = QFileDialog.getExistingDirectory(None, 'Select a folder', self._creation_directory_path_default, QFileDialog.ShowDirsOnly)
+        new_directory_path = QFileDialog.getExistingDirectory(None, 'Select a folder', self._creation_directory_path, QFileDialog.ShowDirsOnly)
         # Check returned value.
         if ((new_directory_path is None) or (new_directory_path == "")):
             return

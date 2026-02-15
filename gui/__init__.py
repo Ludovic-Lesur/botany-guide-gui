@@ -1,3 +1,12 @@
-# Ce fichier transforme le dossier `gui` en package Python.
-# Il peut rester vide, ou contenir des initialisations de package si besoin.
-__all__ = ["species", "gui", "image", "main_window_ui"]
+__all__ = [
+    "classification",
+    "gui",
+    "identification_edit_window_ui",
+    "identification",
+    "image",
+    "main_window_ui",
+    "single_slot_connector",
+    "species_edit_window",
+    "species",
+    "workspace"
+]
