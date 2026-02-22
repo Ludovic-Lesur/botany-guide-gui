@@ -5,20 +5,17 @@
 *      Author: Ludo
 """
 
-import subprocess
 import sys
 
 from PySide6.QtWidgets import QApplication, QMainWindow
 
 from gui.workspace import WorkspaceView
 from gui.main_window_ui import Ui_MainWindow
+from gui.version import get_git_version
+from gui import _build_version
 
-### GUI class definition ###
+### GUI classes ###
 
-"""
-* BotanyGuideGui
-* Main GUI class.
-"""
 class BotanyGuideGui(QMainWindow, Ui_MainWindow):
 
     def __init__(self):
@@ -31,24 +28,23 @@ class BotanyGuideGui(QMainWindow, Ui_MainWindow):
         self._workspace = WorkspaceView(self)
 
     def _get_git_version(self) -> str:
+        # Read from version file.
+        git_version = self._get_git_version_from_file()
+        if git_version:
+            return git_version
         try:
-            # Read last tag.
-            tag = subprocess.check_output(["git", "describe", "--tags", "--match", "sw*", "--abbrev=0"], stderr=subprocess.DEVNULL, text=True).strip()
-            # Read number of commits since last tag.
-            commits_since_tag = subprocess.check_output(["git", "rev-list", "--count", f"{tag}..HEAD"], stderr=subprocess.DEVNULL, text=True).strip()
-            # Read commit hash.
-            commit_hash = subprocess.check_output(["git", "rev-parse", "--short", "HEAD"], stderr=subprocess.DEVNULL, text=True).strip()
-            # Check dirty state.
-            result = subprocess.run(["git", "status", "--porcelain"], capture_output=True, text=True)
-            is_dirty = bool(result.stdout.strip())
-            # Build version
-            version = f"{tag}.{commits_since_tag}"
-            if is_dirty:
-                version += ".dev"
-            version += f" - {commit_hash}"
-            return version
-        except subprocess.CalledProcessError:
+            return get_git_version().format()
+        except Exception:
             return "Unknown version"
+
+    def _get_git_version_from_file(self) -> str | None:
+        try:
+            git_version = getattr(_build_version, "VERSION", None)
+            if git_version and git_version != "dev":
+                return str(git_version)
+            return None
+        except Exception:
+            return None
             
 ### GUI main function ###
 

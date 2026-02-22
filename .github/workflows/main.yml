@@ -35,6 +35,12 @@ jobs:
           python -m pip install pyinstaller
         shell: bash
 
+      - name: Compute Git version
+        if: github.ref_type == 'tag'
+        run: |
+          python gui/version.py --write gui/_build_version.py
+        shell: bash
+
       - name: Build (Linux)
         if: runner.os == 'Linux'
         run: |
