@@ -1,4 +1,8 @@
 .settings/
+.venv/
+build/
+dist/
 *.pyc
 *.bkp
+*.spec
 workspace.json
