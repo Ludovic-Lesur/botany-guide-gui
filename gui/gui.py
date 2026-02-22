@@ -10,8 +10,8 @@ import sys
 
 from PySide6.QtWidgets import QApplication, QMainWindow
 
-from .workspace import WorkspaceView
-from .main_window_ui import Ui_MainWindow
+from gui.workspace import WorkspaceView
+from gui.main_window_ui import Ui_MainWindow
 
 ### GUI class definition ###
 

@@ -11,7 +11,7 @@ import array
 from pathlib import Path
 from PySide6.QtWidgets import QTreeWidgetItem, QHeaderView
 
-from .species import Species, SpeciesEditWindow, SpeciesView
+from gui.species import Species, SpeciesEditWindow, SpeciesView
 
 ### CLASSIFICATION macros ###   
 
