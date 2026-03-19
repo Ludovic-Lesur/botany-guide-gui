@@ -46,6 +46,12 @@ class ClassificationView:
         self._gui.classificationTreeWidget.clear()
         # Read all data folder.
         for root, _, _ in sorted(os.walk(self._data_directory_path)):
+            # Ignore folders with name starting with dot.
+            rel = os.path.relpath(root, self._data_directory_path)
+            if rel != ".":
+                parts = rel.split(os.sep)
+                if any(p.startswith(".") for p in parts):
+                    continue
             # Compute directory depth.
             depth = (len(Path(os.path.join(root)).parents) - data_directory_depth)
             if ((depth > 0) and (depth < CLASSIFICATION_DEPTH_MAX)):
