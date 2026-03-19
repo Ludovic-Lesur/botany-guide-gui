@@ -24,7 +24,7 @@ class Ui_MainWindow(object):
     def setupUi(self, MainWindow):
         if not MainWindow.objectName():
             MainWindow.setObjectName(u"MainWindow")
-        MainWindow.resize(1580, 725)
+        MainWindow.resize(1580, 848)
         font = QFont()
         font.setFamilies([u"LM Sans 12"])
         MainWindow.setFont(font)
@@ -161,6 +161,8 @@ class Ui_MainWindow(object):
 
         self.speciesPhotoGraphicsView = QGraphicsView(self.speciesGroupBox)
         self.speciesPhotoGraphicsView.setObjectName(u"speciesPhotoGraphicsView")
+        self.speciesPhotoGraphicsView.setMinimumSize(QSize(0, 0))
+        self.speciesPhotoGraphicsView.setMaximumSize(QSize(16777215, 16777215))
         self.speciesPhotoGraphicsView.setFrameShape(QFrame.Shape.Panel)
         self.speciesPhotoGraphicsView.setInteractive(False)
         self.speciesPhotoGraphicsView.setRenderHints(QPainter.RenderHint.LosslessImageRendering|QPainter.RenderHint.SmoothPixmapTransform|QPainter.RenderHint.TextAntialiasing)
@@ -174,17 +176,44 @@ class Ui_MainWindow(object):
         self.gridLayout_11.setObjectName(u"gridLayout_11")
         self.gridLayout_10 = QGridLayout()
         self.gridLayout_10.setObjectName(u"gridLayout_10")
-        self.speciedEdibilityLabel = QLabel(self.speciesInfosGroupBox)
-        self.speciedEdibilityLabel.setObjectName(u"speciedEdibilityLabel")
+        self.speciesCriteriaContentLabel = QLabel(self.speciesInfosGroupBox)
+        self.speciesCriteriaContentLabel.setObjectName(u"speciesCriteriaContentLabel")
+        self.speciesCriteriaContentLabel.setMinimumSize(QSize(0, 100))
+        self.speciesCriteriaContentLabel.setAlignment(Qt.AlignmentFlag.AlignRight|Qt.AlignmentFlag.AlignTrailing|Qt.AlignmentFlag.AlignVCenter)
+        self.speciesCriteriaContentLabel.setWordWrap(True)
 
-        self.gridLayout_10.addWidget(self.speciedEdibilityLabel, 0, 0, 1, 1)
+        self.gridLayout_10.addWidget(self.speciesCriteriaContentLabel, 0, 1, 1, 1)
+
+        self.speciesEdibilityLabel = QLabel(self.speciesInfosGroupBox)
+        self.speciesEdibilityLabel.setObjectName(u"speciesEdibilityLabel")
+
+        self.gridLayout_10.addWidget(self.speciesEdibilityLabel, 1, 0, 1, 1)
 
         self.speciesEdibilityContentLabel = QLabel(self.speciesInfosGroupBox)
         self.speciesEdibilityContentLabel.setObjectName(u"speciesEdibilityContentLabel")
-        self.speciesEdibilityContentLabel.setMinimumSize(QSize(0, 50))
+        self.speciesEdibilityContentLabel.setMinimumSize(QSize(0, 100))
         self.speciesEdibilityContentLabel.setAlignment(Qt.AlignmentFlag.AlignRight|Qt.AlignmentFlag.AlignTrailing|Qt.AlignmentFlag.AlignVCenter)
+        self.speciesEdibilityContentLabel.setWordWrap(True)
 
-        self.gridLayout_10.addWidget(self.speciesEdibilityContentLabel, 0, 1, 1, 1)
+        self.gridLayout_10.addWidget(self.speciesEdibilityContentLabel, 1, 1, 1, 1)
+
+        self.speciesCriteriaLabel = QLabel(self.speciesInfosGroupBox)
+        self.speciesCriteriaLabel.setObjectName(u"speciesCriteriaLabel")
+
+        self.gridLayout_10.addWidget(self.speciesCriteriaLabel, 0, 0, 1, 1)
+
+        self.speciesConfusionLabel = QLabel(self.speciesInfosGroupBox)
+        self.speciesConfusionLabel.setObjectName(u"speciesConfusionLabel")
+
+        self.gridLayout_10.addWidget(self.speciesConfusionLabel, 2, 0, 1, 1)
+
+        self.speciesConfusionContentLabel = QLabel(self.speciesInfosGroupBox)
+        self.speciesConfusionContentLabel.setObjectName(u"speciesConfusionContentLabel")
+        self.speciesConfusionContentLabel.setMinimumSize(QSize(0, 100))
+        self.speciesConfusionContentLabel.setAlignment(Qt.AlignmentFlag.AlignRight|Qt.AlignmentFlag.AlignTrailing|Qt.AlignmentFlag.AlignVCenter)
+        self.speciesConfusionContentLabel.setWordWrap(True)
+
+        self.gridLayout_10.addWidget(self.speciesConfusionContentLabel, 2, 1, 1, 1)
 
 
         self.gridLayout_11.addLayout(self.gridLayout_10, 0, 0, 1, 1)
@@ -474,9 +503,13 @@ class Ui_MainWindow(object):
         self.speciesLatinNameContentLabel.setText("")
         self.speciesCommonNameLabel.setText(QCoreApplication.translate("MainWindow", u"<html><head/><body><p><span style=\" font-weight:700; color:#26a269;\">Nom commun</span></p></body></html>", None))
         self.speciesCommonNameContentLabel.setText("")
-        self.speciesInfosGroupBox.setTitle(QCoreApplication.translate("MainWindow", u"Infos", None))
-        self.speciedEdibilityLabel.setText(QCoreApplication.translate("MainWindow", u"<html><head/><body><p><span style=\" font-weight:700; color:#e5a50a;\">Comestibilit\u00e9</span></p></body></html>", None))
+        self.speciesInfosGroupBox.setTitle(QCoreApplication.translate("MainWindow", u"Description", None))
+        self.speciesCriteriaContentLabel.setText("")
+        self.speciesEdibilityLabel.setText(QCoreApplication.translate("MainWindow", u"<html><head/><body><p><span style=\" font-weight:700; color:#f5c211;\">Comestibilit\u00e9</span></p></body></html>", None))
         self.speciesEdibilityContentLabel.setText("")
+        self.speciesCriteriaLabel.setText(QCoreApplication.translate("MainWindow", u"<html><head/><body><p><span style=\" font-weight:700; color:#f5c211;\">Crit\u00e8res</span></p></body></html>", None))
+        self.speciesConfusionLabel.setText(QCoreApplication.translate("MainWindow", u"<html><head/><body><p><span style=\" font-weight:700; color:#f5c211;\">Confusions</span></p></body></html>", None))
+        self.speciesConfusionContentLabel.setText("")
         self.speciesReferencesGroupBox.setTitle(QCoreApplication.translate("MainWindow", u"R\u00e9f\u00e9rences", None))
         self.speciesRefGuide700PlantesContentLabel.setText("")
         self.speciesRefFlorePyreneesLabel.setText(QCoreApplication.translate("MainWindow", u"<html><head/><body><p><span style=\" font-weight:700; color:#3584e4;\">Guide Flore des Pyr\u00e9n\u00e9es</span></p></body></html>", None))

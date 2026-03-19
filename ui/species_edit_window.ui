@@ -7,7 +7,7 @@
     <x>0</x>
     <y>0</y>
     <width>650</width>
-    <height>500</height>
+    <height>600</height>
    </rect>
   </property>
   <property name="font">
@@ -158,8 +158,8 @@
          </property>
         </widget>
        </item>
-       <item row="2" column="0">
-        <widget class="QLabel" name="edibilityLabel">
+       <item row="4" column="0">
+        <widget class="QLabel" name="confusionLabel">
          <property name="minimumSize">
           <size>
            <width>200</width>
@@ -172,12 +172,12 @@
           </font>
          </property>
          <property name="text">
-          <string>Comestibilité</string>
+          <string>Confusions</string>
          </property>
         </widget>
        </item>
-       <item row="2" column="1">
-        <widget class="QTextEdit" name="edibilityTextEdit">
+       <item row="4" column="1">
+        <widget class="QTextEdit" name="confusionTextEdit">
          <property name="minimumSize">
           <size>
            <width>300</width>
@@ -195,7 +195,7 @@
          </property>
         </widget>
        </item>
-       <item row="3" column="0">
+       <item row="5" column="0">
         <widget class="QLabel" name="refDelachauxFleursLabel">
          <property name="minimumSize">
           <size>
@@ -213,7 +213,7 @@
          </property>
         </widget>
        </item>
-       <item row="3" column="1">
+       <item row="5" column="1">
         <widget class="QTextEdit" name="refDelachauxFleursTextEdit">
          <property name="minimumSize">
           <size>
@@ -235,7 +235,7 @@
          </property>
         </widget>
        </item>
-       <item row="4" column="0">
+       <item row="6" column="0">
         <widget class="QLabel" name="ref700PlantesLabel">
          <property name="minimumSize">
           <size>
@@ -253,7 +253,7 @@
          </property>
         </widget>
        </item>
-       <item row="4" column="1">
+       <item row="6" column="1">
         <widget class="QTextEdit" name="ref700PlantesTextEdit">
          <property name="minimumSize">
           <size>
@@ -275,7 +275,7 @@
          </property>
         </widget>
        </item>
-       <item row="5" column="0">
+       <item row="7" column="0">
         <widget class="QLabel" name="refFlorePyreneesLabel">
          <property name="minimumSize">
           <size>
@@ -293,7 +293,7 @@
          </property>
         </widget>
        </item>
-       <item row="5" column="1">
+       <item row="7" column="1">
         <widget class="QTextEdit" name="refFlorePyreneesTextEdit">
          <property name="minimumSize">
           <size>
@@ -315,7 +315,7 @@
          </property>
         </widget>
        </item>
-       <item row="6" column="0">
+       <item row="8" column="0">
         <widget class="QLabel" name="refDelachauxArbresLabel">
          <property name="minimumSize">
           <size>
@@ -333,7 +333,7 @@
          </property>
         </widget>
        </item>
-       <item row="6" column="1">
+       <item row="8" column="1">
         <widget class="QTextEdit" name="refDelachauxArbresTextEdit">
          <property name="minimumSize">
           <size>
@@ -355,7 +355,7 @@
          </property>
         </widget>
        </item>
-       <item row="7" column="0">
+       <item row="9" column="0">
         <widget class="QLabel" name="refChampignonsLabel">
          <property name="minimumSize">
           <size>
@@ -373,7 +373,7 @@
          </property>
         </widget>
        </item>
-       <item row="7" column="1">
+       <item row="9" column="1">
         <widget class="QTextEdit" name="refChampignonsTextEdit">
          <property name="minimumSize">
           <size>
@@ -392,6 +392,64 @@
          </property>
          <property name="documentTitle">
           <string/>
+         </property>
+        </widget>
+       </item>
+       <item row="2" column="0">
+        <widget class="QLabel" name="criteriaLabel">
+         <property name="minimumSize">
+          <size>
+           <width>200</width>
+           <height>0</height>
+          </size>
+         </property>
+         <property name="text">
+          <string>Critères</string>
+         </property>
+        </widget>
+       </item>
+       <item row="3" column="0">
+        <widget class="QLabel" name="edibilityLabel">
+         <property name="minimumSize">
+          <size>
+           <width>200</width>
+           <height>0</height>
+          </size>
+         </property>
+         <property name="text">
+          <string>Comestibilité</string>
+         </property>
+        </widget>
+       </item>
+       <item row="2" column="1">
+        <widget class="QTextEdit" name="criteriaTextEdit">
+         <property name="minimumSize">
+          <size>
+           <width>300</width>
+           <height>35</height>
+          </size>
+         </property>
+         <property name="maximumSize">
+          <size>
+           <width>16777215</width>
+           <height>35</height>
+          </size>
+         </property>
+        </widget>
+       </item>
+       <item row="3" column="1">
+        <widget class="QTextEdit" name="edibilityTextEdit">
+         <property name="minimumSize">
+          <size>
+           <width>300</width>
+           <height>35</height>
+          </size>
+         </property>
+         <property name="maximumSize">
+          <size>
+           <width>16777215</width>
+           <height>35</height>
+          </size>
          </property>
         </widget>
        </item>

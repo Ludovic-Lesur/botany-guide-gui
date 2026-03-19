@@ -24,7 +24,7 @@ class Ui_SpeciesEditDialog(object):
     def setupUi(self, SpeciesEditDialog):
         if not SpeciesEditDialog.objectName():
             SpeciesEditDialog.setObjectName(u"SpeciesEditDialog")
-        SpeciesEditDialog.resize(650, 500)
+        SpeciesEditDialog.resize(650, 600)
         font = QFont()
         font.setFamilies([u"LM Sans 12"])
         SpeciesEditDialog.setFont(font)
@@ -91,27 +91,27 @@ class Ui_SpeciesEditDialog(object):
 
         self.formLayout.setWidget(1, QFormLayout.ItemRole.FieldRole, self.commonNameTextEdit)
 
-        self.edibilityLabel = QLabel(SpeciesEditDialog)
-        self.edibilityLabel.setObjectName(u"edibilityLabel")
-        self.edibilityLabel.setMinimumSize(QSize(200, 0))
-        self.edibilityLabel.setFont(font)
+        self.confusionLabel = QLabel(SpeciesEditDialog)
+        self.confusionLabel.setObjectName(u"confusionLabel")
+        self.confusionLabel.setMinimumSize(QSize(200, 0))
+        self.confusionLabel.setFont(font)
 
-        self.formLayout.setWidget(2, QFormLayout.ItemRole.LabelRole, self.edibilityLabel)
+        self.formLayout.setWidget(4, QFormLayout.ItemRole.LabelRole, self.confusionLabel)
 
-        self.edibilityTextEdit = QTextEdit(SpeciesEditDialog)
-        self.edibilityTextEdit.setObjectName(u"edibilityTextEdit")
-        self.edibilityTextEdit.setMinimumSize(QSize(300, 35))
-        self.edibilityTextEdit.setMaximumSize(QSize(16777215, 35))
-        self.edibilityTextEdit.viewport().setProperty(u"cursor", QCursor(Qt.CursorShape.IBeamCursor))
+        self.confusionTextEdit = QTextEdit(SpeciesEditDialog)
+        self.confusionTextEdit.setObjectName(u"confusionTextEdit")
+        self.confusionTextEdit.setMinimumSize(QSize(300, 35))
+        self.confusionTextEdit.setMaximumSize(QSize(16777215, 35))
+        self.confusionTextEdit.viewport().setProperty(u"cursor", QCursor(Qt.CursorShape.IBeamCursor))
 
-        self.formLayout.setWidget(2, QFormLayout.ItemRole.FieldRole, self.edibilityTextEdit)
+        self.formLayout.setWidget(4, QFormLayout.ItemRole.FieldRole, self.confusionTextEdit)
 
         self.refDelachauxFleursLabel = QLabel(SpeciesEditDialog)
         self.refDelachauxFleursLabel.setObjectName(u"refDelachauxFleursLabel")
         self.refDelachauxFleursLabel.setMinimumSize(QSize(200, 0))
         self.refDelachauxFleursLabel.setFont(font)
 
-        self.formLayout.setWidget(3, QFormLayout.ItemRole.LabelRole, self.refDelachauxFleursLabel)
+        self.formLayout.setWidget(5, QFormLayout.ItemRole.LabelRole, self.refDelachauxFleursLabel)
 
         self.refDelachauxFleursTextEdit = QTextEdit(SpeciesEditDialog)
         self.refDelachauxFleursTextEdit.setObjectName(u"refDelachauxFleursTextEdit")
@@ -119,14 +119,14 @@ class Ui_SpeciesEditDialog(object):
         self.refDelachauxFleursTextEdit.setMaximumSize(QSize(16777215, 35))
         self.refDelachauxFleursTextEdit.viewport().setProperty(u"cursor", QCursor(Qt.CursorShape.IBeamCursor))
 
-        self.formLayout.setWidget(3, QFormLayout.ItemRole.FieldRole, self.refDelachauxFleursTextEdit)
+        self.formLayout.setWidget(5, QFormLayout.ItemRole.FieldRole, self.refDelachauxFleursTextEdit)
 
         self.ref700PlantesLabel = QLabel(SpeciesEditDialog)
         self.ref700PlantesLabel.setObjectName(u"ref700PlantesLabel")
         self.ref700PlantesLabel.setMinimumSize(QSize(200, 0))
         self.ref700PlantesLabel.setFont(font)
 
-        self.formLayout.setWidget(4, QFormLayout.ItemRole.LabelRole, self.ref700PlantesLabel)
+        self.formLayout.setWidget(6, QFormLayout.ItemRole.LabelRole, self.ref700PlantesLabel)
 
         self.ref700PlantesTextEdit = QTextEdit(SpeciesEditDialog)
         self.ref700PlantesTextEdit.setObjectName(u"ref700PlantesTextEdit")
@@ -134,14 +134,14 @@ class Ui_SpeciesEditDialog(object):
         self.ref700PlantesTextEdit.setMaximumSize(QSize(16777215, 35))
         self.ref700PlantesTextEdit.viewport().setProperty(u"cursor", QCursor(Qt.CursorShape.IBeamCursor))
 
-        self.formLayout.setWidget(4, QFormLayout.ItemRole.FieldRole, self.ref700PlantesTextEdit)
+        self.formLayout.setWidget(6, QFormLayout.ItemRole.FieldRole, self.ref700PlantesTextEdit)
 
         self.refFlorePyreneesLabel = QLabel(SpeciesEditDialog)
         self.refFlorePyreneesLabel.setObjectName(u"refFlorePyreneesLabel")
         self.refFlorePyreneesLabel.setMinimumSize(QSize(200, 0))
         self.refFlorePyreneesLabel.setFont(font)
 
-        self.formLayout.setWidget(5, QFormLayout.ItemRole.LabelRole, self.refFlorePyreneesLabel)
+        self.formLayout.setWidget(7, QFormLayout.ItemRole.LabelRole, self.refFlorePyreneesLabel)
 
         self.refFlorePyreneesTextEdit = QTextEdit(SpeciesEditDialog)
         self.refFlorePyreneesTextEdit.setObjectName(u"refFlorePyreneesTextEdit")
@@ -149,14 +149,14 @@ class Ui_SpeciesEditDialog(object):
         self.refFlorePyreneesTextEdit.setMaximumSize(QSize(16777215, 35))
         self.refFlorePyreneesTextEdit.viewport().setProperty(u"cursor", QCursor(Qt.CursorShape.IBeamCursor))
 
-        self.formLayout.setWidget(5, QFormLayout.ItemRole.FieldRole, self.refFlorePyreneesTextEdit)
+        self.formLayout.setWidget(7, QFormLayout.ItemRole.FieldRole, self.refFlorePyreneesTextEdit)
 
         self.refDelachauxArbresLabel = QLabel(SpeciesEditDialog)
         self.refDelachauxArbresLabel.setObjectName(u"refDelachauxArbresLabel")
         self.refDelachauxArbresLabel.setMinimumSize(QSize(200, 0))
         self.refDelachauxArbresLabel.setFont(font)
 
-        self.formLayout.setWidget(6, QFormLayout.ItemRole.LabelRole, self.refDelachauxArbresLabel)
+        self.formLayout.setWidget(8, QFormLayout.ItemRole.LabelRole, self.refDelachauxArbresLabel)
 
         self.refDelachauxArbresTextEdit = QTextEdit(SpeciesEditDialog)
         self.refDelachauxArbresTextEdit.setObjectName(u"refDelachauxArbresTextEdit")
@@ -164,14 +164,14 @@ class Ui_SpeciesEditDialog(object):
         self.refDelachauxArbresTextEdit.setMaximumSize(QSize(16777215, 35))
         self.refDelachauxArbresTextEdit.viewport().setProperty(u"cursor", QCursor(Qt.CursorShape.IBeamCursor))
 
-        self.formLayout.setWidget(6, QFormLayout.ItemRole.FieldRole, self.refDelachauxArbresTextEdit)
+        self.formLayout.setWidget(8, QFormLayout.ItemRole.FieldRole, self.refDelachauxArbresTextEdit)
 
         self.refChampignonsLabel = QLabel(SpeciesEditDialog)
         self.refChampignonsLabel.setObjectName(u"refChampignonsLabel")
         self.refChampignonsLabel.setMinimumSize(QSize(200, 0))
         self.refChampignonsLabel.setFont(font)
 
-        self.formLayout.setWidget(7, QFormLayout.ItemRole.LabelRole, self.refChampignonsLabel)
+        self.formLayout.setWidget(9, QFormLayout.ItemRole.LabelRole, self.refChampignonsLabel)
 
         self.refChampignonsTextEdit = QTextEdit(SpeciesEditDialog)
         self.refChampignonsTextEdit.setObjectName(u"refChampignonsTextEdit")
@@ -179,7 +179,33 @@ class Ui_SpeciesEditDialog(object):
         self.refChampignonsTextEdit.setMaximumSize(QSize(16777215, 35))
         self.refChampignonsTextEdit.viewport().setProperty(u"cursor", QCursor(Qt.CursorShape.IBeamCursor))
 
-        self.formLayout.setWidget(7, QFormLayout.ItemRole.FieldRole, self.refChampignonsTextEdit)
+        self.formLayout.setWidget(9, QFormLayout.ItemRole.FieldRole, self.refChampignonsTextEdit)
+
+        self.criteriaLabel = QLabel(SpeciesEditDialog)
+        self.criteriaLabel.setObjectName(u"criteriaLabel")
+        self.criteriaLabel.setMinimumSize(QSize(200, 0))
+
+        self.formLayout.setWidget(2, QFormLayout.ItemRole.LabelRole, self.criteriaLabel)
+
+        self.edibilityLabel = QLabel(SpeciesEditDialog)
+        self.edibilityLabel.setObjectName(u"edibilityLabel")
+        self.edibilityLabel.setMinimumSize(QSize(200, 0))
+
+        self.formLayout.setWidget(3, QFormLayout.ItemRole.LabelRole, self.edibilityLabel)
+
+        self.criteriaTextEdit = QTextEdit(SpeciesEditDialog)
+        self.criteriaTextEdit.setObjectName(u"criteriaTextEdit")
+        self.criteriaTextEdit.setMinimumSize(QSize(300, 35))
+        self.criteriaTextEdit.setMaximumSize(QSize(16777215, 35))
+
+        self.formLayout.setWidget(2, QFormLayout.ItemRole.FieldRole, self.criteriaTextEdit)
+
+        self.edibilityTextEdit = QTextEdit(SpeciesEditDialog)
+        self.edibilityTextEdit.setObjectName(u"edibilityTextEdit")
+        self.edibilityTextEdit.setMinimumSize(QSize(300, 35))
+        self.edibilityTextEdit.setMaximumSize(QSize(16777215, 35))
+
+        self.formLayout.setWidget(3, QFormLayout.ItemRole.FieldRole, self.edibilityTextEdit)
 
 
         self.verticalLayout.addLayout(self.formLayout)
@@ -211,7 +237,7 @@ class Ui_SpeciesEditDialog(object):
         self.explorerPushButton.setText(QCoreApplication.translate("SpeciesEditDialog", u"Parcourir", None))
         self.latinNameLabel.setText(QCoreApplication.translate("SpeciesEditDialog", u"Nom latin", None))
         self.commonNameLabel.setText(QCoreApplication.translate("SpeciesEditDialog", u"Nom commun", None))
-        self.edibilityLabel.setText(QCoreApplication.translate("SpeciesEditDialog", u"Comestibilit\u00e9", None))
+        self.confusionLabel.setText(QCoreApplication.translate("SpeciesEditDialog", u"Confusions", None))
         self.refDelachauxFleursLabel.setText(QCoreApplication.translate("SpeciesEditDialog", u"Guide Delachaux des Fleurs", None))
         self.refDelachauxFleursTextEdit.setDocumentTitle("")
         self.ref700PlantesLabel.setText(QCoreApplication.translate("SpeciesEditDialog", u"Guide 700 Plantes", None))
@@ -222,5 +248,7 @@ class Ui_SpeciesEditDialog(object):
         self.refDelachauxArbresTextEdit.setDocumentTitle("")
         self.refChampignonsLabel.setText(QCoreApplication.translate("SpeciesEditDialog", u"Guide des Champignons", None))
         self.refChampignonsTextEdit.setDocumentTitle("")
+        self.criteriaLabel.setText(QCoreApplication.translate("SpeciesEditDialog", u"Crit\u00e8res", None))
+        self.edibilityLabel.setText(QCoreApplication.translate("SpeciesEditDialog", u"Comestibilit\u00e9", None))
     # retranslateUi
 

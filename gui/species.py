@@ -30,7 +30,10 @@ SPECIES_JSON_KEY_TOP_LEVEL = 'species'
 SPECIES_JSON_KEY_NAME = 'name'
 SPECIES_JSON_KEY_NAME_LATIN = 'latin'
 SPECIES_JSON_KEY_NAME_COMMON = 'common'
-SPECIES_JSON_KEY_EDIBILITY = 'edibility'
+SPECIES_JSON_KEY_DESCRIPTION = 'description'
+SPECIES_JSON_KEY_DESCRIPTION_CRITERIA = 'criteria'
+SPECIES_JSON_KEY_DESCRIPTION_EDIBILITY = 'edibility'
+SPECIES_JSON_KEY_DESCRIPTION_CONFUSION = 'confusion'
 SPECIES_JSON_KEY_REFERENCES = 'references'
 SPECIES_JSON_KEY_REFERENCES_GUIDE_DELACHAUX_FLEURS = 'guideDelachauxFleurs'
 SPECIES_JSON_KEY_REFERENCES_RECONNAITRE_700_PLANTES = 'reconnaitre700Plantes'
@@ -58,7 +61,9 @@ class Species:
     def __init__(self) -> None :
         self.latin_name = ""
         self.common_name = ""
+        self.criteria = ""
         self.edibility = ""
+        self.confusion = ""
         self.references_guide_delachaux_fleurs = 0
         self.references_reconnaitre_700_plantes = 0
         self.references_decouvrir_flore_pyrenees = 0
@@ -102,7 +107,9 @@ class SpeciesEditWindow(QDialog, Ui_SpeciesEditDialog):
             self.setWindowTitle("Edition espèce")
             self.latinNameTextEdit.setPlainText(self._species.latin_name)
             self.commonNameTextEdit.setPlainText(self._species.common_name)
+            self.criteriaTextEdit.setPlainText(self._species.criteria)
             self.edibilityTextEdit.setPlainText(self._species.edibility)
+            self.confusionTextEdit.setPlainText(self._species.confusion)
             SpeciesEditWindow._display_page(self.refDelachauxFleursTextEdit, self._species.references_guide_delachaux_fleurs)
             SpeciesEditWindow._display_page(self.ref700PlantesTextEdit, self._species.references_reconnaitre_700_plantes)
             SpeciesEditWindow._display_page(self.refFlorePyreneesTextEdit, self._species.references_decouvrir_flore_pyrenees)
@@ -114,7 +121,9 @@ class SpeciesEditWindow(QDialog, Ui_SpeciesEditDialog):
         self.explorerPushButton.clicked.connect(self._open_explorer_callback)
         self.latinNameTextEdit.textChanged.connect(self._check_all_fields)
         self.commonNameTextEdit.textChanged.connect(self._check_all_fields)
+        self.criteriaTextEdit.textChanged.connect(self._check_all_fields)
         self.edibilityTextEdit.textChanged.connect(self._check_all_fields)
+        self.confusionTextEdit.textChanged.connect(self._check_all_fields)
         self.refDelachauxFleursTextEdit.textChanged.connect(self._check_all_fields)
         self.ref700PlantesTextEdit.textChanged.connect(self._check_all_fields)
         self.refFlorePyreneesTextEdit.textChanged.connect(self._check_all_fields)
@@ -176,7 +185,9 @@ class SpeciesEditWindow(QDialog, Ui_SpeciesEditDialog):
         # Update parent species fields.
         self._species.latin_name = self.latinNameTextEdit.toPlainText()
         self._species.common_name = self.commonNameTextEdit.toPlainText()
+        self._species.criteria = self.criteriaTextEdit.toPlainText()
         self._species.edibility = self.edibilityTextEdit.toPlainText()
+        self._species.confusion = self.confusionTextEdit.toPlainText()
         self._species.references_guide_delachaux_fleurs = SpeciesEditWindow._to_page(self.refDelachauxFleursTextEdit.toPlainText())
         self._species.references_reconnaitre_700_plantes = SpeciesEditWindow._to_page(self.ref700PlantesTextEdit.toPlainText())
         self._species.references_decouvrir_flore_pyrenees = SpeciesEditWindow._to_page(self.refFlorePyreneesTextEdit.toPlainText())
@@ -280,7 +291,9 @@ class SpeciesView:
         # Update context.
         self._species.latin_name = self._to_text(name_mapping.get(SPECIES_JSON_KEY_NAME_LATIN, ""))
         self._species.common_name = self._to_text(name_mapping.get(SPECIES_JSON_KEY_NAME_COMMON, ""))
-        self._species.edibility = self._to_text(species_mapping.get(SPECIES_JSON_KEY_EDIBILITY, ""))
+        self._species.criteria = self._to_text(species_mapping.get(SPECIES_JSON_KEY_DESCRIPTION).get(SPECIES_JSON_KEY_DESCRIPTION_CRITERIA, ""))
+        self._species.edibility = self._to_text(species_mapping.get(SPECIES_JSON_KEY_DESCRIPTION).get(SPECIES_JSON_KEY_DESCRIPTION_EDIBILITY, ""))
+        self._species.confusion = self._to_text(species_mapping.get(SPECIES_JSON_KEY_DESCRIPTION).get(SPECIES_JSON_KEY_DESCRIPTION_CONFUSION, ""))
         self._species.references_guide_delachaux_fleurs = species_mapping.get(SPECIES_JSON_KEY_REFERENCES).get(SPECIES_JSON_KEY_REFERENCES_GUIDE_DELACHAUX_FLEURS, 0)
         self._species.references_reconnaitre_700_plantes = species_mapping.get(SPECIES_JSON_KEY_REFERENCES).get(SPECIES_JSON_KEY_REFERENCES_RECONNAITRE_700_PLANTES, 0)
         self._species.references_decouvrir_flore_pyrenees = species_mapping.get(SPECIES_JSON_KEY_REFERENCES).get(SPECIES_JSON_KEY_REFERENCES_DECOUVRIR_FLORE_PYRENEES, 0)
@@ -297,10 +310,13 @@ class SpeciesView:
         with open(self._json_path, 'r+' if (os.path.isfile(self._json_path)) else 'w+') as json_file:
             # Compute data.
             data[SPECIES_JSON_KEY_TOP_LEVEL] = dict()
-            data[SPECIES_JSON_KEY_TOP_LEVEL][SPECIES_JSON_KEY_NAME]= dict()
+            data[SPECIES_JSON_KEY_TOP_LEVEL][SPECIES_JSON_KEY_NAME] = dict()
             data[SPECIES_JSON_KEY_TOP_LEVEL][SPECIES_JSON_KEY_NAME][SPECIES_JSON_KEY_NAME_LATIN] = self._species.latin_name
             data[SPECIES_JSON_KEY_TOP_LEVEL][SPECIES_JSON_KEY_NAME][SPECIES_JSON_KEY_NAME_COMMON] = self._species.common_name
-            data[SPECIES_JSON_KEY_TOP_LEVEL][SPECIES_JSON_KEY_EDIBILITY] = self._species.edibility
+            data[SPECIES_JSON_KEY_TOP_LEVEL][SPECIES_JSON_KEY_DESCRIPTION] = dict()
+            data[SPECIES_JSON_KEY_TOP_LEVEL][SPECIES_JSON_KEY_DESCRIPTION][SPECIES_JSON_KEY_DESCRIPTION_CRITERIA] = self._species.criteria
+            data[SPECIES_JSON_KEY_TOP_LEVEL][SPECIES_JSON_KEY_DESCRIPTION][SPECIES_JSON_KEY_DESCRIPTION_EDIBILITY] = self._species.edibility
+            data[SPECIES_JSON_KEY_TOP_LEVEL][SPECIES_JSON_KEY_DESCRIPTION][SPECIES_JSON_KEY_DESCRIPTION_CONFUSION] = self._species.confusion
             data[SPECIES_JSON_KEY_TOP_LEVEL][SPECIES_JSON_KEY_REFERENCES] = dict()
             data[SPECIES_JSON_KEY_TOP_LEVEL][SPECIES_JSON_KEY_REFERENCES][SPECIES_JSON_KEY_REFERENCES_GUIDE_DELACHAUX_FLEURS] = self._species.references_guide_delachaux_fleurs
             data[SPECIES_JSON_KEY_TOP_LEVEL][SPECIES_JSON_KEY_REFERENCES][SPECIES_JSON_KEY_REFERENCES_RECONNAITRE_700_PLANTES] = self._species.references_reconnaitre_700_plantes
@@ -406,7 +422,9 @@ class SpeciesView:
         # Print fields.
         self._gui.speciesLatinNameContentLabel.setText(self._species.latin_name)
         self._gui.speciesCommonNameContentLabel.setText(self._species.common_name)
+        self._gui.speciesCriteriaContentLabel.setText(self._species.criteria)
         self._gui.speciesEdibilityContentLabel.setText(self._species.edibility)
+        self._gui.speciesConfusionContentLabel.setText(self._species.confusion)
         self._gui.speciesRefDelachauxFleursContentLabel.setText(SpeciesView._display_page(self._species.references_guide_delachaux_fleurs))
         self._gui.speciesRefGuide700PlantesContentLabel.setText(SpeciesView._display_page(self._species.references_reconnaitre_700_plantes))
         self._gui.speciesRefFlorePyreneesContentLabel.setText(SpeciesView._display_page(self._species.references_decouvrir_flore_pyrenees))
@@ -435,7 +453,9 @@ class SpeciesView:
         # Clear all fields.
         gui.speciesLatinNameContentLabel.setText("")
         gui.speciesCommonNameContentLabel.setText("")
+        gui.speciesCriteriaContentLabel.setText("")
         gui.speciesEdibilityContentLabel.setText("")
+        gui.speciesConfusionContentLabel.setText("")
         gui.speciesRefDelachauxFleursContentLabel.setText("")
         gui.speciesRefGuide700PlantesContentLabel.setText("")
         gui.speciesRefFlorePyreneesContentLabel.setText("")
