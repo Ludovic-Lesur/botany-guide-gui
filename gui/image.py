@@ -19,6 +19,7 @@ from PySide6.QtCore import Qt
 class Image:
     
     IMAGE_FILE_EXTENSION = '.jpg'
+    IMAGE_FILE_MAXIMUM_SIZE_BYTES = 1000000
 
     @staticmethod
     def display(q_graphic_view: QGraphicsView, image_path: str = None) -> None:

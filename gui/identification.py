@@ -246,7 +246,7 @@ class IdentificationView:
                 except Exception as e:
                     logging.error("Invalid JSON file : %s", e)
             # Check if there a photo.
-            if (Path(f).suffix.lower() == Image.IMAGE_FILE_EXTENSION):
+            if ((Path(f).suffix.lower() == Image.IMAGE_FILE_EXTENSION) and (Path(p).stat().st_size < Image.IMAGE_FILE_MAXIMUM_SIZE_BYTES)):
                 self._image_path_list.append(p)
                 image_found = True
         # Warn if image has not been found.
