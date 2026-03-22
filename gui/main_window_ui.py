@@ -139,6 +139,7 @@ class Ui_MainWindow(object):
         self.speciesLatinNameContentLabel = QLabel(self.speciesNameGroupBox)
         self.speciesLatinNameContentLabel.setObjectName(u"speciesLatinNameContentLabel")
         self.speciesLatinNameContentLabel.setAlignment(Qt.AlignmentFlag.AlignRight|Qt.AlignmentFlag.AlignTrailing|Qt.AlignmentFlag.AlignVCenter)
+        self.speciesLatinNameContentLabel.setWordWrap(True)
 
         self.gridLayout_13.addWidget(self.speciesLatinNameContentLabel, 0, 1, 1, 1)
 
@@ -150,6 +151,7 @@ class Ui_MainWindow(object):
         self.speciesCommonNameContentLabel = QLabel(self.speciesNameGroupBox)
         self.speciesCommonNameContentLabel.setObjectName(u"speciesCommonNameContentLabel")
         self.speciesCommonNameContentLabel.setAlignment(Qt.AlignmentFlag.AlignRight|Qt.AlignmentFlag.AlignTrailing|Qt.AlignmentFlag.AlignVCenter)
+        self.speciesCommonNameContentLabel.setWordWrap(True)
 
         self.gridLayout_13.addWidget(self.speciesCommonNameContentLabel, 1, 1, 1, 1)
 
